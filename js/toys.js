@@ -548,7 +548,36 @@
     fromScroll();
   }
 
+  /* =====================================================================
+     6. PIP'S NURSERY GROWTH CHART
+     ===================================================================== */
+  function initGrowth() {
+    var wrap = $('#chartWrap'), bar = $('#rulerBar');
+    if (!wrap || !bar) return;
+    var animated = false;
+
+    var tagLights = $('#tagLights');
+    var tagBlocks = $('#tagBlocks');
+    var bestScore = parseInt(store.get('best', '0'), 10) || 0;
+    if (tagBlocks && bestScore > 0) {
+      tagBlocks.textContent = 'Mastered (' + bestScore + ')';
+      tagBlocks.classList.add('m-gold');
+    }
+
+    PIP.watchVisible(wrap, function (isVisible) {
+      if (isVisible && !animated) {
+        animated = true;
+        bar.style.setProperty('--h', '100%');
+        $$('.milestone', wrap).forEach(function (m, idx) {
+          window.setTimeout(function () {
+            m.classList.add('is-revealed');
+          }, idx * 160);
+        });
+      }
+    }, '40px');
+  }
+
   PIP.toys = {
-    init: function () { initLab(); initLights(); initBlocks(); initRoute(); }
+    init: function () { initLab(); initLights(); initBlocks(); initRoute(); initGrowth(); }
   };
 })();

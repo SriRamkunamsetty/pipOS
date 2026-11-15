@@ -464,6 +464,102 @@ main { max-width: 1120px; margin: 0 auto; padding: 92px 16px 40px; }
 .route-svg .rd-eye { fill: #2c1d19; }
 .route-svg .rd-cap { fill: #8b8fd9; stroke: #5c4033; stroke-width: 1.5; }
 
+/* --- 10.6 Nursery Growth Chart --- */
+.w-growth { grid-column: span 12; }
+.chart-wrap {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 1.2rem;
+  padding: 1rem 0.5rem;
+  position: relative;
+}
+.chart-ruler {
+  position: relative;
+  width: 32px;
+  background: var(--butter);
+  border: 3px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 3px 3px 0 var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.ruler-bar {
+  width: 100%;
+  height: var(--h, 0%);
+  background: var(--berry);
+  transition: height 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.milestones {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.9rem;
+}
+.milestone {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0.35;
+  transform: translateX(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.milestone.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+.m-mark {
+  flex: none;
+  font: 700 0.95rem var(--f-ui);
+  color: var(--berry-ink);
+  min-width: 52px;
+  text-align: right;
+}
+.m-card {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 2px 2px 0 var(--shadow);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+.m-card h4 {
+  font-family: var(--f-head);
+  font-size: 1.08rem;
+  margin: 0;
+  color: var(--ink);
+}
+.m-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--ink);
+  opacity: 0.9;
+  flex-basis: 100%;
+}
+.m-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.5rem;
+  background: var(--mint);
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+}
+.m-tag.is-mastered, .m-tag.m-gold {
+  background: var(--butter);
+  color: var(--ink);
+}
+
 /* ==========================================================================
    11. Bedtime Storybook (Track & Scenes)
    ========================================================================== */
@@ -681,6 +777,7 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
   .pip-svg.is-wave .p-arm-wave { animation: wave-big 0.42s ease-in-out 2; }
   .marquee { overflow-x: auto; }
   .marquee-track span:last-child { display: none; }
-  .scene, .odo-strip, .toast { transition-duration: 0.01s; }
+  .scene, .odo-strip, .toast, .ruler-bar, .milestone { transition-duration: 0.01s; }
+  .milestone { transform: none !important; opacity: 1 !important; }
   .sparkle { display: none; }
 }
