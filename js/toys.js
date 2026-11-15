@@ -148,7 +148,7 @@
       b.tabIndex = i === 0 ? 0 : -1;
       b.style.setProperty('--c', l.glow);
       b.innerHTML = '<i aria-hidden="true"></i><span>' + l.name + '</span>';
-      b.addEventListener('click', function () { setLantern(i); });
+      b.addEventListener('click', function () { setLantern(i); b.focus(); });
       b.addEventListener('keydown', function (e) {
         var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
         var radios = $$('.lantern', lanternsEl);
@@ -273,7 +273,8 @@
         if (Math.hypot(ix - x, iy - y) < Math.max(34, r * 0.55)) {
           it.classList.add('is-found');
           found += 1;
-          trayN.textContent = found + ' of ' + items.length + ' dreams found';
+          var itName = it.getAttribute('data-name');
+          trayN.textContent = found + ' of ' + items.length + ' dreams found' + (itName ? ' (' + itName + ')' : '');
           if (audio.isOn()) audio.note(audio.SCALE[Math.min(found + 2, 7)], { dur: 1.2, gain: 0.18 });
           if (found === items.length) {
             toast('All five dreams found. Pip is very proud.');
@@ -528,15 +529,20 @@
     window.addEventListener('resize', fromScroll);
 
     btn.addEventListener('click', function () {
+      if (manual) return;
       if (reduce.matches) { set(p >= 0.99 ? 0 : 1); return; }
       manual = true;
+      btn.setAttribute('aria-busy', 'true');
       var t0 = performance.now(), dur = 5200;
       (function step(now) {
         var k = clamp((now - t0) / dur, 0, 1);
         var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; // ease in-out
         set(e);
         if (k < 1) window.requestAnimationFrame(step);
-        else window.setTimeout(function () { manual = false; }, 1500);
+        else window.setTimeout(function () {
+          manual = false;
+          btn.removeAttribute('aria-busy');
+        }, 1500);
       })(t0);
       if (audio.isOn()) {
         [0, 2, 4, 3, 5, 4, 7].forEach(function (n, k) {

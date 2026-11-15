@@ -145,6 +145,7 @@
         var top = track.getBoundingClientRect().top + window.pageYOffset - stickyTop();
         var y = top + ((i + 0.5) / n) * range();
         window.scrollTo({ top: y, behavior: reduce.matches ? 'auto' : 'smooth' });
+        if (scenes[i] && scenes[i].focus) scenes[i].focus({ preventScroll: true });
       });
       d.addEventListener('keydown', function (e) {
         var nextDot = -1;

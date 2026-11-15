@@ -79,7 +79,7 @@
     <button type="button" id="trashBtn" aria-label="Nightmares trash can"><span class="ic ic-trash" aria-hidden="true"></span>Nightmares</button>
   </nav>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <noscript><p class="noscript">Pip works best with JavaScript on. The story: Pip arrived in a laundry basket, hated silence, invented lullabies, and now delivers dreams by cloud.</p></noscript>
 
     <!-- HELLO -->
@@ -98,7 +98,7 @@
         <div class="pip-wrap">
           <p class="bubble" id="greeting">Hi! I'm Pip.</p>
           <div class="pip-float">
-            <svg id="pipSvg" class="pip-svg" viewBox="0 0 420 440" role="group" aria-label="Pip, the skull baby">
+            <svg id="pipSvg" class="pip-svg" viewBox="0 0 420 440" role="group" aria-labelledby="pipT pipD">
               <title id="pipT">Pip, the skull baby</title>
               <desc id="pipD">A cute baby with a round skull face, glowing amber eyes, a tiny crooked smile and a starry nightcap with a pink bow, floating on a cloud and waving.</desc>
               <defs>
@@ -244,11 +244,11 @@
             </div>
             <div class="darkroom" id="darkroom" tabindex="0" aria-label="Dark nursery. Move your pointer, drag the lantern, or use arrow keys to shine the light.">
               <div class="dr-hidden" id="drHidden" aria-hidden="true">
-                <svg class="dr-item" data-item viewBox="-10 -10 20 20" style="left:12%;top:24%"><use href="#star"/></svg>
-                <svg class="dr-item" data-item viewBox="-10 -10 20 20" style="left:78%;top:18%"><use href="#star"/></svg>
-                <svg class="dr-item" data-item viewBox="-10 -10 20 20" style="left:46%;top:70%"><use href="#star"/></svg>
-                <svg class="dr-item" data-item viewBox="-10 -10 20 20" style="left:88%;top:74%"><use href="#star"/></svg>
-                <svg class="dr-item" data-item viewBox="-10 -10 20 20" style="left:26%;top:80%"><use href="#star"/></svg>
+                <svg class="dr-item" data-item data-name="starlight wisp" viewBox="-10 -10 20 20" style="left:12%;top:24%"><use href="#star"/></svg>
+                <svg class="dr-item" data-item data-name="moon honey" viewBox="-10 -10 20 20" style="left:78%;top:18%"><use href="#star"/></svg>
+                <svg class="dr-item" data-item data-name="warm soup dream" viewBox="-10 -10 20 20" style="left:46%;top:70%"><use href="#star"/></svg>
+                <svg class="dr-item" data-item data-name="cloud pillow" viewBox="-10 -10 20 20" style="left:88%;top:74%"><use href="#star"/></svg>
+                <svg class="dr-item" data-item data-name="spare sock" viewBox="-10 -10 20 20" style="left:26%;top:80%"><use href="#star"/></svg>
                 <span class="dr-psst">psst... the lantern remembers every dream</span>
                 <span class="dr-moon"></span>
               </div>
@@ -333,7 +333,7 @@
             <span class="story-prog" aria-hidden="true"><i id="storyBar"></i></span>
           </div>
           <div class="scenes">
-            <article class="scene is-active" aria-labelledby="sc1">
+            <article class="scene is-active" aria-labelledby="sc1" tabindex="-1">
               <div class="scene-art">
                 <svg viewBox="0 0 320 200" aria-hidden="true">
                   <rect class="s-sky" width="320" height="200" rx="10"/>
@@ -348,7 +348,7 @@
               </div>
               <div class="scene-text"><h3 id="sc1">The hiccup</h3><p>Nobody knows exactly where Pip came from. The night nurse found a laundry basket on the nursery step, a nightcap two sizes too big, and one very loud hiccup. Inside the basket: Pip, giggling at the moon.</p></div>
             </article>
-            <article class="scene" aria-labelledby="sc2" aria-hidden="true">
+            <article class="scene" aria-labelledby="sc2" aria-hidden="true" inert tabindex="-1">
               <div class="scene-art">
                 <svg viewBox="0 0 320 200" aria-hidden="true">
                   <rect class="s-sky" width="320" height="200" rx="10"/>
@@ -361,7 +361,7 @@
               </div>
               <div class="scene-text"><h3 id="sc2">No silence allowed</h3><p>The Midnight Nursery had one rule: every little ghost falls asleep to something. Humming, rain, a rusty fan. Pip took one look at all that waiting quiet and decided silence was a problem to be engineered.</p></div>
             </article>
-            <article class="scene" aria-labelledby="sc3" aria-hidden="true">
+            <article class="scene" aria-labelledby="sc3" aria-hidden="true" inert tabindex="-1">
               <div class="scene-art">
                 <svg viewBox="0 0 320 200" aria-hidden="true">
                   <rect class="s-sky" width="320" height="200" rx="10"/>
@@ -373,7 +373,7 @@
               </div>
               <div class="scene-text"><h3 id="sc3">The first lullaby</h3><p>Pip wound a dusty music box and turned the key the wrong way. Out came five notes, slightly crooked, just like Pip's smile. Eleven ghosts yawned at once. Nobody has stayed up past midnight since.</p></div>
             </article>
-            <article class="scene" aria-labelledby="sc4" aria-hidden="true">
+            <article class="scene" aria-labelledby="sc4" aria-hidden="true" inert tabindex="-1">
               <div class="scene-art">
                 <svg viewBox="0 0 320 200" aria-hidden="true">
                   <rect class="s-sky" width="320" height="200" rx="10"/>

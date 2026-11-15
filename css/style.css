@@ -89,6 +89,7 @@ p { margin: 0 0 1rem; }
 a { color: var(--berry-ink); }
 img, svg, canvas { max-width: 100%; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+#main:focus { outline: none; }
 .btn-primary:focus-visible, .start:focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 3px;
