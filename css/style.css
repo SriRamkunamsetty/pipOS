@@ -134,6 +134,7 @@ code { font-size: 0.9em; background: var(--blush); padding: 0.05rem 0.3rem; bord
   font: 600 1rem var(--f-ui); color: var(--ink); text-decoration: none;
   background: var(--paper); border: 3px solid var(--line); border-radius: 999px;
   box-shadow: 0 4px 0 var(--shadow); cursor: pointer;
+  touch-action: manipulation;
   transition: transform 0.08s, box-shadow 0.08s;
 }
 .btn:hover { transform: translateY(-1px); box-shadow: 0 5px 0 var(--shadow); }
@@ -358,6 +359,7 @@ main { max-width: 1120px; margin: 0 auto; padding: 92px 16px 40px; }
   font: 600 0.95rem var(--f-ui); color: #5c4033;
   background: var(--k); border: 3px solid var(--line); border-radius: 6px 6px 16px 16px;
   box-shadow: 0 5px 0 var(--shadow); cursor: pointer;
+  touch-action: manipulation;
   transition: transform 0.08s, box-shadow 0.08s;
 }
 .key:active, .key.is-down { transform: translateY(4px); box-shadow: 0 1px 0 var(--shadow); }
@@ -432,9 +434,10 @@ main { max-width: 1120px; margin: 0 auto; padding: 92px 16px 40px; }
 }
 .lanterns { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .lantern {
-  display: inline-flex; align-items: center; gap: 0.4rem; min-height: 40px; padding: 0.2rem 0.8rem 0.2rem 0.4rem;
+  display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; padding: 0.2rem 0.8rem 0.2rem 0.4rem;
   font: 600 0.9rem var(--f-ui); color: var(--ink);
   background: var(--paper); border: 3px solid var(--line); border-radius: 999px; cursor: pointer;
+  touch-action: manipulation;
 }
 .lantern i { width: 22px; height: 22px; border-radius: 50%; background: var(--c); border: 2px solid var(--line); box-shadow: 0 0 8px var(--c); }
 .lantern[aria-checked="true"] { background: var(--butter); box-shadow: 0 3px 0 var(--shadow); }
@@ -649,7 +652,7 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
   }
   .start { padding: 0.3rem 0.6rem; }
   .start span, .tb-btn span, .clock { display: none; }
-  .tb-btn { min-width: 44px; padding: 0.3rem; }
+  .tb-btn { min-width: 44px; min-height: 44px; padding: 0.3rem; touch-action: manipulation; }
   .task-nav { gap: 0; }
   .task-nav a { padding: 0.35rem 0.5rem; font-size: 0.88rem; }
   .win:not(.hero) { content-visibility: auto; contain-intrinsic-size: auto 320px; }

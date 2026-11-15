@@ -195,12 +195,14 @@
         toLocal(e);
         tryFind();
         e.stopPropagation();
+        if (e.cancelable) e.preventDefault();
       });
 
       handle.addEventListener('pointermove', function (e) {
         if (!isDraggingHandle) return;
         toLocal(e);
         tryFind();
+        if (e.cancelable) e.preventDefault();
       });
 
       function endHandleDrag(e) {
