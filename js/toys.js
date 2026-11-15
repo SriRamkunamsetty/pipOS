@@ -603,7 +603,86 @@
   }
 
   /* =====================================================================
-     5. PIP'S GROWTH CHART
+     5. BEDTIME STORYBOOK (flipbook)
+     ===================================================================== */
+  function initStorybook() {
+    var book = $('#book'), prevBtn = $('#bookPrev'), nextBtn = $('#bookNext'), ind = $('#bookInd');
+    if (!book || !prevBtn || !nextBtn || !ind) return;
+    var pages = $$('.book-page', book);
+    var total = pages.length;
+    var current = 0;
+
+    function renderPage(idx) {
+      current = clamp(idx, 0, total - 1);
+      pages.forEach(function (page, i) {
+        var isCur = i === current;
+        page.classList.toggle('is-current', isCur);
+        page.classList.toggle('is-past', i < current);
+        if (isCur) {
+          page.removeAttribute('aria-hidden');
+          page.removeAttribute('inert');
+        } else {
+          page.setAttribute('aria-hidden', 'true');
+          page.setAttribute('inert', '');
+        }
+      });
+      ind.textContent = 'Page ' + (current + 1) + ' of ' + total;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === total - 1;
+      prevBtn.setAttribute('aria-disabled', current === 0 ? 'true' : 'false');
+      nextBtn.setAttribute('aria-disabled', current === total - 1 ? 'true' : 'false');
+    }
+
+    prevBtn.addEventListener('click', function () {
+      if (current > 0) {
+        renderPage(current - 1);
+        if (audio.isOn()) audio.pop();
+      }
+    });
+
+    nextBtn.addEventListener('click', function () {
+      if (current < total - 1) {
+        renderPage(current + 1);
+        if (audio.isOn()) audio.pop();
+      }
+    });
+
+    book.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextBtn.click();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevBtn.click();
+      }
+    });
+
+    var touchStartX = 0, touchStartY = 0;
+    book.addEventListener('touchstart', function (e) {
+      if (e.touches && e.touches[0]) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    book.addEventListener('touchend', function (e) {
+      if (!touchStartX) return;
+      var touchEndX = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : 0;
+      var touchEndY = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientY : 0;
+      var dx = touchEndX - touchStartX;
+      var dy = touchEndY - touchStartY;
+      if (Math.abs(dx) > 35 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0 && current < total - 1) nextBtn.click();
+        else if (dx > 0 && current > 0) prevBtn.click();
+      }
+      touchStartX = 0;
+    }, { passive: true });
+
+    renderPage(0);
+  }
+
+  /* =====================================================================
+     6. PIP'S GROWTH CHART
      ===================================================================== */
   function initGrowthChart() {
     var chart = $('#growthChart');
@@ -622,6 +701,13 @@
   }
 
   PIP.toys = {
-    init: function () { initLab(); initLights(); initBlocks(); initRoute(); initGrowthChart(); }
+    init: function () {
+      initLab();
+      initLights();
+      initBlocks();
+      initRoute();
+      initStorybook();
+      initGrowthChart();
+    }
   };
 })();
