@@ -413,7 +413,15 @@ kbd {
 .growth-copy p { margin: 0; font-size: 0.88rem; color: var(--ink); opacity: 0.85; }
 .growth-value { display: block; margin-top: 4px; font: 600 0.78rem var(--f-ui); color: var(--berry); }
 .growth-bar { height: 12px; background: rgba(0, 0, 0, 0.08); border-radius: 999px; overflow: hidden; border: 1.5px solid var(--line); }
-.growth-fill { display: block; height: 100%; width: calc(var(--progress, 0) * 1%); background: linear-gradient(90deg, var(--mint), var(--butter)); transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.growth-fill {
+  display: block;
+  height: 100%;
+  width: calc(var(--progress, 0) * 1%);
+  background: linear-gradient(90deg, var(--mint), var(--butter));
+  transition: width 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+html.js .growth-fill { width: 0%; }
+html.js .growth-chart.is-visible .growth-fill { width: calc(var(--progress, 0) * 1%); }
 .proj-head { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0.9rem; }
 .proj-head p { margin: 0; }
 .thumb { flex: none; width: 84px; height: 84px; padding: 4px; background: var(--blush); border: 3px solid var(--line); border-radius: 12px; }

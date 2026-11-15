@@ -44,10 +44,22 @@ test('js/toys.js implements initGrowthChart with IntersectionObserver animation'
   assert.match(toysSrc, /PIP\.watchVisible\(chart/, 'Growth chart must animate via watchVisible IntersectionObserver');
 });
 
-test('css/style.css defines responsive styles and reduced-motion overrides for growth-fill', () => {
+test('css/style.css links initial zero-fill state and reveals width on .is-visible with reduced-motion support', () => {
   const css = fs.readFileSync(CSS_PATH, 'utf8');
 
-  assert.match(css, /\.growth-chart/, 'CSS must style .growth-chart');
-  assert.match(css, /\.growth-fill/, 'CSS must style .growth-fill');
-  assert.match(css, /prefers-reduced-motion[\s\S]*\.growth-fill/, 'Reduced motion must include .growth-fill');
+  // Verify CSS defines zero initial fill for JS users before entering viewport
+  assert.match(css, /html\.js\s+\.growth-fill\s*\{\s*width:\s*0%?;?\s*\}/,
+    'html.js .growth-fill must initialize at width: 0%');
+
+  // Verify CSS triggers expansion to --progress once .is-visible is attached
+  assert.match(css, /html\.js\s+\.growth-chart\.is-visible\s+\.growth-fill\s*\{\s*width:\s*calc\(var\(--progress/,
+    'html.js .growth-chart.is-visible .growth-fill must expand to var(--progress)');
+
+  // Verify reduced-motion override
+  assert.match(css, /prefers-reduced-motion[\s\S]*\.growth-fill/,
+    'Reduced motion must include .growth-fill transition override');
+
+  // Verify mobile responsive override resets grid span
+  assert.match(css, /\.w-growth\s*\{\s*grid-column:\s*auto;?\s*\}/,
+    'Mobile media query must reset .w-growth grid-column to auto');
 });
