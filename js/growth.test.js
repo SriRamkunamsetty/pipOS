@@ -55,11 +55,11 @@ test('css/style.css links initial zero-fill state and reveals width on .is-visib
   assert.match(css, /html\.js\s+\.growth-chart\.is-visible\s+\.growth-fill\s*\{\s*width:\s*calc\(var\(--progress/,
     'html.js .growth-chart.is-visible .growth-fill must expand to var(--progress)');
 
-  // Verify reduced-motion override
-  assert.match(css, /prefers-reduced-motion[\s\S]*\.growth-fill/,
-    'Reduced motion must include .growth-fill transition override');
+  // Verify reduced-motion override scopes correctly inside @media (prefers-reduced-motion)
+  assert.match(css, /@media[^{]*prefers-reduced-motion[^{]*\{[\s\S]*?\.growth-fill[^{]*\{[^}]*transition-duration:\s*0\.01s/,
+    'Reduced motion media query must override .growth-fill transition-duration to 0.01s');
 
-  // Verify mobile responsive override resets grid span
-  assert.match(css, /\.w-growth\s*\{\s*grid-column:\s*auto;?\s*\}/,
-    'Mobile media query must reset .w-growth grid-column to auto');
+  // Verify mobile responsive override resets grid span (allowing grouped selectors)
+  assert.match(css, /@media[^{]*max-width:\s*960px[^{]*\{[\s\S]*?\.w-growth[^{]*\{\s*grid-column:\s*auto;?\s*\}/,
+    'Mobile media query must reset .w-growth grid-column to auto within grouped or standalone selectors');
 });
