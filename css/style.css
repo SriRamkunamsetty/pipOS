@@ -178,7 +178,7 @@ code { font-size: 0.9em; background: var(--blush); padding: 0.05rem 0.3rem; bord
 }
 .tb-btn svg { width: 20px; height: 20px; fill: currentColor; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 .tb-btn .spk, .tb-btn .sun, .tb-btn .moon { stroke: none; }
-.tb-btn .waves, .tb-btn .slash, .tb-btn .rays { fill: none; }
+.tb-btn .waves, .tb-btn .slash, .tb-btn .rays, .tb-btn .globe { fill: none; }
 .tb-btn .slash, .tb-btn .moon { display: none; }
 .tb-btn.is-off .waves { display: none; }
 .tb-btn.is-off .slash { display: inline; }

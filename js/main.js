@@ -208,6 +208,7 @@
 
   /* ---------- go ---------- */
   safe('images', PIP.optionalImages);
+  safe('i18n', PIP.i18n ? PIP.i18n.init : function () {});
   safe('pip', PIP.pip.init);
   safe('theme', initTheme);
   safe('sound', initSound);

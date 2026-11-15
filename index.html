@@ -53,15 +53,19 @@
   <header class="taskbar">
     <a class="start" href="#hello"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#star" width="20" height="20"/></svg><span>Pip OS</span></a>
     <nav class="task-nav" aria-label="Sections">
-      <a href="#hello">Pip</a>
-      <a href="#work">Work</a>
-      <a href="#story">Story</a>
-      <a href="#wall">Wall</a>
+      <a href="#hello" data-i18n="nav_pip">Pip</a>
+      <a href="#work" data-i18n="nav_work">Work</a>
+      <a href="#story" data-i18n="nav_story">Story</a>
+      <a href="#wall" data-i18n="nav_wall">Wall</a>
     </nav>
     <div class="task-right">
       <button class="tb-btn" id="soundBtn" type="button" data-silent aria-pressed="false" aria-label="Sound off, turn sound on">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M3 9v6h4l5 4V5L7 9H3z"/><path class="waves" d="M16 8c1.5 1.2 1.5 6.8 0 8M19 5c3 3 3 11 0 14"/><path class="slash" d="M16 9l6 6M22 9l-6 6"/></svg>
         <span id="soundLabel">Sound off</span>
+      </button>
+      <button class="tb-btn" id="langBtn" type="button" aria-label="Language: English, हिन्दी में बदलें">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="globe" cx="12" cy="12" r="9"/><ellipse class="globe" cx="12" cy="12" rx="4" ry="9"/><path class="globe" d="M3 12h18"/></svg>
+        <span id="langLabel">EN</span>
       </button>
       <button class="tb-btn" id="themeBtn" type="button" aria-label="Day mode, switch to night mode">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="sun" cx="12" cy="12" r="4.5"/><path class="rays" d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/><path class="moon" d="M20 14.5A8 8 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
@@ -87,16 +91,16 @@
       <div class="win-bar"><span class="win-title" id="helloTitle">pip.exe</span><span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
       <div class="hero-body">
         <div class="hero-copy">
-          <h1>I build the dreams you fall asleep inside.</h1>
-          <p class="lede">Junior Dream Engineer at the Midnight Nursery. Lullabies, nightlights and rooftop deliveries, all finished before sunrise.</p>
+          <h1 data-i18n="hero_title">I build the dreams you fall asleep inside.</h1>
+          <p class="lede" data-i18n="hero_lede">Junior Dream Engineer at the Midnight Nursery. Lullabies, nightlights and rooftop deliveries, all finished before sunrise.</p>
           <div class="hero-actions">
-            <button class="btn btn-primary" id="sayHi" type="button">Say hi to Pip</button>
-            <a class="btn" href="#work">See what Pip made</a>
+            <button class="btn btn-primary" id="sayHi" type="button" data-i18n="hero_say_hi">Say hi to Pip</button>
+            <a class="btn" href="#work" data-i18n="hero_see_work">See what Pip made</a>
           </div>
-          <p class="fine">Pip's eyes follow you. Flip the sun and moon switch up top and see what happens.</p>
+          <p class="fine" data-i18n="hero_fine">Pip's eyes follow you. Flip the sun and moon switch up top and see what happens.</p>
         </div>
         <div class="pip-wrap">
-          <p class="bubble" id="greeting">Hi! I'm Pip.</p>
+          <p class="bubble" id="greeting" data-i18n="hero_greeting">Hi! I'm Pip.</p>
           <div class="pip-float">
             <svg id="pipSvg" class="pip-svg" viewBox="0 0 420 440" role="group" aria-label="Pip, the skull baby">
               <title id="pipT">Pip, the skull baby</title>
@@ -213,8 +217,8 @@
     <!-- WORK -->
     <section id="work" aria-labelledby="workTitle">
       <div class="sec-head">
-        <h2 id="workTitle">Things Pip made</h2>
-        <p>Four projects from the Midnight Nursery workbench. Every one of them is playable.</p>
+        <h2 id="workTitle" data-i18n="work_title">Things Pip made</h2>
+        <p data-i18n="work_desc">Four projects from the Midnight Nursery workbench. Every one of them is playable.</p>
       </div>
       <div class="work">
         <!-- Lullaby Lab -->
@@ -346,7 +350,7 @@
                   <path class="s-cap" d="M188 118C192 96 214 92 232 100 212 102 206 110 204 116Z"/>
                 </svg>
               </div>
-              <div class="scene-text"><h3 id="sc1">The hiccup</h3><p>Nobody knows exactly where Pip came from. The night nurse found a laundry basket on the nursery step, a nightcap two sizes too big, and one very loud hiccup. Inside the basket: Pip, giggling at the moon.</p></div>
+              <div class="scene-text"><h3 id="sc1" data-i18n="story_h1">The hiccup</h3><p data-i18n="story_p1">Nobody knows exactly where Pip came from. The night nurse found a laundry basket on the nursery step, a nightcap two sizes too big, and one very loud hiccup. Inside the basket: Pip, giggling at the moon.</p></div>
             </article>
             <article class="scene" aria-labelledby="sc2" aria-hidden="true">
               <div class="scene-art">
@@ -359,7 +363,7 @@
                   <text class="s-z" x="104" y="76" font-size="20">z</text><text class="s-z" x="188" y="60" font-size="24">Z</text><text class="s-z" x="272" y="80" font-size="18">z</text>
                 </svg>
               </div>
-              <div class="scene-text"><h3 id="sc2">No silence allowed</h3><p>The Midnight Nursery had one rule: every little ghost falls asleep to something. Humming, rain, a rusty fan. Pip took one look at all that waiting quiet and decided silence was a problem to be engineered.</p></div>
+              <div class="scene-text"><h3 id="sc2" data-i18n="story_h2">No silence allowed</h3><p data-i18n="story_p2">The Midnight Nursery had one rule: every little ghost falls asleep to something. Humming, rain, a rusty fan. Pip took one look at all that waiting quiet and decided silence was a problem to be engineered.</p></div>
             </article>
             <article class="scene" aria-labelledby="sc3" aria-hidden="true">
               <div class="scene-art">
@@ -371,7 +375,7 @@
                   <use class="s-star" href="#star" x="96" y="38" width="20" height="20"/><use class="s-star" href="#star" x="144" y="18" width="14" height="14"/><use class="s-star" href="#star" x="196" y="36" width="22" height="22"/><use class="s-star" href="#star" x="244" y="20" width="12" height="12"/><use class="s-star" href="#star" x="54" y="76" width="12" height="12"/>
                 </svg>
               </div>
-              <div class="scene-text"><h3 id="sc3">The first lullaby</h3><p>Pip wound a dusty music box and turned the key the wrong way. Out came five notes, slightly crooked, just like Pip's smile. Eleven ghosts yawned at once. Nobody has stayed up past midnight since.</p></div>
+              <div class="scene-text"><h3 id="sc3" data-i18n="story_h3">The first lullaby</h3><p data-i18n="story_p3">Pip wound a dusty music box and turned the key the wrong way. Out came five notes, slightly crooked, just like Pip's smile. Eleven ghosts yawned at once. Nobody has stayed up past midnight since.</p></div>
             </article>
             <article class="scene" aria-labelledby="sc4" aria-hidden="true">
               <div class="scene-art">
@@ -386,7 +390,7 @@
                   <ellipse class="s-cloud" cx="190" cy="96" rx="26" ry="9"/><circle class="s-skull" cx="190" cy="82" r="11"/><circle class="s-eye" cx="186" cy="82" r="3"/><circle class="s-eye" cx="194" cy="82" r="3"/>
                 </svg>
               </div>
-              <div class="scene-text"><h3 id="sc4">The night shift</h3><p>Now Pip is a Junior Dream Engineer: lullabies in the lab, nightlights on the shelf, dreams delivered by cloud before sunrise. Tonight's route has seven stops. Leave your window open a crack.</p></div>
+              <div class="scene-text"><h3 id="sc4" data-i18n="story_h4">The night shift</h3><p data-i18n="story_p4">Now Pip is a Junior Dream Engineer: lullabies in the lab, nightlights on the shelf, dreams delivered by cloud before sunrise. Tonight's route has seven stops. Leave your window open a crack.</p></div>
             </article>
           </div>
           <div class="story-dots" role="group" aria-label="Jump to a scene">
@@ -402,8 +406,8 @@
     <!-- WALL -->
     <section id="wall" aria-labelledby="wallTitle">
       <div class="sec-head">
-        <h2 id="wallTitle">The wish wall</h2>
-        <p>Leave Pip a wish. Pip reads every one, usually while yawning.</p>
+        <h2 id="wallTitle" data-i18n="wall_title">The wish wall</h2>
+        <p data-i18n="wall_desc">Leave Pip a wish. Pip reads every one, usually while yawning.</p>
       </div>
       <div class="wall">
         <article class="win w-wish" data-foldable aria-labelledby="wishTitle">
@@ -474,6 +478,7 @@
   <script src="js/audio.js" defer></script>
   <script src="js/wall.js" defer></script>
   <script src="js/fx.js" defer></script>
+  <script src="js/i18n.js" defer></script>
   <script src="js/pip.js" defer></script>
   <script src="js/toys.js" defer></script>
   <script src="js/main.js" defer></script>
