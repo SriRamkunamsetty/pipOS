@@ -214,7 +214,7 @@
     <section id="work" aria-labelledby="workTitle">
       <div class="sec-head">
         <h2 id="workTitle">Things Pip made</h2>
-        <p>Four projects from the Midnight Nursery workbench. Every one of them is playable.</p>
+        <p>Five projects from the Midnight Nursery workbench. Every one of them is playable.</p>
       </div>
       <div class="work">
         <!-- Lullaby Lab -->
@@ -317,6 +317,138 @@
             <div class="row row-between">
               <button class="btn btn-primary" id="flyBtn" type="button" aria-controls="routeSvg routeLabel">Fly the route</button>
               <p class="score" id="routeLabel" aria-live="polite" aria-atomic="true">Waiting at the nursery window</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Bedtime Storybook -->
+        <article id="storybook" class="win w-flipbook" data-foldable aria-labelledby="bookTitle">
+          <div class="win-bar"><h3 class="win-title" id="bookTitle">storybook.exe</h3></div>
+          <div class="win-body">
+            <div class="proj-head">
+              <p>Turn the pages of Pip's bedtime tales. Use arrow keys, swipe, or click Next.</p>
+            </div>
+            <div class="book" id="book" tabindex="0" role="region" aria-label="Bedtime storybook flipbook. Use Left and Right arrow keys to flip pages.">
+              <div class="book-viewport">
+                <article class="book-page is-current" data-page="1" aria-labelledby="bp1">
+                  <div class="bp-art">
+                    <svg viewBox="0 0 280 180" aria-hidden="true">
+                      <rect width="280" height="180" rx="8" fill="var(--sky)"/>
+                      <circle cx="230" cy="40" r="22" fill="#ffe9ae"/>
+                      <use href="#star" x="40" y="30" width="12" height="12" fill="#ffd98a"/>
+                      <use href="#star" x="120" y="24" width="10" height="10" fill="#ffd98a"/>
+                      <ellipse cx="140" cy="140" rx="90" ry="24" fill="#fff"/>
+                      <rect x="95" y="100" width="90" height="42" rx="6" fill="#c98f6b" stroke="var(--line)" stroke-width="2.5"/>
+                      <circle cx="140" cy="94" r="14" fill="#fff1da" stroke="var(--line)" stroke-width="2"/>
+                      <circle cx="135" cy="94" r="3" fill="#ffc24d"/>
+                      <circle cx="145" cy="94" r="3" fill="#ffc24d"/>
+                    </svg>
+                  </div>
+                  <div class="bp-content">
+                    <h4 id="bp1">The Midnight Basket</h4>
+                    <p>A wicker basket floated through the nursery fog at quarter past midnight. Inside was Pip: tiny skull face, sleepy amber eyes, and a starry nightcap resting crooked. Pip yawned once, smiled at the moon, and made the nursery home.</p>
+                  </div>
+                </article>
+
+                <article class="book-page" data-page="2" aria-labelledby="bp2" aria-hidden="true" inert>
+                  <div class="bp-art">
+                    <svg viewBox="0 0 280 180" aria-hidden="true">
+                      <rect width="280" height="180" rx="8" fill="var(--mint)"/>
+                      <line x1="80" y1="20" x2="80" y2="160" stroke="var(--line)" stroke-width="3"/>
+                      <line x1="110" y1="20" x2="110" y2="160" stroke="var(--line)" stroke-width="3"/>
+                      <line x1="80" y1="50" x2="110" y2="50" stroke="var(--line)" stroke-width="2.5"/>
+                      <line x1="80" y1="85" x2="110" y2="85" stroke="var(--line)" stroke-width="2.5"/>
+                      <line x1="80" y1="120" x2="110" y2="120" stroke="var(--line)" stroke-width="2.5"/>
+                      <circle cx="95" cy="40" r="14" fill="#fff1da" stroke="var(--line)" stroke-width="2"/>
+                      <use href="#star" x="180" y="32" width="28" height="28" fill="#ffd98a" stroke="var(--line)" stroke-width="1.5"/>
+                      <path d="M106 38Q140 30 175 42" fill="none" stroke="var(--line)" stroke-width="2" stroke-dasharray="3 3"/>
+                    </svg>
+                  </div>
+                  <div class="bp-content">
+                    <h4 id="bp2">The Stolen Star</h4>
+                    <p>Every evening at twilight, Pip climbs the tallest bedpost with a wooden ladder. One by one, Pip plucks falling stars from the windowsill and tucks them inside the nightcap's woolly brim to keep the bad dreams far away.</p>
+                  </div>
+                </article>
+
+                <article class="book-page" data-page="3" aria-labelledby="bp3" aria-hidden="true" inert>
+                  <div class="bp-art">
+                    <svg viewBox="0 0 280 180" aria-hidden="true">
+                      <rect width="280" height="180" rx="8" fill="var(--butter)"/>
+                      <ellipse cx="140" cy="120" rx="55" ry="32" fill="#8e583c" stroke="var(--line)" stroke-width="3"/>
+                      <path d="M95 120Q140 155 185 120" fill="#ffc24d"/>
+                      <circle cx="140" cy="65" r="14" fill="#fff1da" stroke="var(--line)" stroke-width="2"/>
+                      <line x1="148" y1="72" x2="135" y2="125" stroke="var(--line)" stroke-width="3" stroke-linecap="round"/>
+                      <circle cx="115" cy="85" r="5" fill="#fff" opacity="0.8"/>
+                      <circle cx="165" cy="88" r="4" fill="#fff" opacity="0.8"/>
+                    </svg>
+                  </div>
+                  <div class="bp-content">
+                    <h4 id="bp3">Mixing Lantern Honey</h4>
+                    <p>In the nursery pantry, Pip stirs glow-worm nectar, moon water, and warm honey in a bronze kettle. That is how the dream lanterns are filled: with light soft enough that even the fussiest little ghost can fall asleep.</p>
+                  </div>
+                </article>
+
+                <article class="book-page" data-page="4" aria-labelledby="bp4" aria-hidden="true" inert>
+                  <div class="bp-art">
+                    <svg viewBox="0 0 280 180" aria-hidden="true">
+                      <rect width="280" height="180" rx="8" fill="var(--sky)"/>
+                      <rect x="30" y="120" width="45" height="40" fill="#b07d62" stroke="var(--line)" stroke-width="2.5"/>
+                      <polygon points="25,120 52,95 80,120" fill="#8e4a49" stroke="var(--line)" stroke-width="2"/>
+                      <rect x="180" y="110" width="55" height="50" fill="#b07d62" stroke="var(--line)" stroke-width="2.5"/>
+                      <polygon points="175,110 207,85 240,110" fill="#8e4a49" stroke="var(--line)" stroke-width="2"/>
+                      <path d="M50 70Q120 20 200 65" fill="none" stroke="var(--line)" stroke-width="2.5" stroke-dasharray="4 4"/>
+                      <ellipse cx="125" cy="45" rx="28" ry="11" fill="#fff" stroke="var(--line)" stroke-width="2"/>
+                    </svg>
+                  </div>
+                  <div class="bp-content">
+                    <h4 id="bp4">Rooftop Wind Secrets</h4>
+                    <p>Clouds don't steer with wheels; they steer with whispers. When Pip delivers dreams over cobblestones, Pip blows softly across the chimney pots. The chimneys whistle back, guiding the cloud straight to every bedroom with an open window.</p>
+                  </div>
+                </article>
+
+                <article class="book-page" data-page="5" aria-labelledby="bp5" aria-hidden="true" inert>
+                  <div class="bp-art">
+                    <svg viewBox="0 0 280 180" aria-hidden="true">
+                      <rect width="280" height="180" rx="8" fill="var(--blush)"/>
+                      <line x1="30" y1="60" x2="250" y2="70" stroke="var(--line)" stroke-width="2.5"/>
+                      <path d="M70 63l-4 35 18 10 8-8-6-35z" fill="#ff9fb4" stroke="var(--line)" stroke-width="2"/>
+                      <path d="M130 65l-4 38 18 10 8-8-6-38z" fill="#9fd8c4" stroke="var(--line)" stroke-width="2"/>
+                      <path d="M190 67l-4 35 18 10 8-8-6-35z" fill="#ffd27a" stroke="var(--line)" stroke-width="2"/>
+                      <use href="#star" x="30" y="50" width="14" height="14" fill="#ffd98a"/>
+                      <use href="#star" x="245" y="60" width="14" height="14" fill="#ffd98a"/>
+                    </svg>
+                  </div>
+                  <div class="bp-content">
+                    <h4 id="bp5">The Sock Detective</h4>
+                    <p>Where do lost socks go? They don't vanish. Pip collects single socks from the nursery floor and sews them into soft cloud hammocks for sleepy moths. Pip says everyone deserves cozy toes, even the tiniest night fliers.</p>
+                  </div>
+                </article>
+
+                <article class="book-page" data-page="6" aria-labelledby="bp6" aria-hidden="true" inert>
+                  <div class="bp-art">
+                    <svg viewBox="0 0 280 180" aria-hidden="true">
+                      <rect width="280" height="180" rx="8" fill="#1b1430"/>
+                      <circle cx="140" cy="90" r="50" fill="url(#gHalo)" opacity="0.6"/>
+                      <ellipse cx="140" cy="115" rx="55" ry="18" fill="var(--cloud)" stroke="var(--line)" stroke-width="2.5"/>
+                      <circle cx="140" cy="85" r="16" fill="#fff1da" stroke="var(--line)" stroke-width="2"/>
+                      <path d="M134 85q6 4 12 0" fill="none" stroke="var(--line)" stroke-width="1.8"/>
+                      <text x="175" y="65" font-family="var(--f-ui)" font-size="16" fill="#ffd98a">z</text>
+                      <text x="190" y="52" font-family="var(--f-ui)" font-size="20" fill="#ffd98a">Z</text>
+                    </svg>
+                  </div>
+                  <div class="bp-content">
+                    <h4 id="bp6">Goodnight, Little Dreamer</h4>
+                    <p>The sun is still hours away, but Pip's eyes are growing heavy. The music box slows, the last lantern flickers low, and the cloud curls up on the rug. Close your eyes now. Pip will watch over your dreams until morning.</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="row row-between book-bar">
+              <div class="book-nav">
+                <button class="btn" id="bookPrev" type="button" aria-label="Previous storybook page">← Back</button>
+                <button class="btn btn-primary" id="bookNext" type="button" aria-label="Next storybook page">Next →</button>
+              </div>
+              <p class="score" id="bookInd" aria-live="polite" aria-atomic="true">Page 1 of 6</p>
             </div>
           </div>
         </article>

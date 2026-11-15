@@ -464,6 +464,81 @@ main { max-width: 1120px; margin: 0 auto; padding: 92px 16px 40px; }
 .route-svg .rd-eye { fill: #2c1d19; }
 .route-svg .rd-cap { fill: #8b8fd9; stroke: #5c4033; stroke-width: 1.5; }
 
+/* --- 10.5 Bedtime Storybook Flipbook --- */
+.w-flipbook { grid-column: span 12; }
+.book {
+  position: relative;
+  background: var(--paper);
+  border: 3px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 4px 4px 0 var(--shadow);
+  padding: 1.2rem;
+  min-height: 220px;
+  overflow: hidden;
+  outline: none;
+}
+.book:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.book-viewport { position: relative; min-height: 200px; }
+.book-page {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.4rem;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  transform: translateX(20px);
+}
+.book-page.is-current {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+  transform: translateX(0);
+}
+.book-page.is-past {
+  transform: translateX(-20px);
+}
+.bp-art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+.bp-content h4 {
+  font-family: var(--f-head);
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem;
+  color: var(--berry-ink);
+}
+.bp-content p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.book-bar { margin-top: 1rem; }
+.book-nav { display: flex; gap: 0.6rem; }
+.book-nav .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 0 var(--shadow);
+}
+
+@media (max-width: 760px) {
+  .book-page {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+  .bp-art svg {
+    max-height: 160px;
+  }
+}
+
 /* ==========================================================================
    11. Bedtime Storybook (Track & Scenes)
    ========================================================================== */
@@ -681,6 +756,6 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
   .pip-svg.is-wave .p-arm-wave { animation: wave-big 0.42s ease-in-out 2; }
   .marquee { overflow-x: auto; }
   .marquee-track span:last-child { display: none; }
-  .scene, .odo-strip, .toast { transition-duration: 0.01s; }
+  .scene, .odo-strip, .toast, .book-page { transition-duration: 0.01s; transform: none !important; }
   .sparkle { display: none; }
 }
