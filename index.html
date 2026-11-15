@@ -227,9 +227,26 @@
             </div>
             <div class="mb-stage" id="mbStage" aria-hidden="true"></div>
             <div class="keys" id="keys" role="group" aria-label="Music box keys"></div>
-            <div class="row">
-              <button class="btn btn-primary" id="windBtn" type="button" data-silent aria-pressed="false">Wind the box</button>
-              <button class="btn" id="endlessBtn" type="button" data-silent aria-pressed="false">Endless lullaby</button>
+            <div class="row row-between lab-bar">
+              <div class="lab-actions">
+                <button class="btn btn-primary" id="windBtn" type="button" data-silent aria-pressed="false">Wind the box</button>
+                <button class="btn" id="endlessBtn" type="button" data-silent aria-pressed="false">Endless lullaby</button>
+              </div>
+              <div class="lab-controls">
+                <div class="tune-wrap">
+                  <label for="tuneSelect" class="lab-label">Tune</label>
+                  <select id="tuneSelect" class="lab-select" aria-label="Select lullaby melody">
+                    <option value="0">The Nursery Step</option>
+                    <option value="1">Cloud Patrol</option>
+                    <option value="2">Starlight Waltz</option>
+                  </select>
+                </div>
+                <div class="vol-wrap">
+                  <label for="volSlider" class="lab-label"><span aria-hidden="true">♪</span> Volume</label>
+                  <input type="range" id="volSlider" class="lab-slider" min="0" max="1" step="0.05" value="0.7" aria-label="Music box volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" aria-valuetext="70 percent volume">
+                  <span id="volValue" class="vol-val" aria-hidden="true">70%</span>
+                </div>
+              </div>
             </div>
           </div>
         </article>

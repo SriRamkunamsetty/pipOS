@@ -59,8 +59,53 @@
     });
     PIP.watchVisible($('#lab'), function (v) { labVisible = v; }, '0px');
 
-    // an original little tune; -1 is a rest
-    var TUNE = [0, 2, 4, 2, 3, 1, 0, -1, 2, 4, 5, 4, 3, 2, 1, -1, 4, 5, 7, 5, 4, 2, 3, 1, 0, -1, -1, -1];
+    // original pentatonic melodies; -1 is a rest
+    var TUNES = [
+      {
+        name: 'The Nursery Step',
+        notes: [0, 2, 4, 2, 3, 1, 0, -1, 2, 4, 5, 4, 3, 2, 1, -1, 4, 5, 7, 5, 4, 2, 3, 1, 0, -1, -1, -1],
+        tempo: 430
+      },
+      {
+        name: 'Cloud Patrol',
+        notes: [0, 1, 2, 4, 3, 2, 1, -1, 2, 3, 5, 4, 3, 2, 0, -1, 4, 6, 7, 6, 5, 3, 4, 2, 0, -1, -1, -1],
+        tempo: 410
+      },
+      {
+        name: 'Starlight Waltz',
+        notes: [4, 2, 0, 2, 4, 5, 4, -1, 5, 4, 2, 4, 5, 7, 6, -1, 7, 5, 4, 3, 2, 1, 0, 2, 0, -1, -1, -1],
+        tempo: 460
+      }
+    ];
+    var currentTuneIdx = parseInt(store.get('tune_idx', '0'), 10) || 0;
+    if (currentTuneIdx < 0 || currentTuneIdx >= TUNES.length) currentTuneIdx = 0;
+
+    var volSlider = $('#volSlider'), volValue = $('#volValue'), tuneSelect = $('#tuneSelect');
+
+    if (volSlider && audio.getVolume) {
+      volSlider.value = audio.getVolume();
+      if (volValue) volValue.textContent = Math.round(audio.getVolume() * 100) + '%';
+      volSlider.addEventListener('input', function () {
+        var val = parseFloat(volSlider.value);
+        if (audio.setVolume) audio.setVolume(val);
+        if (volValue) volValue.textContent = Math.round(val * 100) + '%';
+        volSlider.setAttribute('aria-valuenow', Math.round(val * 100));
+        volSlider.setAttribute('aria-valuetext', Math.round(val * 100) + ' percent volume');
+      });
+    }
+
+    if (tuneSelect) {
+      tuneSelect.value = String(currentTuneIdx);
+      tuneSelect.addEventListener('change', function () {
+        currentTuneIdx = parseInt(tuneSelect.value, 10);
+        store.set('tune_idx', currentTuneIdx);
+        if (playing) {
+          stopTune();
+          playTune();
+        }
+      });
+    }
+
     var playing = false, timers = [];
 
     function stopTune() {
@@ -76,11 +121,12 @@
       playing = true;
       wind.textContent = 'Stop the box';
       wind.setAttribute('aria-pressed', 'true');
-      TUNE.forEach(function (n, step) {
+      var curTune = TUNES[currentTuneIdx] || TUNES[0];
+      curTune.notes.forEach(function (n, step) {
         timers.push(window.setTimeout(function () {
           if (n >= 0) press(n);
-          if (step === TUNE.length - 1) stopTune();
-        }, step * 430));
+          if (step === curTune.notes.length - 1) stopTune();
+        }, step * curTune.tempo));
       });
     }
     wind.addEventListener('click', function () { if (playing) stopTune(); else playTune(); });
