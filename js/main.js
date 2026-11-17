@@ -221,7 +221,9 @@
             minBtn.id = minId;
             minBtn.className = 'tb-min-btn';
             minBtn.setAttribute('aria-label', 'Restore ' + titleText);
-            minBtn.innerHTML = '<span class="tb-min-icon" aria-hidden="true">🪟</span><span class="tb-min-title">' + titleText + '</span>';
+            minBtn.innerHTML = '<span class="tb-min-icon" aria-hidden="true">🪟</span><span class="tb-min-title"></span>';
+            var titleSpan = minBtn.querySelector('.tb-min-title');
+            if (titleSpan) titleSpan.textContent = titleText;
             minBtn.addEventListener('click', function () {
               body.hidden = false;
               win.classList.remove('is-folded');
