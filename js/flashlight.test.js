@@ -55,7 +55,7 @@ test('Night Flashlight: index.html DOM structure and accessibility attributes', 
   // Flashlight overlay exists, is hidden by default, and accessible to screen readers
   assert.match(html, /<div\s+[^>]*id=["']flashlightOverlay["'][^>]*hidden/i, 'flashlightOverlay must exist and start hidden');
   assert.match(html, /<div\s+[^>]*id=["']flashlightOverlay["'][^>]*aria-hidden=["']true["']/i, 'flashlightOverlay must have aria-hidden="true"');
-  assert.match(html, /<div\s+[^>]*id=["']flashlightOverlay["'][^>]*role=["']presentation["']/i, 'flashlightOverlay must have role="presentation"');
+  assert.match(html, /<div\s+[^>]*id=["']flashlightOverlay["'][^>]*role=["'](presentation|none)["']/i, 'flashlightOverlay must have role="none" or role="presentation"');
 
   // Flashlight glow exists
   assert.match(html, /<div\s+[^>]*id=["']flashlightGlow["'][^>]*hidden/i, 'flashlightGlow must exist and start hidden');
