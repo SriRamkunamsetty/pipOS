@@ -79,6 +79,9 @@
         var r = svg.getBoundingClientRect();
         var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
         look(cx + (Math.random() - 0.5) * 520, cy + (Math.random() - 0.5) * 360);
+        if (mood === 'night' && Math.random() < 0.28) {
+          yawn(2600);
+        }
       }
       idleLoop();
     }, 1600 + Math.random() * 1800);
@@ -92,7 +95,36 @@
     }, 2400 + Math.random() * 3600);
   }
 
-  /* ---------- moods ---------- */
+  /* ---------- expressions & moods ---------- */
+  var exprTimer = 0;
+  function setExpression(expr, ms) {
+    if (!svg) return;
+    svg.classList.remove('is-surprised', 'is-shy', 'is-yawn');
+    window.clearTimeout(exprTimer);
+    if (!expr) return;
+    svg.classList.add('is-' + expr);
+    exprTimer = window.setTimeout(function () {
+      svg.classList.remove('is-' + expr);
+    }, ms || 2200);
+  }
+
+  function surprise(ms) {
+    setExpression('surprised', ms || 2000);
+    if (PIP.audio && PIP.audio.isOn()) PIP.audio.pop();
+  }
+
+  function shy(ms) {
+    setExpression('shy', ms || 2500);
+    if (PIP.audio && PIP.audio.isOn()) PIP.audio.pop();
+  }
+
+  function yawn(ms) {
+    setExpression('yawn', ms || 2800);
+    if (PIP.audio && PIP.audio.isOn()) {
+      PIP.audio.note(392, { dur: 1.4, gain: 0.08, type: 'triangle', bell: false });
+    }
+  }
+
   function setMood(m) {
     mood = m;
     svg.classList.toggle('is-night', m === 'night');
@@ -188,6 +220,32 @@
       window.setTimeout(function () { svg.classList.remove('is-wave'); }, 2300);
     });
 
+    var nose = $('#pipNose');
+    if (nose) {
+      nose.addEventListener('mouseenter', function () { surprise(2000); });
+      nose.addEventListener('focus', function () { surprise(2000); });
+      nose.addEventListener('click', function (e) {
+        e.stopPropagation();
+        surprise(2200);
+      });
+      nose.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); surprise(2200); }
+      });
+    }
+
+    var lastHeadClick = 0;
+    if (head) {
+      head.addEventListener('click', function () {
+        var now = performance.now();
+        if (now - lastHeadClick < 450) {
+          shy(2500);
+          lastHeadClick = 0;
+        } else {
+          lastHeadClick = now;
+        }
+      });
+    }
+
     if (egg) {
       egg.addEventListener('click', onEgg);
       egg.addEventListener('keydown', function (e) {
@@ -208,7 +266,11 @@
     glance: glance,
     setMood: setMood,
     wake: wake,
-    getMood: function () { return mood; }
+    getMood: function () { return mood; },
+    setExpression: setExpression,
+    surprise: surprise,
+    shy: shy,
+    yawn: yawn
   };
 
   if (typeof module !== 'undefined' && module.exports) {

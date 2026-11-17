@@ -338,11 +338,82 @@ main { max-width: 1120px; margin: 0 auto; padding: 92px 16px 40px; }
 .pip-svg.is-blink .lid { transform: scaleY(1); }
 .pip-svg .p-nose { fill: #2c1d19; }
 .pip-svg .p-mouth { stroke: #5c4033; stroke-width: 6; stroke-linecap: round; }
-.pip-svg .mouth-giggle { display: none; }
+.pip-svg .mouth-giggle,
+.pip-svg .mouth-surprised,
+.pip-svg .mouth-yawn {
+  display: none;
+}
 .pip-svg .p-mouth-open { fill: #2c1d19; stroke: #5c4033; stroke-width: 4; stroke-linejoin: round; }
 .pip-svg.is-awake .mouth-giggle { display: inline; }
 .pip-svg.is-awake .mouth-smile { display: none; }
-.pip-svg .p-cheek { fill: #ff9fb4; opacity: 0.55; }
+
+/* Pip Expression 1: Surprised (wide eyes, cute 'O' mouth) */
+.pip-svg.is-surprised .mouth-surprised {
+  display: inline;
+}
+.pip-svg.is-surprised .mouth-smile,
+.pip-svg.is-surprised .mouth-giggle,
+.pip-svg.is-surprised .mouth-yawn {
+  display: none;
+}
+.pip-svg.is-surprised .lid {
+  transform: scaleY(0);
+}
+.pip-svg.is-surprised .pupil-in {
+  transform: scale(1.15);
+}
+.pip-svg.is-surprised .p-cheek {
+  opacity: 0.75;
+  transform: translateY(-2px);
+}
+
+/* Pip Expression 2: Shy (rosy blushing cheeks, bashful lowered lids) */
+.pip-svg.is-shy .lid {
+  transform: scaleY(0.42);
+}
+.pip-svg.is-shy .p-cheek {
+  fill: #ff6b8b;
+  opacity: 0.95;
+  transform: scale(1.35);
+  filter: drop-shadow(0 0 5px #ff7fa8);
+}
+.pip-svg.is-shy .mouth-smile {
+  transform: translateY(2px) scale(0.95);
+}
+
+/* Pip Expression 3: Sleepy Yawn (yawning mouth, droopy lids) */
+.pip-svg.is-yawn .mouth-yawn {
+  display: inline;
+}
+.pip-svg.is-yawn .mouth-smile,
+.pip-svg.is-yawn .mouth-giggle,
+.pip-svg.is-yawn .mouth-surprised {
+  display: none;
+}
+.pip-svg.is-yawn .lid {
+  transform: scaleY(0.8);
+}
+.pip-svg.is-yawn .p-cheek {
+  opacity: 0.65;
+}
+
+.pip-svg #pipNose {
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.pip-svg #pipNose:hover,
+.pip-svg #pipNose:focus-visible {
+  filter: drop-shadow(0 0 4px #ffc24d);
+}
+
+.pip-svg .p-cheek {
+  fill: #ff9fb4;
+  opacity: 0.55;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: fill 0.2s, opacity 0.2s, transform 0.2s;
+}
 .pip-svg .p-cap { fill: #8b8fd9; stroke: #5c4033; stroke-width: 5; stroke-linejoin: round; }
 .pip-svg .p-brim, .pip-svg .p-pom { fill: #fff1da; stroke: #5c4033; stroke-width: 5; stroke-linejoin: round; }
 .pip-svg .p-capstar { fill: #fff1da; }
