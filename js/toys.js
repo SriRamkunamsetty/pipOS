@@ -592,8 +592,16 @@
     }
     PIP.watchVisible(room, function (v) {
       visible = v;
-      if (v && !raf) raf = window.requestAnimationFrame(drift);
+      if (v && !document.hidden && !raf) raf = window.requestAnimationFrame(drift);
     });
+
+    if (typeof document !== 'undefined') {
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden && visible && !raf) {
+          raf = window.requestAnimationFrame(drift);
+        }
+      });
+    }
 
     window.addEventListener('resize', function () { if (performance.now() - lastMove > 2500) { center(); paint(); } });
     syncRoomElements();
