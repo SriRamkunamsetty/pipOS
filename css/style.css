@@ -2847,3 +2847,76 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
   }
 }
 
+/* --- Interactive Playable Baby Rattle Toy --- */
+.rattle-toy-box {
+  margin-top: 18px;
+  padding: 12px 14px;
+  background: var(--paper-warm, rgba(0, 0, 0, 0.03));
+  border: 2px dashed var(--line);
+  border-radius: 12px;
+}
+
+.rattle-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.rattle-label {
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.rattle-tip {
+  font-size: 0.78rem;
+  color: var(--ink);
+  opacity: 0.75;
+}
+
+.rattle-stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 170px;
+  padding: 10px 0;
+  touch-action: none;
+  overflow: visible;
+}
+
+.rattle-svg {
+  cursor: grab;
+  touch-action: none;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.15));
+  transition: filter 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.rattle-svg:active {
+  cursor: grabbing;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.22));
+}
+
+.rattle-svg:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+.rattle-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.rattle-sensor-status {
+  font-size: 0.78rem;
+  color: var(--ink);
+  opacity: 0.8;
+  margin-left: auto;
+}
