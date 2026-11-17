@@ -181,24 +181,79 @@
     }
   }
 
-  /* ---------- fold-up windows ---------- */
+  /* ---------- fold-up & minimized windows ---------- */
   function initFoldable() {
+    var minDock = $('#taskbarMinimized');
+    var maxZ = 10;
+
+    function bringToFront(win) {
+      if (!win) return;
+      maxZ++;
+      win.style.zIndex = maxZ;
+      $$('.win').forEach(function (w) { w.classList.remove('win-active'); });
+      win.classList.add('win-active');
+    }
+
     $$('.win[data-foldable]').forEach(function (win, n) {
       var bar = $('.win-bar', win), body = $('.win-body', win), title = $('.win-title', win);
       if (!bar || !body) return;
       if (!body.id) body.id = 'winbody' + n;
+
+      win.addEventListener('pointerdown', function () { bringToFront(win); });
+      win.addEventListener('focusin', function () { bringToFront(win); });
+
+      var titleText = title ? title.textContent.trim() : 'window ' + n;
+      var minId = 'tb-min-' + (win.id || n);
+
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'win-btn';
       b.setAttribute('aria-controls', body.id);
       b.setAttribute('data-silent', '');
+
+      function updateTaskbarDock(open) {
+        if (!minDock) return;
+        var existing = $('#' + minId, minDock);
+        if (!open) {
+          if (!existing) {
+            var minBtn = document.createElement('button');
+            minBtn.type = 'button';
+            minBtn.id = minId;
+            minBtn.className = 'tb-min-btn';
+            minBtn.setAttribute('aria-label', 'Restore ' + titleText);
+            minBtn.innerHTML = '<span class="tb-min-icon" aria-hidden="true">🪟</span><span class="tb-min-title">' + titleText + '</span>';
+            minBtn.addEventListener('click', function () {
+              body.hidden = false;
+              win.classList.remove('is-folded');
+              paint();
+              bringToFront(win);
+              win.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              b.focus();
+            });
+            minDock.appendChild(minBtn);
+          }
+        } else {
+          if (existing) existing.remove();
+        }
+      }
+
       function paint() {
         var open = !body.hidden;
         b.setAttribute('aria-expanded', open ? 'true' : 'false');
-        b.setAttribute('aria-label', (open ? 'Fold up ' : 'Open ') + (title ? title.textContent : 'window'));
+        b.setAttribute('aria-label', (open ? 'Fold up ' : 'Open ') + titleText);
         b.textContent = open ? '−' : '+';
+        win.classList.toggle('is-folded', !open);
+        updateTaskbarDock(open);
       }
-      b.addEventListener('click', function () { body.hidden = !body.hidden; paint(); });
+
+      b.addEventListener('click', function () {
+        body.hidden = !body.hidden;
+        paint();
+        if (!body.hidden) {
+          bringToFront(win);
+        }
+      });
+
       bar.appendChild(b);
       paint();
     });

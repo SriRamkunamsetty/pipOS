@@ -2989,3 +2989,71 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
 [data-theme="night"] .notes-status.is-saved {
   color: #5ce68b;
 }
+
+/* --- Window Management & Taskbar Minimized Dock --- */
+.win {
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.win.win-active {
+  border-color: var(--focus, #6366f1) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3), 6px 6px 0 var(--shadow) !important;
+}
+
+.task-minimized {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  max-width: 320px;
+  scrollbar-width: none;
+}
+
+.task-minimized::-webkit-scrollbar {
+  display: none;
+}
+
+.tb-min-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 36px;
+  padding: 0.2rem 0.65rem;
+  font: 600 0.82rem var(--f-ui);
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 2px 0 var(--shadow);
+  cursor: pointer;
+  white-space: nowrap;
+  touch-action: manipulation;
+  transition: transform 0.08s, background 0.15s, box-shadow 0.08s;
+}
+
+.tb-min-btn:hover {
+  background: var(--blush, #fce7f3);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 var(--shadow);
+}
+
+.tb-min-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 var(--shadow);
+}
+
+.tb-min-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.tb-min-icon {
+  font-size: 0.88rem;
+}
+
+.tb-min-title {
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
