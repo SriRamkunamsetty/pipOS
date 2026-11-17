@@ -428,6 +428,7 @@
   safe('toys', PIP.toys.init);
   safe('stars', PIP.stars && PIP.stars.init);
   safe('rattle', PIP.rattle && PIP.rattle.init);
+  safe('drag', PIP.drag && PIP.drag.init);
   safe('story', initStory);
   safe('navspy', initNavSpy);
   safe('trash', initTrash);

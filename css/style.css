@@ -2989,3 +2989,23 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
 [data-theme="night"] .notes-status.is-saved {
   color: #5ce68b;
 }
+
+/* --- Draggable Desktop Windows --- */
+@media (min-width: 900px) {
+  .win-bar.is-draggable {
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .win-bar.is-draggable:active,
+  .win.is-dragging .win-bar {
+    cursor: grabbing;
+  }
+
+  .win.is-dragging {
+    opacity: 0.95;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), 8px 8px 0 var(--shadow);
+    transition: none !important;
+  }
+}
