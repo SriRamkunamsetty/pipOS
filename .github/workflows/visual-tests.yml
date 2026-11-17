@@ -30,7 +30,7 @@ jobs:
         working-directory: tests
         run: |
           npm install
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chromium webkit
 
       - name: Run Playwright tests
         working-directory: tests
