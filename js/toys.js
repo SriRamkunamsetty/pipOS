@@ -556,7 +556,7 @@
      ===================================================================== */
   function initBlocks() {
     var cv = $('#blockCanvas'), btn = $('#blockDrop'), scoreEl = $('#blockScore');
-    var leaderboardListEl = $('#blockLeaderboardList');
+    var leaderboardListEl = $('#blockLeaderboardList'), comboEl = $('#blockCombo');
     if (!cv || !cv.getContext) return;
     var ctx = cv.getContext('2d');
     if (!ctx) return;
@@ -675,6 +675,10 @@
 
     function reset() {
       st = { stack: [{ x: (W - mode.start) / 2, w: mode.start, i: 0 }], cur: null, chips: [], score: 0, combo: 0, over: false, cam: 0 };
+      if (comboEl) {
+        comboEl.hidden = true;
+        comboEl.textContent = '';
+      }
       spawn();
       hud();
       if (!raf && visible) loop();
@@ -701,6 +705,8 @@
         st.cur = null;
         st.over = true;
         saveTopScore(st.score);
+        st.combo = 0;
+        if (comboEl) comboEl.hidden = true;
         if (st.score > best) { best = st.score; store.set(bestKey(), best); }
         hud();
         toast('Wobbly! Your tower is ' + st.score + ' blocks tall.');
@@ -712,8 +718,13 @@
         nx = top.x;
         nw = top.w;
         st.combo = (st.combo || 0) + 1;
+        if (comboEl) {
+          comboEl.hidden = false;
+          comboEl.textContent = (st.combo > 1 ? st.combo + 'x Combo! ✨' : 'Perfect! ✨');
+        }
       } else {
         st.combo = 0;
+        if (comboEl) comboEl.hidden = true;
         if (c.x < top.x) st.chips.push({ x: c.x, w: top.x - c.x, y: levelY(c.i), vy: 0, i: c.i });
         else st.chips.push({ x: top.x + top.w, w: c.x + c.w - (top.x + top.w), y: levelY(c.i), vy: 0, i: c.i });
         nx = left;
@@ -1116,8 +1127,41 @@ var col = theme.pal[idx % theme.pal.length];
     }, '0px');
   }
 
+  function updateLeaderboardList(list, newScore, mode) {
+    var copy = Array.isArray(list) ? list.filter(function (entry) {
+      if (typeof entry === 'number' && !isNaN(entry) && entry > 0) return true;
+      return entry && typeof entry === 'object' && typeof entry.score === 'number' && entry.score > 0;
+    }).map(function (entry) {
+      if (typeof entry === 'number') return { score: Math.floor(entry), mode: 'normal', date: '' };
+      return {
+        score: Math.floor(entry.score),
+        mode: typeof entry.mode === 'string' ? entry.mode : 'normal',
+        date: typeof entry.date === 'string' ? entry.date : ''
+      };
+    }) : [];
+
+    if (newScore && typeof newScore === 'number' && newScore > 0) {
+      var d = new Date();
+      var dateStr = (d.getMonth() + 1) + '/' + d.getDate();
+      copy.push({
+        score: Math.floor(newScore),
+        mode: mode || 'normal',
+        date: dateStr
+      });
+    }
+    copy.sort(function (a, b) { return b.score - a.score; });
+    return copy.slice(0, 5);
+  }
+
+  function getComboPitchMultiplier(combo) {
+    if (!combo || combo <= 1) return 1;
+    return Math.pow(1.08, Math.min(combo - 1, 8));
+  }
+
   PIP.toys = {
     HOUSE_STORIES: HOUSE_STORIES,
+    updateLeaderboardList: updateLeaderboardList,
+    getComboPitchMultiplier: getComboPitchMultiplier,
     init: function () {
       initLab();
       initLights();
@@ -1130,7 +1174,9 @@ var col = theme.pal[idx % theme.pal.length];
 
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-      HOUSE_STORIES: HOUSE_STORIES
+      HOUSE_STORIES: HOUSE_STORIES,
+      updateLeaderboardList: updateLeaderboardList,
+      getComboPitchMultiplier: getComboPitchMultiplier
     };
   }
 })();

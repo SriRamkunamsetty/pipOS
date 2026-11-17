@@ -650,6 +650,38 @@ html.js .growth-chart.is-visible .growth-fill { width: calc(var(--progress, 0) *
 .mode-hint { margin: 0; min-height: 1.2em; font-size: 0.82rem; }
 @media (max-width: 760px) { .opt-btn { min-height: 44px; } }
 
+/* Rattle & Blocks: Combo Counter */
+.block-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.block-combo {
+  display: inline-flex;
+  align-items: center;
+  font: 700 0.82rem var(--f-ui);
+  color: #fff;
+  background: linear-gradient(135deg, var(--berry), #f59e0b);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 2px solid var(--line);
+  box-shadow: 1px 2px 0 var(--line);
+  animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 /* Rattle & Blocks: Top 5 leaderboard */
 .block-leaderboard {
   margin-top: 0.9rem;
@@ -1481,7 +1513,7 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
   html { scroll-behavior: auto; }
   .pip-float, .pip-svg .p-arm-wave, .marquee-track, .tb-btn.is-hint,
   .pip-svg.is-night .p-zzz text, [data-theme="night"] .desk::after, .dr-item.is-found,
-  .storybook .scene.is-active { animation: none; }
+  .storybook .scene.is-active, .block-combo { animation: none; }
   .pip-svg.is-wave .p-arm-wave { animation: wave-big 0.42s ease-in-out 2; }
   .marquee { overflow-x: auto; }
   .marquee-track span:last-child { display: none; }
