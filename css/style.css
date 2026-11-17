@@ -409,10 +409,10 @@ main { max-width: 1120px; margin: 0 auto; padding: 92px 16px 40px; }
   transform-origin: center;
   transition: fill 0.2s, opacity 0.2s, transform 0.2s;
 }
-.pip-svg .p-cap { fill: #8b8fd9; stroke: #5c4033; stroke-width: 5; stroke-linejoin: round; }
+.pip-svg .p-cap { fill: var(--pip-cap, #8b8fd9); stroke: #5c4033; stroke-width: 5; stroke-linejoin: round; transition: fill 0.25s ease; }
 .pip-svg .p-brim, .pip-svg .p-pom { fill: #fff1da; stroke: #5c4033; stroke-width: 5; stroke-linejoin: round; }
-.pip-svg .p-capstar { fill: #fff1da; }
-.pip-svg .p-bow path, .pip-svg .p-bow circle { fill: #ff7fa8; stroke: #5c4033; stroke-width: 3.5; stroke-linejoin: round; }
+.pip-svg .p-capstar { fill: var(--pip-capstar, #fff1da); transition: fill 0.25s ease; }
+.pip-svg .p-bow path, .pip-svg .p-bow circle { fill: var(--pip-bow, #ff7fa8); stroke: #5c4033; stroke-width: 3.5; stroke-linejoin: round; transition: fill 0.25s ease; }
 .pip-svg #egg { cursor: pointer; }
 .pip-svg #egg:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; border-radius: 50%; }
 .pip-svg .egg-star { fill: #ffc83d; stroke: #5c4033; stroke-width: 1.3; stroke-linejoin: round; transform-box: fill-box; transform-origin: center; transition: filter 0.15s; }
@@ -2988,4 +2988,90 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
 
 [data-theme="night"] .notes-status.is-saved {
   color: #5ce68b;
+}
+
+/* ==========================================================================
+   Pip Dress-up Customizer
+   ========================================================================== */
+:root {
+  --pip-cap: #8b8fd9;
+  --pip-bow: #ff7fa8;
+  --pip-capstar: #fff1da;
+}
+
+.dressup-picker {
+  margin-top: 0.8rem;
+  padding: 0.6rem 0.8rem;
+  background: var(--paper);
+  border: 2px dashed var(--line);
+  border-radius: 12px;
+}
+
+.dressup-title {
+  display: block;
+  font: 600 0.8rem var(--f-ui);
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.dressup-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.dressup-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.6rem;
+  min-height: 36px;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  font: 500 0.82rem var(--f-ui);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dressup-opt:hover,
+.dressup-opt:focus-visible {
+  border-color: var(--ink);
+  background: var(--sky);
+}
+
+.dressup-opt.is-selected,
+.dressup-opt[aria-checked="true"] {
+  background: var(--blush);
+  border-color: var(--berry);
+  font-weight: 600;
+  box-shadow: 2px 2px 0 var(--shadow);
+}
+
+.dressup-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 760px) {
+  .dressup-opt {
+    min-height: 44px;
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pip-svg .p-cap,
+  .pip-svg .p-capstar,
+  .pip-svg .p-bow path,
+  .pip-svg .p-bow circle,
+  .dressup-picker,
+  .dressup-opt {
+    transition: none !important;
+  }
 }

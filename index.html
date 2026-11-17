@@ -200,6 +200,36 @@
           <div class="hero-actions">
             <button class="btn btn-primary" id="sayHi" type="button" data-i18n="hero_say_hi">Say hi to Pip</button>
             <a class="btn" href="#work" data-i18n="hero_see_work">See what Pip made</a>
+            <button class="btn" id="dressupBtn" type="button" aria-expanded="false" aria-controls="dressupPicker" aria-label="Dress up Pip, choose nightcap colours">Dress up Pip</button>
+          </div>
+          <div id="dressupPicker" class="dressup-picker" hidden role="region" aria-label="Pip dress-up palettes">
+            <span class="dressup-title">Nightcap &amp; Bow Palettes:</span>
+            <div class="dressup-options" role="radiogroup" aria-label="Bedtime palettes">
+              <button type="button" class="dressup-opt is-selected" data-palette="classic" role="radio" aria-checked="true" aria-label="Classic Lavender palette">
+                <span class="dressup-swatch" style="background:#8b8fd9;" aria-hidden="true"></span>
+                <span>Lavender</span>
+              </button>
+              <button type="button" class="dressup-opt" data-palette="minty" role="radio" aria-checked="false" aria-label="Mint Meadow palette">
+                <span class="dressup-swatch" style="background:#48bfe3;" aria-hidden="true"></span>
+                <span>Mint</span>
+              </button>
+              <button type="button" class="dressup-opt" data-palette="twilight" role="radio" aria-checked="false" aria-label="Twilight Dusk palette">
+                <span class="dressup-swatch" style="background:#5a4897;" aria-hidden="true"></span>
+                <span>Twilight</span>
+              </button>
+              <button type="button" class="dressup-opt" data-palette="cotton" role="radio" aria-checked="false" aria-label="Cotton Candy palette">
+                <span class="dressup-swatch" style="background:#f78fb3;" aria-hidden="true"></span>
+                <span>Cotton Candy</span>
+              </button>
+              <button type="button" class="dressup-opt" data-palette="starlight" role="radio" aria-checked="false" aria-label="Cosmic Starlight palette">
+                <span class="dressup-swatch" style="background:#7048e8;" aria-hidden="true"></span>
+                <span>Starlight</span>
+              </button>
+              <button type="button" class="dressup-opt" data-palette="autumn" role="radio" aria-checked="false" aria-label="Autumn Ember palette">
+                <span class="dressup-swatch" style="background:#e76f51;" aria-hidden="true"></span>
+                <span>Autumn</span>
+              </button>
+            </div>
           </div>
           <p class="fine" data-i18n="hero_fine">Pip's eyes follow you. Flip the sun and moon switch up top and see what
             happens.</p>
@@ -1703,6 +1733,7 @@
   <script src="js/taskbar.js" defer></script>
   <script src="js/monitor.js" defer></script>
   <script src="js/notes.js" defer></script>
+  <script src="js/dressup.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 

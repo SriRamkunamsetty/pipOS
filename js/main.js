@@ -429,6 +429,7 @@
   safe('stars', PIP.stars && PIP.stars.init);
   safe('rattle', PIP.rattle && PIP.rattle.init);
   safe('story', initStory);
+  safe('dressup', PIP.dressup ? PIP.dressup.init : function () {});
   safe('navspy', initNavSpy);
   safe('trash', initTrash);
   safe('sw', initServiceWorker);
