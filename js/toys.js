@@ -152,9 +152,61 @@
       endless.classList.add('is-on');
     });
 
+    var rainBtn = $('#ambientRainBtn'), cricketsBtn = $('#ambientCricketsBtn');
+    var ambSlider = $('#ambientSlider'), ambValue = $('#ambientValue');
+
+    if (rainBtn) {
+      rainBtn.addEventListener('click', function () {
+        if (audio.isRainActive && audio.isRainActive()) {
+          audio.stopRain();
+          rainBtn.setAttribute('aria-pressed', 'false');
+          rainBtn.classList.remove('is-on');
+        } else {
+          if (!audio.request()) return;
+          audio.startRain();
+          rainBtn.setAttribute('aria-pressed', 'true');
+          rainBtn.classList.add('is-on');
+        }
+      });
+    }
+
+    if (cricketsBtn) {
+      cricketsBtn.addEventListener('click', function () {
+        if (audio.isCricketsActive && audio.isCricketsActive()) {
+          audio.stopCrickets();
+          cricketsBtn.setAttribute('aria-pressed', 'false');
+          cricketsBtn.classList.remove('is-on');
+        } else {
+          if (!audio.request()) return;
+          audio.startCrickets();
+          cricketsBtn.setAttribute('aria-pressed', 'true');
+          cricketsBtn.classList.add('is-on');
+        }
+      });
+    }
+
+    if (ambSlider && audio.getAmbientLevel) {
+      var initialAmb = audio.getAmbientLevel();
+      ambSlider.value = initialAmb;
+      if (ambValue) ambValue.textContent = Math.round(initialAmb * 100) + '%';
+      ambSlider.addEventListener('input', function () {
+        var v = parseFloat(ambSlider.value);
+        if (audio.setAmbientLevel) audio.setAmbientLevel(v);
+        var pct = Math.round(v * 100);
+        if (ambValue) ambValue.textContent = pct + '%';
+        ambSlider.setAttribute('aria-valuenow', pct);
+        ambSlider.setAttribute('aria-valuetext', pct + ' percent ambient volume');
+      });
+    }
+
     // muting from the taskbar stops everything the lab is doing
     audio.onChange(function (s) {
-      if (s !== 'on') { stopTune(); stopEndlessUi(); }
+      if (s !== 'on') {
+        stopTune();
+        stopEndlessUi();
+        if (rainBtn) { rainBtn.setAttribute('aria-pressed', 'false'); rainBtn.classList.remove('is-on'); }
+        if (cricketsBtn) { cricketsBtn.setAttribute('aria-pressed', 'false'); cricketsBtn.classList.remove('is-on'); }
+      }
     });
   }
 

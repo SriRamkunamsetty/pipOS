@@ -343,6 +343,22 @@
                 </div>
               </div>
             </div>
+            <div class="ambient-bar" role="group" aria-label="Ambient night sounds">
+              <div class="ambient-actions">
+                <span class="ambient-title" id="ambientHeading"><span aria-hidden="true">🌌</span> Ambient</span>
+                <button class="btn btn-ambient" id="ambientRainBtn" type="button" data-silent aria-pressed="false" aria-label="Rain sound generator">
+                  <span aria-hidden="true">🌧️</span> Rain
+                </button>
+                <button class="btn btn-ambient" id="ambientCricketsBtn" type="button" data-silent aria-pressed="false" aria-label="Crickets sound generator">
+                  <span aria-hidden="true">🦗</span> Crickets
+                </button>
+              </div>
+              <div class="ambient-wrap">
+                <label for="ambientSlider" class="lab-label"><span aria-hidden="true">🎚️</span> Level</label>
+                <input type="range" id="ambientSlider" class="lab-slider" min="0" max="1" step="0.05" value="0.5" aria-label="Ambient night sounds volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50 percent ambient volume">
+                <span id="ambientValue" class="vol-val" aria-hidden="true">50%</span>
+              </div>
+            </div>
           </div>
         </article>
 

@@ -478,6 +478,57 @@ html.js .growth-chart.is-visible .growth-fill { width: calc(var(--progress, 0) *
 }
 .vol-val { font-size: 0.85rem; font-weight: 600; min-width: 32px; color: var(--ink); }
 
+/* Ambient night sounds in Lullaby Lab */
+.ambient-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+  padding-top: 0.6rem;
+  border-top: 2px dashed rgba(92, 64, 51, 0.22);
+}
+
+[data-theme="night"] .ambient-bar {
+  border-top-color: rgba(233, 211, 187, 0.22);
+}
+
+.ambient-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ambient-title {
+  font: 700 0.85rem var(--f-ui);
+  color: var(--line);
+  margin-right: 0.2rem;
+}
+
+.btn-ambient {
+  min-height: 36px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+.btn-ambient.is-on {
+  background: var(--butter);
+  border-color: var(--line);
+}
+
+[data-theme="night"] .btn-ambient.is-on {
+  background: var(--berry);
+  color: #fff;
+}
+
+.ambient-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
 /* --- 10.2 Nightlight Collection (Darkroom) --- */
 .dr-rooms {
   display: flex;

@@ -2,8 +2,10 @@
    Sound state is 'on' | 'off' | '' (never chosen). Nothing plays unless it is 'on'. */
 (function () {
   'use strict';
-  var PIP = window.PIP;
-  var store = PIP.store, toast = PIP.toast, clamp = PIP.clamp;
+  var PIP = (typeof window !== 'undefined' && window.PIP) ? window.PIP : {};
+  var store = PIP.store || { get: function () { return ''; }, set: function () {} };
+  var toast = PIP.toast || function () {};
+  var clamp = PIP.clamp || function (v, a, b) { return Math.min(b, Math.max(a, v)); };
 
   // C major pentatonic across ~1.6 octaves: the music box keys
   var SCALE = [523.25, 587.33, 659.25, 783.99, 880.0, 1046.5, 1174.66, 1318.51];
@@ -15,6 +17,13 @@
   if (isNaN(currentVolume) || currentVolume < 0 || currentVolume > 1) currentVolume = 0.7;
   var endlessTimer = 0;
   var listeners = [];
+
+  var ambientGain = null;
+  var rainSource = null, rainFilter = null;
+  var cricketTimer = 0;
+  var rainActive = false, cricketsActive = false;
+  var ambientLevel = parseFloat(store.get('ambientLevel', '0.5'));
+  if (isNaN(ambientLevel) || ambientLevel < 0 || ambientLevel > 1) ambientLevel = 0.5;
 
   function isOn() { return state === 'on'; }
 
@@ -139,10 +148,147 @@
   function set(next) {
     state = next;
     store.set('sound', next);
-    if (next !== 'on') stopEndless();
+    if (next !== 'on') {
+      stopEndless();
+      stopAmbient();
+    }
     emit();
   }
   function onChange(fn) { listeners.push(fn); }
+
+  function ensureAmbientGain() {
+    if (!ctx || !master) return null;
+    if (!ambientGain) {
+      ambientGain = ctx.createGain();
+      ambientGain.gain.setValueAtTime(ambientLevel, ctx.currentTime);
+      ambientGain.connect(master);
+    }
+    return ambientGain;
+  }
+
+  function setAmbientLevel(val) {
+    ambientLevel = clamp(parseFloat(val), 0, 1);
+    store.set('ambientLevel', ambientLevel);
+    if (ambientGain && ctx) {
+      ambientGain.gain.setValueAtTime(ambientLevel, ctx.currentTime);
+    }
+  }
+
+  function getAmbientLevel() {
+    return ambientLevel;
+  }
+
+  function makeNoiseBuffer(c, seconds) {
+    var rate = c.sampleRate, len = Math.floor(rate * seconds);
+    var buf = c.createBuffer(1, len, rate);
+    var d = buf.getChannelData(0);
+    var b0 = 0, b1 = 0, b2 = 0;
+    for (var i = 0; i < len; i++) {
+      var white = Math.random() * 2 - 1;
+      b0 = 0.99886 * b0 + white * 0.0555179;
+      b1 = 0.99332 * b1 + white * 0.0750759;
+      b2 = 0.96900 * b2 + white * 0.1538520;
+      d[i] = (b0 + b1 + b2 + white * 0.5362) * 0.18;
+    }
+    return buf;
+  }
+
+  function startRain() {
+    if (rainSource || !isOn() || !ensure()) return false;
+    var g = ensureAmbientGain();
+    if (!g) return false;
+    try {
+      var noiseBuf = makeNoiseBuffer(ctx, 3);
+      rainSource = ctx.createBufferSource();
+      rainSource.buffer = noiseBuf;
+      rainSource.loop = true;
+
+      rainFilter = ctx.createBiquadFilter();
+      rainFilter.type = 'lowpass';
+      rainFilter.frequency.setValueAtTime(1100, ctx.currentTime);
+      rainFilter.Q.setValueAtTime(1.2, ctx.currentTime);
+
+      var rainGain = ctx.createGain();
+      rainGain.gain.setValueAtTime(0.35, ctx.currentTime);
+
+      rainSource.connect(rainFilter);
+      rainFilter.connect(rainGain);
+      rainGain.connect(g);
+
+      rainSource.start();
+      rainActive = true;
+      return true;
+    } catch (e) {
+      rainSource = null;
+      rainActive = false;
+      return false;
+    }
+  }
+
+  function stopRain() {
+    if (rainSource) {
+      try { rainSource.stop(); rainSource.disconnect(); } catch (e) {}
+      rainSource = null;
+    }
+    rainActive = false;
+  }
+
+  function isRainActive() {
+    return rainActive;
+  }
+
+  function chirpCricket() {
+    if (!cricketsActive || !isOn() || !ctx || !ambientGain) return;
+    var now = ctx.currentTime;
+    var count = 2 + Math.floor(Math.random() * 2);
+    for (var i = 0; i < count; i++) {
+      var t = now + i * 0.055;
+      var osc = ctx.createOscillator();
+      var g = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(4500 + Math.random() * 200, t);
+
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.linearRampToValueAtTime(0.04, t + 0.008);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
+
+      osc.connect(g);
+      g.connect(ambientGain);
+
+      osc.start(t);
+      osc.stop(t + 0.05);
+    }
+  }
+
+  function startCrickets() {
+    if (cricketsActive || !isOn() || !ensure()) return false;
+    var g = ensureAmbientGain();
+    if (!g) return false;
+    cricketsActive = true;
+    (function loop() {
+      if (!cricketsActive || !isOn()) return;
+      chirpCricket();
+      cricketTimer = window.setTimeout(loop, 1800 + Math.random() * 1600);
+    })();
+    return true;
+  }
+
+  function stopCrickets() {
+    cricketsActive = false;
+    if (cricketTimer) {
+      window.clearTimeout(cricketTimer);
+      cricketTimer = 0;
+    }
+  }
+
+  function isCricketsActive() {
+    return cricketsActive;
+  }
+
+  function stopAmbient() {
+    stopRain();
+    stopCrickets();
+  }
 
   // The speaker switch in the taskbar
   function toggle() {
@@ -163,12 +309,14 @@
   }
 
   // soft click sound on buttons and links (when sound is on)
-  document.addEventListener('click', function (e) {
-    if (!isOn()) return;
-    var t = e.target && e.target.closest ? e.target.closest('button, a, [data-click]') : null;
-    if (!t || t.hasAttribute('data-silent')) return;
-    pop();
-  });
+  if (typeof document !== 'undefined') {
+    document.addEventListener('click', function (e) {
+      if (!isOn()) return;
+      var t = e.target && e.target.closest ? e.target.closest('button, a, [data-click]') : null;
+      if (!t || t.hasAttribute('data-silent')) return;
+      pop();
+    });
+  }
 
   PIP.audio = {
     SCALE: SCALE,
@@ -184,6 +332,27 @@
     isEndless: isEndless,
     onChange: onChange,
     setVolume: setVolume,
-    getVolume: getVolume
+    getVolume: getVolume,
+    startRain: startRain,
+    stopRain: stopRain,
+    isRainActive: isRainActive,
+    startCrickets: startCrickets,
+    stopCrickets: stopCrickets,
+    isCricketsActive: isCricketsActive,
+    stopAmbient: stopAmbient,
+    setAmbientLevel: setAmbientLevel,
+    getAmbientLevel: getAmbientLevel
   };
+
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+      SCALE: SCALE,
+      BASS: BASS,
+      setVolume: setVolume,
+      getVolume: getVolume,
+      setAmbientLevel: setAmbientLevel,
+      getAmbientLevel: getAmbientLevel,
+      makeNoiseBuffer: makeNoiseBuffer
+    };
+  }
 })();
