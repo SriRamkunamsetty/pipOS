@@ -12,25 +12,56 @@
     try { fn(); } catch (e) { if (window.console) console.error('[pip] ' + name + ' failed:', e); }
   }
 
-  /* ---------- day / night / high contrast ---------- */
+  /* ---------- day / night / auto / high contrast ---------- */
   function initTheme() {
     var html = document.documentElement, btn = $('#themeBtn'), label = $('#themeLabel');
     var cBtn = $('#contrastBtn');
     var meta = document.querySelector('meta[name="theme-color"]');
-    var base = 'day';
+    var mode = 'auto'; // 'auto' | 'day' | 'night'
     var contrast = store.get('contrast', '') === 'on';
 
-    function apply(t) {
-      base = t;
-      store.set('theme', t);
-      html.setAttribute('data-theme', contrast ? 'contrast' : t);
+    function getLocalDayNight() {
+      var hour = new Date().getHours();
+      return (hour >= 6 && hour < 19) ? 'day' : 'night';
+    }
+
+    function resolveTheme(currentMode) {
+      if (currentMode === 'day') return 'day';
+      if (currentMode === 'night') return 'night';
+      var prefersDark = typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return getLocalDayNight() || (prefersDark ? 'night' : 'day');
+    }
+
+    function apply(newMode) {
+      mode = newMode;
+      store.set('themeMode', mode);
+      var resolved = resolveTheme(mode);
+      store.set('theme', resolved);
+
+      html.setAttribute('data-theme', contrast ? 'contrast' : resolved);
+      html.setAttribute('data-theme-mode', mode);
+
       if (btn) {
-        btn.setAttribute('aria-label', t === 'night' ? 'Night mode, switch to day mode' : 'Day mode, switch to night mode');
-        btn.classList.toggle('is-night', t === 'night');
+        var ariaText = '';
+        if (mode === 'auto') {
+          ariaText = 'Theme mode: Auto (currently ' + (resolved === 'night' ? 'Night' : 'Day') + '), switch to Day mode';
+        } else if (mode === 'day') {
+          ariaText = 'Day mode, switch to Night mode';
+        } else {
+          ariaText = 'Night mode, switch to Auto mode';
+        }
+
+        btn.setAttribute('aria-label', ariaText);
+        btn.classList.toggle('is-auto', mode === 'auto');
+        btn.classList.toggle('is-night', resolved === 'night');
       }
-      if (label) label.textContent = tr(t === 'night' ? 'Night' : 'Day');
-      if (meta) meta.setAttribute('content', contrast ? '#000000' : (t === 'night' ? '#1b1430' : '#fff8f1'));
-      if (PIP.pip) PIP.pip.setMood(t === 'night' ? 'night' : 'day');
+
+      if (label) {
+        label.textContent = (mode === 'auto') ? tr('Auto') : tr(mode === 'night' ? 'Night' : 'Day');
+      }
+
+      if (meta) meta.setAttribute('content', contrast ? '#000000' : (resolved === 'night' ? '#1b1430' : '#fff8f1'));
+      if (PIP.pip) PIP.pip.setMood(resolved === 'night' ? 'night' : 'day');
     }
 
     function paintContrast() {
@@ -39,27 +70,50 @@
       cBtn.setAttribute('aria-label', contrast ? 'High contrast on, turn it off' : 'High contrast off, turn it on');
     }
 
-    document.addEventListener('pip-language-change', function () { apply(base); });
-    var saved = store.get('theme', '');
-    if (saved !== 'day' && saved !== 'night') saved = '';
-    var prefersDark = typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    apply(saved || (prefersDark ? 'night' : 'day'));
+    document.addEventListener('pip-language-change', function () { apply(mode); });
+
+    var savedMode = store.get('themeMode', '');
+    if (savedMode !== 'auto' && savedMode !== 'day' && savedMode !== 'night') {
+      var legacySaved = store.get('theme', '');
+      savedMode = (legacySaved === 'day' || legacySaved === 'night') ? legacySaved : 'auto';
+    }
+
+    apply(savedMode);
     paintContrast();
 
+    // Check periodically for dawn/dusk transitions when in auto mode
+    window.setInterval(function () {
+      if (mode === 'auto') apply('auto');
+    }, 60000);
+
+    if (typeof window.matchMedia === 'function') {
+      try {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+          if (mode === 'auto') apply('auto');
+        });
+      } catch (e) {}
+    }
+
     if (btn) btn.addEventListener('click', function () {
-      var next = base === 'night' ? 'day' : 'night';
+      var nextMode = 'day';
+      if (mode === 'auto') nextMode = 'day';
+      else if (mode === 'day') nextMode = 'night';
+      else if (mode === 'night') nextMode = 'auto';
+
       if (contrast) { contrast = false; store.set('contrast', 'off'); paintContrast(); }
-      apply(next);
+      apply(nextMode);
+
       if (audio.isOn()) {
-        audio.note(audio.SCALE[next === 'night' ? 2 : 5], { dur: 1.1, gain: 0.14 });
-        audio.note(audio.SCALE[next === 'night' ? 0 : 7], { dur: 1.3, gain: 0.12, when: 0.14 });
+        var resolved = resolveTheme(nextMode);
+        audio.note(audio.SCALE[resolved === 'night' ? 2 : 5], { dur: 1.1, gain: 0.14 });
+        audio.note(audio.SCALE[resolved === 'night' ? 0 : 7], { dur: 1.3, gain: 0.12, when: 0.14 });
       }
     });
 
     if (cBtn) cBtn.addEventListener('click', function () {
       contrast = !contrast;
       store.set('contrast', contrast ? 'on' : 'off');
-      apply(base);
+      apply(mode);
       paintContrast();
     });
   }
