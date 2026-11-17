@@ -72,10 +72,18 @@
     });
   }
 
+  var idleTimer = 0, blinkTimer = 0;
+  var svgInView = true;
+
   // when nobody is moving, Pip looks around by itself
   function idleLoop() {
-    window.setTimeout(function () {
-      if (performance.now() - lastPointer > 3500 && performance.now() - lastGlance > 2500 && !document.hidden) {
+    window.clearTimeout(idleTimer);
+    if (document.hidden || !svgInView) {
+      idleTimer = 0;
+      return;
+    }
+    idleTimer = window.setTimeout(function () {
+      if (performance.now() - lastPointer > 3500 && performance.now() - lastGlance > 2500 && !document.hidden && svgInView) {
         var r = svg.getBoundingClientRect();
         var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
         look(cx + (Math.random() - 0.5) * 520, cy + (Math.random() - 0.5) * 360);
@@ -88,11 +96,25 @@
   }
 
   function blinkLoop() {
-    window.setTimeout(function () {
-      svg.classList.add('is-blink');
-      window.setTimeout(function () { svg.classList.remove('is-blink'); }, 140);
+    window.clearTimeout(blinkTimer);
+    if (document.hidden || !svgInView) {
+      blinkTimer = 0;
+      return;
+    }
+    blinkTimer = window.setTimeout(function () {
+      if (!document.hidden && svgInView) {
+        svg.classList.add('is-blink');
+        window.setTimeout(function () { svg.classList.remove('is-blink'); }, 140);
+      }
       blinkLoop();
     }, 2400 + Math.random() * 3600);
+  }
+
+  function resumePipLoops() {
+    if (!document.hidden && svgInView) {
+      if (!idleTimer) idleLoop();
+      if (!blinkTimer) blinkLoop();
+    }
   }
 
   /* ---------- expressions & moods ---------- */
@@ -125,6 +147,7 @@
     }
   }
 
+  /* ---------- moods ---------- */
   function setMood(m) {
     mood = m;
     svg.classList.toggle('is-night', m === 'night');
@@ -205,6 +228,17 @@
 
     window.addEventListener('pointermove', onPointer, { passive: true });
     window.addEventListener('pointerdown', onPointer, { passive: true });
+    if (typeof document !== 'undefined') {
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) resumePipLoops();
+      });
+    }
+    if (PIP.watchVisible && svg) {
+      PIP.watchVisible(svg, function (v) {
+        svgInView = v;
+        if (v) resumePipLoops();
+      });
+    }
     idleLoop();
     blinkLoop();
     greet();

@@ -151,6 +151,13 @@
     if (next !== 'on') {
       stopEndless();
       stopAmbient();
+      if (ctx && ctx.state === 'running' && typeof ctx.suspend === 'function') {
+        ctx.suspend().catch(function () {});
+      }
+    } else {
+      if (ctx && ctx.state === 'suspended' && typeof ctx.resume === 'function') {
+        ctx.resume().catch(function () {});
+      }
     }
     emit();
   }
@@ -288,6 +295,20 @@
   function stopAmbient() {
     stopRain();
     stopCrickets();
+  }
+
+  if (typeof document !== 'undefined') {
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        if (ctx && ctx.state === 'running' && typeof ctx.suspend === 'function') {
+          ctx.suspend().catch(function () {});
+        }
+      } else if (isOn()) {
+        if (ctx && ctx.state === 'suspended' && typeof ctx.resume === 'function') {
+          ctx.resume().catch(function () {});
+        }
+      }
+    });
   }
 
   // The speaker switch in the taskbar

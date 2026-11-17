@@ -169,10 +169,17 @@
     var el = $('#clock');
     if (!el) return;
     function tick() {
-      el.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      if (!document.hidden) {
+        el.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      }
     }
     tick();
     window.setInterval(tick, 20000);
+    if (typeof document !== 'undefined') {
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) tick();
+      });
+    }
   }
 
   /* ---------- fold-up windows ---------- */

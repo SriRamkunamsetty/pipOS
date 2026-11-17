@@ -112,17 +112,36 @@
     }
     render();
     var inView = true;
-    PIP.watchVisible(el, function (v) { inView = v; });
-    (function tick() {
-      window.setTimeout(function () {
+    var odoTimer = 0;
+    function scheduleTick() {
+      window.clearTimeout(odoTimer);
+      if (document.hidden || !inView) {
+        odoTimer = 0;
+        return;
+      }
+      odoTimer = window.setTimeout(function () {
         if (inView && !document.hidden) {
           value += 1;
           store.set('dreams', value);
           render();
         }
-        tick();
+        odoTimer = 0;
+        scheduleTick();
       }, 5000 + Math.random() * 4000);
-    })();
+    }
+
+    PIP.watchVisible(el, function (v) {
+      inView = v;
+      if (v && !document.hidden && !odoTimer) scheduleTick();
+    });
+
+    if (typeof document !== 'undefined') {
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden && inView && !odoTimer) scheduleTick();
+      });
+    }
+
+    scheduleTick();
   }
 
   /* ---------- real visitor counter (#118) ---------- */
