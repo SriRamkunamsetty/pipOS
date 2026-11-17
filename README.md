@@ -115,6 +115,22 @@ python -m http.server 8000
 - **Reduced Motion**: Respect `prefers-reduced-motion: reduce` by disabling non-essential transitions and animations.
 - **Mobile Touch**: Ensure buttons have at least 44x44px touch targets on mobile devices.
 
+### 5. Visual Regression Testing (Dev-Only with Playwright)
+Pip OS includes isolated Playwright visual regression screenshot tests for desktop, tablet, and phone in both day and night themes. To preserve our zero-dependency philosophy, the visual test suite is isolated in `tests/` with its own `package.json` so the root application remains strictly build-free.
+
+```bash
+# 1. Navigate into tests directory and install dev dependencies:
+cd tests
+npm install
+npx playwright install chromium
+
+# 2. Run visual regression tests:
+npm test
+
+# 3. Update snapshots when making approved design updates:
+npm run test:update
+```
+
 ---
 
 ## Run
