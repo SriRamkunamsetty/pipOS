@@ -482,7 +482,7 @@
                 <li class="lb-empty">Stack your first tower to join the nursery records!</li>
               </ol>
             </div>
-            <div class="block-leaderboard" id="blockLeaderboard">
+            <div class="block-leaderboard" id="blockScores">
               <span class="block-leaderboard-title">Top 5 Scores</span>
               <ol class="block-leaderboard-list" id="blockLeaderboardList">
                 <li class="block-leaderboard-empty">No scores yet &mdash; start stacking!</li>
@@ -701,7 +701,6 @@
                 <button class="btn" id="bookPrev" type="button" aria-label="Previous storybook page">← Back</button>
                 <button class="btn btn-primary" id="bookNext" type="button" aria-label="Next storybook page">Next →</button>
               </div>
-              
             <!-- Added speech narration controls -->
             <div class="book-speech" role="group" aria-label="Story narration controls">
               <button class="btn" id="storySpeechBtn" type="button" aria-label="Read this scene aloud">🔊 Read</button>
@@ -730,7 +729,7 @@
             </div>
             <div class="stars-canvas-wrap">
               <canvas id="starsCanvas" width="300" height="380" aria-label="Catch the Falling Stars canvas game" tabindex="0"></canvas>
-              <div id="starsGameOver" class="stars-overlay hidden" aria-hidden="true">
+              <div id="starsGameOver" class="stars-overlay hidden" hidden>
                 <div class="stars-modal">
                   <div class="stars-modal-icon" aria-hidden="true">🌙</div>
                   <h4 class="stars-modal-title">Dawn has arrived</h4>
