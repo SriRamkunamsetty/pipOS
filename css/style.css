@@ -1331,7 +1331,82 @@ html.js .growth-chart.is-visible .growth-fill { width: calc(var(--progress, 0) *
 .s-lit { fill: #ffcf4a; stroke: #5c4033; stroke-width: 2; }
 .s-cloud { fill: #fff; stroke: #5c4033; stroke-width: 2.5; }
 
-/* ===================================================================   12. Wish Wall & Dream Odometer
+/* Story scene animations (active scene only) */
+.scene.is-active .s-star {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: scene-twinkle 2.5s ease-in-out infinite alternate;
+}
+.scene.is-active .s-star:nth-child(odd) { animation-delay: 0.5s; }
+.scene.is-active .s-star:nth-child(3n) { animation-delay: 1.1s; }
+
+.scene.is-active .s-basket,
+.scene.is-active .s-weave {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: scene-rock 3.6s ease-in-out infinite;
+}
+
+.scene.is-active .s-ghost {
+  animation: scene-float 4.2s ease-in-out infinite alternate;
+}
+.scene.is-active .s-ghost:nth-of-type(2) { animation-delay: 0.8s; }
+.scene.is-active .s-ghost:nth-of-type(3) { animation-delay: 1.6s; }
+
+.scene.is-active .s-z {
+  animation: scene-zzz 3s ease-in-out infinite;
+}
+.scene.is-active .s-z:nth-of-type(2) { animation-delay: 0.7s; }
+.scene.is-active .s-z:nth-of-type(3) { animation-delay: 1.4s; }
+
+.scene.is-active .s-lid {
+  transform-box: fill-box;
+  transform-origin: bottom left;
+  animation: scene-lid 4s ease-in-out infinite alternate;
+}
+
+.scene.is-active .s-cloud,
+.scene.is-active .s-route ~ .s-cloud,
+.scene.is-active .s-route ~ .s-skull,
+.scene.is-active .s-route ~ .s-eye {
+  animation: scene-drift 5s ease-in-out infinite alternate;
+}
+
+@keyframes scene-twinkle {
+  0% { transform: scale(0.92); opacity: 0.65; }
+  100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 4px #ffd98a); }
+}
+
+@keyframes scene-rock {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(1.8deg) translateY(-1px); }
+  75% { transform: rotate(-1.8deg) translateY(-1px); }
+}
+
+@keyframes scene-float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+@keyframes scene-zzz {
+  0% { opacity: 0.2; transform: translateY(0) scale(0.9); }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; transform: translateY(-8px) scale(1.1); }
+}
+
+@keyframes scene-lid {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-3deg); }
+}
+
+@keyframes scene-drift {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(5px, -3px); }
+  100% { transform: translate(-3px, 2px); }
+}
+
+/* ==========================================================================
+   12. Wish Wall & Dream Odometer
    ========================================================================== */
 .wall { display: grid; grid-template-columns: 1.5fr 1fr; gap: 28px; align-items: start; }
 .wall .win { margin: 0; }
@@ -1619,7 +1694,17 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
   html { scroll-behavior: auto; }
   .pip-float, .pip-svg .p-arm-wave, .marquee-track, .tb-btn.is-hint,
   .pip-svg.is-night .p-zzz text, [data-theme="night"] .desk::after, .dr-item.is-found,
-  .storybook .scene.is-active, .block-combo { animation: none; }
+  .storybook .scene.is-active, .block-combo,
+  .scene.is-active .s-star,
+  .scene.is-active .s-basket,
+  .scene.is-active .s-weave,
+  .scene.is-active .s-ghost,
+  .scene.is-active .s-z,
+  .scene.is-active .s-lid,
+  .scene.is-active .s-cloud,
+  .scene.is-active .s-route ~ .s-cloud,
+  .scene.is-active .s-route ~ .s-skull,
+  .scene.is-active .s-route ~ .s-eye { animation: none !important; }
   .pip-svg.is-wave .p-arm-wave { animation: wave-big 0.42s ease-in-out 2; }
   .marquee { overflow-x: auto; }
   .marquee-track span:last-child { display: none; }
