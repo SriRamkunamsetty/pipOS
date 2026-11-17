@@ -6,7 +6,7 @@ test.describe('Pip OS Visual Regression Tests', () => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
   });
 
-  test('Homepage full screenshot across device viewports and themes', async ({ page, project }) => {
+  test('Homepage full screenshot across device viewports and themes', async ({ page }, testInfo) => {
     await page.goto('/');
 
     // Wait for fonts and main SVG to be fully rendered
@@ -14,7 +14,7 @@ test.describe('Pip OS Visual Regression Tests', () => {
     await page.waitForLoadState('networkidle');
 
     // If night project, toggle or verify dark theme
-    if (project.name === 'desktop-night') {
+    if (testInfo.project.name === 'desktop-night') {
       const isNight = await page.evaluate(() => document.documentElement.getAttribute('data-theme') === 'night');
       if (!isNight) {
         await page.click('#themeBtn');
@@ -26,38 +26,38 @@ test.describe('Pip OS Visual Regression Tests', () => {
     await expect(page.locator('#hello')).toBeVisible();
 
     // Visual screenshot match
-    await expect(page).toHaveScreenshot(`homepage-${project.name}.png`, {
+    await expect(page).toHaveScreenshot(`homepage-${testInfo.project.name}.png`, {
       fullPage: true,
       maxDiffPixelRatio: 0.05
     });
   });
 
-  test('Hero section and Pip illustration snapshot', async ({ page, project }) => {
+  test('Hero section and Pip illustration snapshot', async ({ page }, testInfo) => {
     await page.goto('/');
     await page.waitForSelector('#pipSvg');
 
     const hero = page.locator('#hello');
-    await expect(hero).toHaveScreenshot(`hero-${project.name}.png`, {
+    await expect(hero).toHaveScreenshot(`hero-${testInfo.project.name}.png`, {
       maxDiffPixelRatio: 0.05
     });
   });
 
-  test('Work section with playable workbench toys', async ({ page, project }) => {
+  test('Work section with playable workbench toys', async ({ page }, testInfo) => {
     await page.goto('/#work');
     await page.waitForSelector('#work');
 
     const workSection = page.locator('#work');
-    await expect(workSection).toHaveScreenshot(`work-section-${project.name}.png`, {
+    await expect(workSection).toHaveScreenshot(`work-section-${testInfo.project.name}.png`, {
       maxDiffPixelRatio: 0.05
     });
   });
 
-  test('Bedtime storybook window snapshot', async ({ page, project }) => {
+  test('Bedtime storybook window snapshot', async ({ page }, testInfo) => {
     await page.goto('/#story');
     await page.waitForSelector('#story');
 
     const storySection = page.locator('#story');
-    await expect(storySection).toHaveScreenshot(`storybook-${project.name}.png`, {
+    await expect(storySection).toHaveScreenshot(`storybook-${testInfo.project.name}.png`, {
       maxDiffPixelRatio: 0.05
     });
   });

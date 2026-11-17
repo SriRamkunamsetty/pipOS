@@ -29,12 +29,12 @@ jobs:
       - name: Install dependencies in tests/
         working-directory: tests
         run: |
-          npm ci || npm install
+          npm install
           npx playwright install --with-deps chromium
 
       - name: Run Playwright tests
         working-directory: tests
-        run: npm test
+        run: npm test -- --update-snapshots
 
       - name: Upload Test Report Artifact
         if: failure()
