@@ -366,6 +366,7 @@
   safe('stickers', PIP.stickers && PIP.stickers.init);
   safe('fx', PIP.fx.init);
   safe('toys', PIP.toys.init);
+  safe('stars', PIP.stars && PIP.stars.init);
   safe('story', initStory);
   safe('navspy', initNavSpy);
   safe('trash', initTrash);

@@ -103,6 +103,7 @@
           <li role="none"><a href="#blocks" class="start-item" role="menuitem"><span class="start-ic" aria-hidden="true">🧱</span>Rattle & Blocks</a></li>
           <li role="none"><a href="#route" class="start-item" role="menuitem"><span class="start-ic" aria-hidden="true">☁️</span>Dream Delivery</a></li>
           <li role="none"><a href="#story" class="start-item" role="menuitem"><span class="start-ic" aria-hidden="true">📖</span>Bedtime Story</a></li>
+          <li role="none"><a href="#stars" class="start-item" role="menuitem"><span class="start-ic" aria-hidden="true">✨</span>Falling Stars</a></li>
           <li role="none"><a href="#stickers" class="start-item" role="menuitem"><span class="start-ic" aria-hidden="true">⭐</span>Sticker Book</a></li>
         </ul>
       </div>
@@ -636,6 +637,40 @@
           </div>
         </article>
 
+        <!-- Catch the Falling Stars Mini-Game -->
+        <article id="stars" class="win w-stars" data-foldable aria-labelledby="starsTitle">
+          <div class="win-bar">
+            <h3 class="win-title" id="starsTitle">pip-stars.exe</h3>
+            <span class="win-hint" aria-hidden="true">[canvas mini-game]</span>
+          </div>
+          <div class="win-body">
+            <div class="proj-head">
+              <p>Catch the sleepy falling stars in Pip's soft cloud before dawn breaks. Use mouse, touch, or arrow keys to steer.</p>
+              <div class="stars-stats" role="status" aria-live="polite">
+                <span class="stars-stat">Score: <strong id="starsScore">0</strong></span>
+                <span class="stars-stat">Best: <strong id="starsBest">0</strong></span>
+                <span class="stars-stat">Misses: <span id="starsMisses" aria-label="Misses left: 0 of 3">☆☆☆</span></span>
+              </div>
+            </div>
+            <div class="stars-canvas-wrap">
+              <canvas id="starsCanvas" width="300" height="380" aria-label="Catch the Falling Stars canvas game" tabindex="0"></canvas>
+              <div id="starsGameOver" class="stars-overlay hidden" aria-hidden="true">
+                <div class="stars-modal">
+                  <div class="stars-modal-icon" aria-hidden="true">🌙</div>
+                  <h4 class="stars-modal-title">Dawn has arrived</h4>
+                  <p class="stars-modal-msg">Pip's cloud gathered <span id="starsFinalScore">0</span> starlight dreams.</p>
+                  <button type="button" id="starsRestartBtn" class="btn btn-sm">Sleep Again</button>
+                </div>
+              </div>
+            </div>
+            <div class="stars-controls">
+              <button type="button" id="starsActionBtn" class="btn btn-sm" aria-label="Start or pause star catching game">Start Game</button>
+              <button type="button" id="starsResetBestBtn" class="btn btn-sm btn-ghost" aria-label="Reset best score">Reset Best</button>
+              <span class="stars-hint" aria-hidden="true">Tip: ← / → or A / D keys move Pip's cloud</span>
+            </div>
+          </div>
+        </article>
+
         <!-- Growth chart -->
         <article id="growth" class="win w-growth" data-foldable aria-labelledby="growthTitle">
           <div class="win-bar"><span class="win-title" id="growthTitle">pip-growth-chart.exe</span></div>
@@ -1057,6 +1092,7 @@
   <script src="js/pip.js" defer></script>
   <script src="js/toys.js" defer></script>
   <script src="js/terminal.js" defer></script>
+  <script src="js/stars.js" defer></script>
   <script src="js/taskbar.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
