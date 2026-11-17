@@ -221,9 +221,15 @@
             minBtn.id = minId;
             minBtn.className = 'tb-min-btn';
             minBtn.setAttribute('aria-label', 'Restore ' + titleText);
-            minBtn.innerHTML = '<span class="tb-min-icon" aria-hidden="true">🪟</span><span class="tb-min-title"></span>';
-            var titleSpan = minBtn.querySelector('.tb-min-title');
-            if (titleSpan) titleSpan.textContent = titleText;
+            var iconSpan = document.createElement('span');
+            iconSpan.className = 'tb-min-icon';
+            iconSpan.setAttribute('aria-hidden', 'true');
+            iconSpan.textContent = '🪟';
+            var titleSpan = document.createElement('span');
+            titleSpan.className = 'tb-min-title';
+            titleSpan.textContent = titleText;
+            minBtn.appendChild(iconSpan);
+            minBtn.appendChild(titleSpan);
             minBtn.addEventListener('click', function () {
               body.hidden = false;
               win.classList.remove('is-folded');
