@@ -59,6 +59,10 @@
 
   <div class="desk" aria-hidden="true"></div>
 
+  <!-- Full-page Night Flashlight (hidden by default) -->
+  <div id="flashlightOverlay" class="flashlight-overlay" hidden aria-hidden="true" role="none"></div>
+  <div id="flashlightGlow" class="flashlight-glow" hidden aria-hidden="true" role="none"></div>
+
   <header class="taskbar">
     <a class="start" href="#hello"><svg viewBox="0 0 20 20" aria-hidden="true">
         <use href="#star" width="20" height="20" />
@@ -96,11 +100,13 @@
         <span id="contrastLabel">Contrast</span>
       </button>
       <button class="tb-btn" id="quietBtn" type="button" aria-pressed="false" aria-label="Quiet mode off, turn it on">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <circle class="globe" cx="12" cy="12" r="9" />
-          <path class="globe" d="M8 12h8" />
-        </svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="globe" cx="12" cy="12" r="9" /><path class="globe" d="M8 12h8" /></svg>
         <span id="quietLabel">Quiet</span>
+      </button>
+      <button class="tb-btn" id="flashlightBtn" type="button" aria-pressed="false" aria-label="Night flashlight off, turn it on">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6l1.5 5h-9zM8.5 7v13a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V7zM10 11h4"/></svg>
+        <span id="flashlightLabel">Lantern</span>
+      </button>
       </button>
       <button class="tb-btn" id="themeBtn" type="button" aria-label="Day mode, switch to night mode">
         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -1703,6 +1709,7 @@
   <script src="js/taskbar.js" defer></script>
   <script src="js/monitor.js" defer></script>
   <script src="js/notes.js" defer></script>
+  <script src="js/flashlight.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 

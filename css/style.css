@@ -2989,3 +2989,64 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
 [data-theme="night"] .notes-status.is-saved {
   color: #5ce68b;
 }
+
+/* ==========================================================================
+   Full-page Night Flashlight
+   ========================================================================== */
+:root {
+  --fl-x: 50vw;
+  --fl-y: 50vh;
+  --fl-r: 160px;
+}
+
+#flashlightBtn[aria-pressed="true"] {
+  background: var(--butter);
+}
+
+.flashlight-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+  pointer-events: none;
+  background: radial-gradient(
+    circle var(--fl-r) at var(--fl-x) var(--fl-y),
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.05) 30%,
+    rgba(10, 7, 24, 0.55) 70%,
+    rgba(10, 7, 24, 0.96) 100%
+  );
+  transition: opacity 0.3s ease;
+  will-change: background;
+}
+
+.flashlight-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 8001;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    circle var(--fl-r) at var(--fl-x) var(--fl-y),
+    rgba(255, 238, 179, 0.16) 0%,
+    rgba(255, 220, 130, 0.06) 55%,
+    transparent 85%
+  );
+  will-change: background;
+}
+
+[data-theme="contrast"] .flashlight-overlay {
+  background: radial-gradient(
+    circle var(--fl-r) at var(--fl-x) var(--fl-y),
+    transparent 0%,
+    transparent 94%,
+    #ffff00 96%,
+    #000000 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flashlight-overlay,
+  .flashlight-glow {
+    transition: none;
+  }
+}
