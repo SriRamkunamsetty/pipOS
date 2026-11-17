@@ -1,4 +1,3 @@
-
 name: pipOS CI
 
 on:
@@ -17,7 +16,7 @@ permissions:
 
 jobs:
   test:
-    name: Code Quality & Tests
+    name: Code Quality, Tests & Audits
     runs-on: ubuntu-latest
 
     steps:
@@ -38,5 +37,14 @@ jobs:
         run: |
           node --test
 
+      - name: Broken Links Check
+        run: node scripts/check-links.js
+
+      - name: HTML Validation
+        run: npx --yes html-validate index.html
+
+      - name: Lighthouse CI
+        run: npx --yes @lhci/cli autorun
+
       - name: CI Complete
-        run: echo "pipOS checks completed successfully."
+        run: echo "pipOS CI checks completed successfully."
