@@ -80,3 +80,34 @@ test('WindowManager: snap applies 50% split classes and removes maximize', () =>
   assert.strictEqual(win.classList.contains('is-snapped-right'), true);
   assert.strictEqual(win.classList.contains('is-snapped-left'), false);
 });
+
+test('WindowManager: snap supports 4-corner quadrant tiling and top/bottom split', () => {
+  const win = createMockElement('winQuad', ['win']);
+
+  WindowManager.snap(win, 'top-left');
+  assert.strictEqual(win.classList.contains('is-snapped-tl'), true);
+
+  WindowManager.snap(win, 'top-right');
+  assert.strictEqual(win.classList.contains('is-snapped-tr'), true);
+  assert.strictEqual(win.classList.contains('is-snapped-tl'), false);
+
+  WindowManager.snap(win, 'bottom-left');
+  assert.strictEqual(win.classList.contains('is-snapped-bl'), true);
+  assert.strictEqual(win.classList.contains('is-snapped-tr'), false);
+
+  WindowManager.snap(win, 'bottom-right');
+  assert.strictEqual(win.classList.contains('is-snapped-br'), true);
+  assert.strictEqual(win.classList.contains('is-snapped-bl'), false);
+
+  WindowManager.snap(win, 'top');
+  assert.strictEqual(win.classList.contains('is-snapped-top'), true);
+  assert.strictEqual(win.classList.contains('is-snapped-br'), false);
+
+  WindowManager.snap(win, 'bottom');
+  assert.strictEqual(win.classList.contains('is-snapped-bottom'), true);
+  assert.strictEqual(win.classList.contains('is-snapped-top'), false);
+
+  WindowManager.restore(win);
+  assert.strictEqual(win.classList.contains('is-snapped-bottom'), false);
+  assert.strictEqual(win.classList.contains('is-maximized'), false);
+});

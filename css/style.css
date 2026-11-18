@@ -4583,4 +4583,79 @@ html.mode-wide-spacing body {
 }
 }
 
+/* ==========================================================================
+   Window Manager 4-Corner Quadrant Tiling (pip-wm-tile)
+   ========================================================================== */
+@media (min-width: 900px) {
+  .win.is-snapped-tl {
+    position: fixed !important;
+    top: 48px !important;
+    left: 0 !important;
+    width: 50% !important;
+    height: calc(50vh - 24px) !important;
+    margin: 0 !important;
+    z-index: 100;
+    border-radius: 0 0 10px 0 !important;
+    box-shadow: 4px 4px 0 var(--shadow);
+  }
+
+  .win.is-snapped-tr {
+    position: fixed !important;
+    top: 48px !important;
+    right: 0 !important;
+    left: auto !important;
+    width: 50% !important;
+    height: calc(50vh - 24px) !important;
+    margin: 0 !important;
+    z-index: 100;
+    border-radius: 0 0 0 10px !important;
+    box-shadow: -4px 4px 0 var(--shadow);
+  }
+
+  .win.is-snapped-bl {
+    position: fixed !important;
+    bottom: 0 !important;
+    top: auto !important;
+    left: 0 !important;
+    width: 50% !important;
+    height: calc(50vh - 24px) !important;
+    margin: 0 !important;
+    z-index: 100;
+    border-radius: 0 10px 0 0 !important;
+    box-shadow: 4px -4px 0 var(--shadow);
+  }
+
+  .win.is-snapped-br {
+    position: fixed !important;
+    bottom: 0 !important;
+    top: auto !important;
+    right: 0 !important;
+    left: auto !important;
+    width: 50% !important;
+    height: calc(50vh - 24px) !important;
+    margin: 0 !important;
+    z-index: 100;
+    border-radius: 10px 0 0 0 !important;
+    box-shadow: -4px -4px 0 var(--shadow);
+  }
+  .win.is-snapped-top {
+    position: fixed !important;
+    top: 48px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: calc(50vh - 24px) !important;
+    margin: 0 !important;
+    z-index: 100;
+  }
+
+  .win.is-snapped-bottom {
+    position: fixed !important;
+    bottom: 0 !important;
+    top: auto !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: calc(50vh - 24px) !important;
+    margin: 0 !important;
+    z-index: 100;
+  }
 

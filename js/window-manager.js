@@ -52,11 +52,30 @@
     }
   }
 
+  var ALL_SNAP_CLASSES = [
+    'is-maximized',
+    'is-snapped-left',
+    'is-snapped-right',
+    'is-snapped-top',
+    'is-snapped-bottom',
+    'is-snapped-tl',
+    'is-snapped-tr',
+    'is-snapped-bl',
+    'is-snapped-br'
+  ];
+
+  function clearSnapClasses(win) {
+    if (!win || !win.classList) return;
+    for (var i = 0; i < ALL_SNAP_CLASSES.length; i++) {
+      win.classList.remove(ALL_SNAP_CLASSES[i]);
+    }
+  }
+
   function maximize(win) {
     if (!win) return;
     // Record original styling if previously styled
     win.dataset.origStyle = win.getAttribute('style') || '';
-    win.classList.remove('is-snapped-left', 'is-snapped-right');
+    clearSnapClasses(win);
     win.classList.add('is-maximized');
 
     var maxBtn = win.querySelector('.win-btn-max');
@@ -68,7 +87,7 @@
 
   function restore(win) {
     if (!win) return;
-    win.classList.remove('is-maximized', 'is-snapped-left', 'is-snapped-right');
+    clearSnapClasses(win);
 
     if (win.dataset.origStyle) {
       win.setAttribute('style', win.dataset.origStyle);
@@ -81,16 +100,36 @@
     }
   }
 
-  // Snap window to 50% left or right screen boundary
+  // Snap window to 50% split (left/right/top/bottom) or 25% quadrant corners
   function snap(win, side) {
     if (!win) return;
     bringToFront(win);
-    win.classList.remove('is-maximized', 'is-snapped-left', 'is-snapped-right');
+    clearSnapClasses(win);
 
-    if (side === 'left') {
-      win.classList.add('is-snapped-left');
-    } else if (side === 'right') {
-      win.classList.add('is-snapped-right');
+    var posMap = {
+      'left': 'is-snapped-left',
+      'right': 'is-snapped-right',
+      'top': 'is-snapped-top',
+      'bottom': 'is-snapped-bottom',
+      'top-left': 'is-snapped-tl',
+      'tl': 'is-snapped-tl',
+      'top-right': 'is-snapped-tr',
+      'tr': 'is-snapped-tr',
+      'bottom-left': 'is-snapped-bl',
+      'bl': 'is-snapped-bl',
+      'bottom-right': 'is-snapped-br',
+      'br': 'is-snapped-br'
+    };
+
+    var targetClass = posMap[side] || (side === 'right' ? 'is-snapped-right' : 'is-snapped-left');
+    win.classList.add(targetClass);
+
+    if (root.document && typeof root.CustomEvent === 'function') {
+      try {
+        root.document.dispatchEvent(new CustomEvent('pip-window-snap', {
+          detail: { id: win.id, position: side, className: targetClass }
+        }));
+      } catch (e) {}
     }
   }
 
@@ -144,18 +183,34 @@
     if (root.document) {
       root.document.addEventListener('keydown', function (e) {
         if (e.altKey && focusedWin) {
-          if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            maximize(focusedWin);
-          } else if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            restore(focusedWin);
-          } else if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            snap(focusedWin, 'left');
-          } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            snap(focusedWin, 'right');
+          if (e.shiftKey) {
+            if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              snap(focusedWin, 'top');
+            } else if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              snap(focusedWin, 'bottom');
+            } else if (e.key === 'ArrowLeft') {
+              e.preventDefault();
+              snap(focusedWin, 'top-left');
+            } else if (e.key === 'ArrowRight') {
+              e.preventDefault();
+              snap(focusedWin, 'top-right');
+            }
+          } else {
+            if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              maximize(focusedWin);
+            } else if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              restore(focusedWin);
+            } else if (e.key === 'ArrowLeft') {
+              e.preventDefault();
+              snap(focusedWin, 'left');
+            } else if (e.key === 'ArrowRight') {
+              e.preventDefault();
+              snap(focusedWin, 'right');
+            }
           }
         }
       });
