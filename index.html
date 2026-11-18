@@ -487,6 +487,21 @@
                 <span id="ambientValue" class="vol-val" aria-hidden="true">50%</span>
               </div>
             </div>
+
+            <!-- Music Box Tune Recorder -->
+            <div class="lab-recorder" id="labRecorder" role="region" aria-label="Music Box Recorder">
+              <div class="rec-controls">
+                <button type="button" class="btn btn-sm" id="recBtn" aria-label="Record lullaby tune" aria-pressed="false">● Record Tune</button>
+                <button type="button" class="btn btn-sm" id="recPlayBtn" disabled aria-label="Play recorded tune">▶ Replay</button>
+                <button type="button" class="btn btn-sm btn-ghost" id="recShareBtn" disabled aria-label="Share recorded tune by link">🔗 Share Link</button>
+                <span id="recStatus" class="rec-status" aria-live="polite">Ready to record</span>
+              </div>
+              <div id="tunePrompt" class="tune-prompt hidden" hidden>
+                <span class="tune-prompt-text">🎵 A shared lullaby tune was loaded!</span>
+                <button type="button" id="tunePlaySharedBtn" class="btn btn-sm btn-primary">Play Shared Tune</button>
+                <button type="button" id="tuneDismissBtn" class="btn btn-sm btn-ghost">Dismiss</button>
+              </div>
+            </div>
           </div>
         </article>
 
@@ -1682,6 +1697,7 @@
   <script src="js/pip.js" defer></script>
   <script src="js/toys.js" defer></script>
   <script src="js/rattle.js" defer></script>
+  <script src="js/recorder.js" defer></script>
   <script src="js/terminal.js" defer></script>
   <script src="js/stars.js" defer></script>
   <script src="js/taskbar.js" defer></script>
