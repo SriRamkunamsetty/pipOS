@@ -3154,6 +3154,20 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
   align-items: center;
 }
 
+/* ==========================================================================
+   Constellation Cartographer (pip-sky.exe)
+   ========================================================================== */
+.w-sky {
+  grid-column: span 12;
+}
+
+.sky-header {
+  margin: 12px 0;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .synth-actions {
   display: flex;
   gap: 8px;
@@ -3786,4 +3800,63 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
   font-weight: 600;
   font-size: 0.88rem;
   color: var(--ink);
+}
+
+.sky-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sky-name {
+  font-family: var(--f-head, cursive);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold, #f3b562);
+}
+
+.sky-progress {
+  font-size: 0.82rem;
+  color: var(--ink);
+  opacity: 0.8;
+}
+
+.sky-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.sky-stage {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  background: radial-gradient(circle at center, #241a45 0%, #110c22 100%);
+  border-radius: 10px;
+  border: 2px solid var(--gold, #f3b562);
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.sky-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+}
+
+.sky-lore {
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: rgba(243, 181, 98, 0.12);
+  border-left: 3px solid var(--gold, #f3b562);
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+[data-theme="night"] .sky-lore {
+  color: #fff;
+  background: rgba(243, 181, 98, 0.18);
 }

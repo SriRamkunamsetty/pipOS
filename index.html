@@ -1507,6 +1507,34 @@
           </div>
         </article>
 
+        <!-- Constellation Cartographer -->
+        <article id="w-sky" class="win w-sky" data-foldable aria-labelledby="skyTitle">
+          <div class="win-bar">
+            <h3 class="win-title" id="skyTitle">pip-sky.exe</h3>
+          </div>
+          <div class="win-body">
+            <div class="proj-head">
+              <p>Constellation Dream Cartographer: Peer through Pip's telescope and connect the glowing stars in sequence to reveal ancient dream maps.</p>
+            </div>
+            <div class="sky-header row row-between">
+              <div class="sky-meta">
+                <span id="skyConstellationName" class="sky-name">Pip's Sleepy Nightcap</span>
+                <span id="skyProgress" class="sky-progress">Stars Linked: 0 / 5</span>
+              </div>
+              <div class="sky-actions">
+                <button type="button" id="skyResetBtn" class="btn">Reset Path</button>
+                <button type="button" id="skyNextBtn" class="btn btn-primary">Next Sky Pattern →</button>
+              </div>
+            </div>
+            <div class="sky-stage">
+              <canvas id="skyCanvas" class="sky-canvas" aria-label="Interactive starlight telescope viewport"></canvas>
+            </div>
+            <div id="skyLore" class="sky-lore" aria-live="polite">
+              Connect stars 1 through 5 to decipher this celestial dream...
+            </div>
+          </div>
+        </article>
+
         <!-- Starlight Scientific Calculator -->
         <article id="calc" class="win w-calc" data-foldable aria-labelledby="calcTitle">
           <div class="win-bar">
@@ -1888,6 +1916,7 @@
   <script src="js/flashlight.js" defer></script>
   <script src="js/drag.js" defer></script>
   <script src="js/haptics.js" defer></script>
+  <script src="js/constellations.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 
