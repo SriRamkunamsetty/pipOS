@@ -22,6 +22,7 @@ var PRECACHE_ASSETS = [
   'js/monitor.js',
   'js/notes.js',
   'js/dressup.js',
+  'js/flashlight.js',
   'js/main.js',
   'assets/favicon.svg',
   'assets/icon-192.png',

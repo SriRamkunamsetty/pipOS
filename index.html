@@ -59,6 +59,10 @@
 
   <div class="desk" aria-hidden="true"></div>
 
+  <!-- Full-page Night Flashlight (hidden by default) -->
+  <div id="flashlightOverlay" class="flashlight-overlay" hidden aria-hidden="true" role="none"></div>
+  <div id="flashlightGlow" class="flashlight-glow" hidden aria-hidden="true" role="none"></div>
+
   <header class="taskbar">
     <a class="start" href="#hello"><svg viewBox="0 0 20 20" aria-hidden="true">
         <use href="#star" width="20" height="20" />
@@ -69,6 +73,7 @@
       <a href="#story" data-i18n="nav_story">Story</a>
       <a href="#wall" data-i18n="nav_wall">Wall</a>
     </nav>
+    <div id="taskbarMinimized" class="task-minimized" role="region" aria-label="Minimized Windows"></div>
     <div class="task-right">
       <button class="tb-btn" id="soundBtn" type="button" data-silent aria-pressed="false"
         aria-label="Sound off, turn sound on">
@@ -96,11 +101,13 @@
         <span id="contrastLabel">Contrast</span>
       </button>
       <button class="tb-btn" id="quietBtn" type="button" aria-pressed="false" aria-label="Quiet mode off, turn it on">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <circle class="globe" cx="12" cy="12" r="9" />
-          <path class="globe" d="M8 12h8" />
-        </svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="globe" cx="12" cy="12" r="9" /><path class="globe" d="M8 12h8" /></svg>
         <span id="quietLabel">Quiet</span>
+      </button>
+      <button class="tb-btn" id="flashlightBtn" type="button" aria-pressed="false" aria-label="Night flashlight off, turn it on">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6l1.5 5h-9zM8.5 7v13a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V7zM10 11h4"/></svg>
+        <span id="flashlightLabel">Lantern</span>
+      </button>
       </button>
       <button class="tb-btn" id="themeBtn" type="button" aria-label="Day mode, switch to night mode">
         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -151,14 +158,13 @@
       <div class="start-menu-col">
         <div class="start-col-title">System &amp; Shortcuts</div>
         <ul class="start-menu-list" role="none">
-          <li role="none"><a href="#wall" class="start-item" role="menuitem"><span class="start-ic"
-                aria-hidden="true">📌</span>Wish Wall</a></li>
-          <li role="none"><a href="#about" class="start-item" role="menuitem"><span class="start-ic"
-                aria-hidden="true">📄</span>About Pip</a></li>
-          <li role="none"><a href="#shortcuts" class="start-item" role="menuitem"><span class="start-ic"
-                aria-hidden="true">⌨️</span>Keys Cheat Sheet</a></li>
-          <li role="none"><button type="button" class="start-item" role="menuitem" data-start-act="fullscreen"><span
-                class="start-ic" aria-hidden="true">⛶</span>Toggle Fullscreen</button></li>
+          <li role="none"><a href="#wall" class="start-item" role="menuitem"><span class="start-ic" aria-hidden="true">📌</span>Wish Wall</a></li>
+          <li role="none"><a href="#about" class="start-item" role="menuitem"><span class="start-ic" aria-hidden="true">📄</span>About Pip</a></li>
+          <li role="none"><a href="#shortcuts" class="start-item" role="menuitem"><span class="start-ic" aria-hidden="true">⌨️</span>Keys Cheat Sheet</a></li>
+          <li role="none"><button type="button" class="start-item" role="menuitem" data-start-act="fullscreen"><span class="start-ic" aria-hidden="true">⛶</span>Toggle Fullscreen</button></li>
+          <li role="none"><button type="button" class="start-item" id="resetLayoutBtn" role="menuitem"><span class="start-ic" aria-hidden="true">🔄</span>Reset Layout</button></li>
+          <li role="none"><button type="button" class="start-item" id="hapticsToggleBtn" role="menuitem" aria-pressed="false"><span class="start-ic" aria-hidden="true">📳</span>Toy Haptics: Off</button></li>
+          <li role="none"><span id="hapticsStatus" class="start-status-note" aria-live="polite">Haptics off (opt-in)</span></li>
         </ul>
       </div>
     </div>
@@ -517,6 +523,21 @@
                   aria-label="Ambient night sounds volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
                   aria-valuetext="50 percent ambient volume">
                 <span id="ambientValue" class="vol-val" aria-hidden="true">50%</span>
+              </div>
+            </div>
+
+            <!-- Music Box Tune Recorder -->
+            <div class="lab-recorder" id="labRecorder" role="region" aria-label="Music Box Recorder">
+              <div class="rec-controls">
+                <button type="button" class="btn btn-sm" id="recBtn" aria-label="Record lullaby tune" aria-pressed="false">● Record Tune</button>
+                <button type="button" class="btn btn-sm" id="recPlayBtn" disabled aria-label="Play recorded tune">▶ Replay</button>
+                <button type="button" class="btn btn-sm btn-ghost" id="recShareBtn" disabled aria-label="Share recorded tune by link">🔗 Share Link</button>
+                <span id="recStatus" class="rec-status" aria-live="polite">Ready to record</span>
+              </div>
+              <div id="tunePrompt" class="tune-prompt hidden" hidden>
+                <span class="tune-prompt-text">🎵 A shared lullaby tune was loaded!</span>
+                <button type="button" id="tunePlaySharedBtn" class="btn btn-sm btn-primary">Play Shared Tune</button>
+                <button type="button" id="tuneDismissBtn" class="btn btn-sm btn-ghost">Dismiss</button>
               </div>
             </div>
           </div>
@@ -1714,12 +1735,16 @@
   <script src="js/pip.js" defer></script>
   <script src="js/toys.js" defer></script>
   <script src="js/rattle.js" defer></script>
+  <script src="js/recorder.js" defer></script>
   <script src="js/terminal.js" defer></script>
   <script src="js/stars.js" defer></script>
   <script src="js/taskbar.js" defer></script>
   <script src="js/monitor.js" defer></script>
   <script src="js/notes.js" defer></script>
   <script src="js/dressup.js" defer></script>
+  <script src="js/flashlight.js" defer></script>
+  <script src="js/drag.js" defer></script>
+  <script src="js/haptics.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 
