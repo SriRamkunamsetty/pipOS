@@ -1865,6 +1865,19 @@
     </div>
   </dialog>
 
+  <!-- PWA Install Banner -->
+  <div id="pwaInstallBanner" class="pwa-install-banner" hidden role="region" aria-label="Install PipOS">
+    <div class="pwa-install-content">
+      <span class="pwa-install-icon" aria-hidden="true">🧸</span>
+      <div class="pwa-install-text">
+        <strong>Install PipOS</strong>
+        <span>Add to home screen for offline play and instant launch</span>
+      </div>
+    </div>
+    <div class="pwa-install-actions">
+      <button type="button" id="pwaInstallBtn" class="btn btn-primary">Install</button>
+      <button type="button" id="pwaDismissBtn" class="btn" aria-label="Dismiss install prompt">✕</button>
+    </div>
   <!-- Desktop Right-Click Context Menu -->
   <menu id="desktopContextMenu" class="desktop-context-menu" hidden role="menu" aria-label="Desktop Context Menu" tabindex="-1">
     <li role="none"><button type="button" id="cmArrange" class="cm-item" role="menuitem">📐 Arrange Icons to Grid</button></li>
@@ -1903,6 +1916,7 @@
   <script src="js/task-switcher.js" defer></script>
   <script src="js/monitor.js" defer></script>
   <script src="js/notes.js" defer></script>
+  <script src="js/pwa.js" defer></script>
   <script src="js/desktop.js" defer></script>
   <script src="js/synth.js" defer></script>
   <script src="js/window-manager.js" defer></script>
