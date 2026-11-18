@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self'; connect-src 'self' https://*.firebaseio.com https://*.supabase.co; object-src 'none'; base-uri 'self';">
+    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://*.firebaseio.com https://*.supabase.co; object-src 'none'; base-uri 'self'; upgrade-insecure-requests;">
   <title>Pip, Junior Dream Engineer | Midnight Nursery</title>
   <meta name="description"
     content="Pip is a baby with a skull face who engineers dreams, lullabies and nightlights at the Midnight Nursery. Poke around Pip's portfolio.">
@@ -51,7 +51,7 @@
   <a class="skip" href="#main">Skip to content</a>
 
   <!-- shared star symbol -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <svg width="0" height="0" class="sr-hidden-svg" aria-hidden="true" focusable="false">
     <symbol id="star" viewBox="-10 -10 20 20">
       <path d="M0-9 2.6-2.8 9-2.4 4 1.7 5.6 8 0 4.5-5.6 8-4 1.7-9-2.4-2.6-2.8Z" />
     </symbol>

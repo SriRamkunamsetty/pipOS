@@ -3140,7 +3140,8 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
   color: #5ce68b;
 }
 
-/* ==========================================================================
+/* 
+==================================================================
    PWA 2.0 Install Banner
    ========================================================================== */
 .pwa-install-banner {
@@ -3991,4 +3992,12 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
 [data-theme="night"] .sky-lore {
   color: #fff;
   background: rgba(243, 181, 98, 0.18);
+=======
+/* Zero-inline utility classes */
+.sr-hidden-svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
 }
