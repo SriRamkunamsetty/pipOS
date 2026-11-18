@@ -28,8 +28,11 @@
 
   var COMMANDS = [
     'help', 'whoami', 'time', 'date', 'theme', 'sound', 'quiet',
-    'play', 'wish', 'fortune', 'dream', 'calc', 'clear', 'history'
+    'play', 'wish', 'fortune', 'dream', 'calc', 'clear', 'history',
+    'ls', 'cd', 'pwd', 'cat', 'mkdir', 'touch', 'rm'
   ];
+
+  var currentCwd = '/home/pip';
 
   var FORTUNES = [
     "A star falls only when a dreamer needs a bedtime flashlight.",
@@ -218,6 +221,94 @@
             }
           } catch (e) {
             out = "calc error: invalid math expression";
+          }
+        }
+        break;
+
+      case 'pwd':
+        out = currentCwd;
+        break;
+
+      case 'cd':
+        var targetCd = args[0] || '/home/pip';
+        var resolvedCd = PIP.fs ? PIP.fs.resolvePath(currentCwd, targetCd) : targetCd;
+        if (PIP.fs && !PIP.fs.isDirectory(resolvedCd)) {
+          out = 'cd: no such directory: ' + targetCd;
+        } else {
+          currentCwd = resolvedCd;
+          out = '';
+        }
+        break;
+
+      case 'ls':
+        if (!PIP.fs) {
+          out = 'desktop  documents';
+        } else {
+          var targetLs = args[0] ? PIP.fs.resolvePath(currentCwd, args[0]) : currentCwd;
+          try {
+            var entries = PIP.fs.readDir(targetLs);
+            out = entries.map(function (e) {
+              return (e.type === 'dir' ? '📁 ' : '📄 ') + e.name + (e.type === 'file' ? ' (' + e.size + ' B)' : '/');
+            }).join('\n') || '(empty directory)';
+          } catch (e) {
+            out = 'ls: ' + (e.message || 'error');
+          }
+        }
+        break;
+
+      case 'cat':
+        if (!args[0]) {
+          out = 'Usage: cat <file>';
+        } else if (!PIP.fs) {
+          out = 'cat: file system not ready';
+        } else {
+          try {
+            var targetCat = PIP.fs.resolvePath(currentCwd, args[0]);
+            out = PIP.fs.readFile(targetCat);
+          } catch (e) {
+            out = 'cat: ' + (e.message || 'error reading file');
+          }
+        }
+        break;
+
+      case 'touch':
+        if (!args[0]) {
+          out = 'Usage: touch <file>';
+        } else if (PIP.fs) {
+          try {
+            var targetTouch = PIP.fs.resolvePath(currentCwd, args[0]);
+            PIP.fs.writeFile(targetTouch, '');
+            out = 'Created ' + args[0];
+          } catch (e) {
+            out = 'touch: ' + (e.message || 'error');
+          }
+        }
+        break;
+
+      case 'mkdir':
+        if (!args[0]) {
+          out = 'Usage: mkdir <directory>';
+        } else if (PIP.fs) {
+          try {
+            var targetMkdir = PIP.fs.resolvePath(currentCwd, args[0]);
+            PIP.fs.mkdir(targetMkdir);
+            out = 'Directory created: ' + args[0];
+          } catch (e) {
+            out = 'mkdir: ' + (e.message || 'error');
+          }
+        }
+        break;
+
+      case 'rm':
+        if (!args[0]) {
+          out = 'Usage: rm <file>';
+        } else if (PIP.fs) {
+          try {
+            var targetRm = PIP.fs.resolvePath(currentCwd, args[0]);
+            PIP.fs.unlink(targetRm);
+            out = 'Removed ' + args[0];
+          } catch (e) {
+            out = 'rm: ' + (e.message || 'error');
           }
         }
         break;
