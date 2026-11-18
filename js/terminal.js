@@ -28,9 +28,8 @@
 
   var COMMANDS = [
     'help', 'whoami', 'time', 'date', 'theme', 'sound', 'quiet',
-    'play', 'wish', 'fortune', 'dream', 'calc', 'clear', 'history',
+    'play', 'wish', 'fortune', 'dream', 'calc', 'blocks', 'clear', 'history',
     'ls', 'cd', 'pwd', 'cat', 'mkdir', 'touch', 'rm'
-    'play', 'wish', 'fortune', 'dream', 'calc', 'blocks', 'clear', 'history'
   ];
 
   var currentCwd = '/home/pip';
@@ -312,6 +311,8 @@
           } catch (e) {
             out = 'rm: ' + (e.message || 'error');
           }
+        }
+        break;
       case 'blocks':
         var sub = args[0] ? args[0].toLowerCase() : 'stats';
         var pipObj = getPIP();
