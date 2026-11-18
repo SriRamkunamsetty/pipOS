@@ -422,6 +422,7 @@
   safe('quiet', initQuiet);
   safe('clock', initClock);
   safe('foldable', initFoldable);
+  safe('wm', PIP.wm && PIP.wm.init);
   safe('shortcuts', initShortcuts);
   safe('stickers', PIP.stickers && PIP.stickers.init);
   safe('fx', PIP.fx.init);

@@ -282,6 +282,20 @@ main { max-width: 1120px; margin: 0 auto; padding: 92px 16px 40px; }
   font: 700 1.2rem/1 var(--f-ui); color: var(--ink);
   background: var(--cream); border: 2.5px solid var(--line); border-radius: 9px; cursor: pointer;
 }
+.win-actions { display: flex; align-items: center; gap: 6px; }
+.win.is-focused { box-shadow: 0 0 0 2px var(--amber, #f59e0b), 7px 7px 0 var(--shadow); }
+.win.is-maximized {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  min-height: 75vh;
+  box-shadow: 0 0 0 3px var(--amber, #f59e0b), 10px 10px 0 var(--shadow);
+  transition: all 0.18s ease-in-out;
+}
+.win.is-snapped-left, .win.is-snapped-right {
+  grid-column: span 6 !important;
+  transition: all 0.18s ease-in-out;
+}
+.win-btn-max { font-size: 1rem; }
 .win-body { padding: 1.1rem 1.2rem 1.3rem; }
 
 /* ===================================================================   08. Hero & Pip Illustration
