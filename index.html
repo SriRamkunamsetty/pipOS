@@ -1663,6 +1663,14 @@
     </div>
   </dialog>
 
+  <!-- Alt+Tab Task Switcher Modal -->
+  <div id="taskSwitcherModal" class="task-switcher-modal" hidden role="region" aria-label="Application Task Switcher">
+    <div class="task-switcher-head">
+      <span class="switcher-head-title">PipOS Task Switcher (Alt+Tab)</span>
+    </div>
+    <div id="taskSwitcherList" class="switcher-list" role="listbox" aria-label="Running processes"></div>
+  </div>
+
   <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
@@ -1678,6 +1686,7 @@
   <script src="js/terminal.js" defer></script>
   <script src="js/stars.js" defer></script>
   <script src="js/taskbar.js" defer></script>
+  <script src="js/task-switcher.js" defer></script>
   <script src="js/monitor.js" defer></script>
   <script src="js/notes.js" defer></script>
   <script src="js/main.js" defer></script>

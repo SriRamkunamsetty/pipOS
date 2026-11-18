@@ -2990,3 +2990,98 @@ dialog.secret::backdrop { background: rgba(40, 24, 40, 0.55); }
 [data-theme="night"] .notes-status.is-saved {
   color: #5ce68b;
 }
+
+/* ==========================================================================
+   PipOS Alt+Tab Task Switcher (HUD Overlay)
+   ========================================================================== */
+.task-switcher-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  background: rgba(30, 22, 54, 0.92);
+  border: 2px solid var(--gold, #f3b562);
+  border-radius: 12px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 24px rgba(243, 181, 98, 0.35);
+  backdrop-filter: blur(12px);
+  padding: 16px;
+  min-width: 320px;
+  max-width: 90vw;
+  pointer-events: auto;
+  color: #fff;
+  font-family: var(--f-sans, sans-serif);
+}
+
+.task-switcher-modal[hidden] {
+  display: none !important;
+}
+
+.task-switcher-head {
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.switcher-head-title {
+  font-family: var(--f-head, cursive);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  color: var(--gold, #f3b562);
+}
+
+.switcher-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.switcher-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 92px;
+  height: 80px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.15s ease, border-color 0.15s ease;
+  user-select: none;
+}
+
+.switcher-item:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.switcher-item.is-selected {
+  background: rgba(243, 181, 98, 0.28);
+  border-color: var(--gold, #f3b562);
+  box-shadow: 0 0 14px rgba(243, 181, 98, 0.5);
+  transform: scale(1.06);
+}
+
+.switcher-icon {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.switcher-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
