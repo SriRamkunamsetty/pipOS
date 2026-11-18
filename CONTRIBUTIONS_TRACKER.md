@@ -4,8 +4,8 @@
 **GitHub Profile**: [@SriRamkunamsetty](https://github.com/SriRamkunamsetty)  
 **Email / Notifications**: `mohansriramkunamsetty@gmail.com`  
 **Target Repository**: [Tech4Aditya/pipOS](https://github.com/Tech4Aditya/pipOS)  
-**Current Milestone**: **19 of 26 PRs MERGED (73.1%)** | 7 Open PRs Fully Rebased & 100% Mergeable (`MERGEABLE: true`)  
-**Last Updated**: 2026-11-18 13:25 IST  
+**Current Milestone**: **19 of 41 PRs MERGED (46.3%)** | 22 Open PRs Fully Rebased & 100% Mergeable (`MERGEABLE: true`)  
+**Last Updated**: 2026-11-18 14:20 IST  
 
 ---
 
@@ -14,16 +14,16 @@
 ```text
 ┌──────────────────────┬──────────────────────┬──────────────────────┬──────────────────────┐
 │   TOTAL PRS SUBMITTED│     PRS MERGED       │      PRS OPEN        │   MERGE CONFLICTS    │
-│         26           │    19 (73.1%) 🟣     │     7 (26.9%) 🟢     │       0 (100% Clean) │
+│         41           │    19 (46.3%) 🟣     │    22 (53.7%) 🟢     │       0 (100% Clean) │
 ├──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┤
 │   OFFICIALLY ASSIGNED│   CI CHECK STATUS    │  ACTIVE REBASE BASE  │  RUNTIME DEPS ADDED  │
-│      19 Issues 🎯    │  100% Green Passes 🛡️│  upstream/main       │       0 (Vanilla)    │
+│      20 Issues 🎯    │  100% Green Passes 🛡️│  upstream/main       │       0 (Vanilla)    │
 │                      │                      │  (commit 71493c9)    │                      │
 └──────────────────────┴──────────────────────┴──────────────────────┴──────────────────────┘
 ```
 
 ### 🎯 Milestone Progress Bar
-`[███████████████████████████████████░░░░░░░░░░░░░] 73.1% Complete (19/26 Merged)`
+`[███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░] 46.3% Complete (19/41 Merged | 22/41 Open & Ready)`
 
 ---
 
@@ -68,19 +68,34 @@
 
 ---
 
-### Section B: 🟢 Open & Mergeable Pull Requests (7 PRs Ready for Merge — 26.9%)
+### Section B: 🟢 Open & Mergeable Pull Requests (22 PRs Ready for Immediate Merge)
 
-All 7 remaining open PRs are **100% conflict-free** (`MERGEABLE: true`), rebased directly onto latest `upstream/main` (`71493c9`), verified with passing unit test suites, and clean automated CI checks:
+All 22 remaining open PRs are **100% conflict-free** (`MERGEABLE: true`), rebased directly onto latest `upstream/main` (`71493c9`), verified with passing unit test suites, and clean automated CI checks:
 
-| PR # | Issue Closed | Feature Scope | Branch | Head SHA | Status | Mergeable | CI Checks | Unit Tests |
-| :---: | :---: | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
-| [**#126**](https://github.com/Tech4Aditya/pipOS/pull/126) | [Closes #113](https://github.com/Tech4Aditya/pipOS/issues/113) 🎯 | `feat(audio): music box recorder and shareable lullaby link` | `feature/music-box-recorder` | `6d42366` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ 4/4 Passes | 7/7 ✔ |
-| [**#127**](https://github.com/Tech4Aditya/pipOS/pull/127) | [Closes #119](https://github.com/Tech4Aditya/pipOS/issues/119) 🎯 | `feat(game): opt-in haptic feedback on toys (navigator.vibrate)` | `feature/haptic-feedback` | `921ab2b` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ 4/4 Passes | 6/6 ✔ |
-| [**#128**](https://github.com/Tech4Aditya/pipOS/pull/128) | [Closes #106](https://github.com/Tech4Aditya/pipOS/issues/106) 🎯 | `feat(ui): window management: minimize to taskbar & restore` | `feature/window-management-minimize` | `342f92c` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ 4/4 Passes | 3/3 ✔ |
-| [**#129**](https://github.com/Tech4Aditya/pipOS/pull/129) | [Closes #107](https://github.com/Tech4Aditya/pipOS/issues/107) 🎯 | `feat(ui): draggable desktop windows & keyboard alternative` | `feature/draggable-windows` | `79787c2` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ 4/4 Passes | 7/7 ✔ |
-| [**#142**](https://github.com/Tech4Aditya/pipOS/pull/142) | [Closes #112](https://github.com/Tech4Aditya/pipOS/issues/112) 🎯 | `feat(ui): night flashlight for the whole page` | `feature/night-flashlight` | `24275f6` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ 4/4 Passes | 8/8 ✔ |
-| [**#144**](https://github.com/Tech4Aditya/pipOS/pull/144) | [Closes #110](https://github.com/Tech4Aditya/pipOS/issues/110) 🎯 | `feat(art): dress-up Pip nightcap & accessories customizer` | `feature/pip-dressup` | `949f64a` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ 4/4 Passes | 7/7 ✔ |
-| [**#170**](https://github.com/Tech4Aditya/pipOS/pull/170) | [Closes #161](https://github.com/Tech4Aditya/pipOS/issues/161) 🎯 | `fix(ui): resolve DOM tag nesting, duplicate IDs, & responsive grid` | `bugfix/inconsistent-ui-161` | `f8510f4` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ 4/4 Passes | 180/180 ✔ |
+| PR # | Issue / Focus | Feature Scope | Branch | Status | Mergeable | CI Checks | Unit Tests |
+| :---: | :---: | :--- | :--- | :---: | :---: | :---: | :---: |
+| [**#185**](https://github.com/Tech4Aditya/pipOS/pull/185) | Security | `feat(security): strict Content-Security-Policy & zero-inline style migration` | `security/strict-csp-zero-inline` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 6/6 ✔ |
+| [**#184**](https://github.com/Tech4Aditya/pipOS/pull/184) | Core / OS | `feat(core): Sleepy Screen of Death (SSOD) crash recovery & telemetry` | `feature/crash-recovery-diagnostics` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 3/3 ✔ |
+| [**#183**](https://github.com/Tech4Aditya/pipOS/pull/183) | i18n | `feat(i18n): extended multilingual localization (es, fr, ja)` | `feature/i18n-extended-languages` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 5/5 ✔ |
+| [**#182**](https://github.com/Tech4Aditya/pipOS/pull/182) | A11y | `feat(a11y): WCAG 2.2 AAA keyboard focus trapping & Web Audio earcons` | `a11y/earcons-and-focus-trapping` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 4/4 ✔ |
+| [**#181**](https://github.com/Tech4Aditya/pipOS/pull/181) | PWA | `feat(pwa): PWA 2.0 complete precache, background sync queue & install banner` | `feature/pwa-sync-queue-and-install` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 4/4 ✔ |
+| [**#180**](https://github.com/Tech4Aditya/pipOS/pull/180) | OS / UI | `feat(os): desktop icon marquee selection, grid snap, & context menu` | `feature/desktop-icon-grid-context-menu` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 4/4 ✔ |
+| [**#179**](https://github.com/Tech4Aditya/pipOS/pull/179) | Games | `feat(game): Constellation Dream Cartographer mini-game (pip-sky.exe)` | `feature/constellation-cartographer-game` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 4/4 ✔ |
+| [**#178**](https://github.com/Tech4Aditya/pipOS/pull/178) | Audio | `feat(audio): Starlight Synthesizer & 8-step lullaby sequencer (pip-synth.exe)` | `feature/starlight-synthesizer-sequencer` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 7/7 ✔ |
+| [**#177**](https://github.com/Tech4Aditya/pipOS/pull/177) | Audio | `feat(audio): global synthesizer master bus with brickwall limiter & reverb` | `feature/audio-master-bus-limiter` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 4/4 ✔ |
+| [**#176**](https://github.com/Tech4Aditya/pipOS/pull/176) | Performance | `perf(fx): batch particle canvas pool engine with zero DOM allocation` | `perf/offscreen-batch-particle-engine` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 5/5 ✔ |
+| [**#175**](https://github.com/Tech4Aditya/pipOS/pull/175) | OS / UI | `feat(os): Alt+Tab heads-up process switcher modal HUD` | `feature/alt-tab-process-switcher` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 3/3 ✔ |
+| [**#174**](https://github.com/Tech4Aditya/pipOS/pull/174) | OS / VFS | `feat(os): PipFS virtual POSIX file system with terminal integration` | `feature/pip-fs-virtual-filesystem` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 6/6 ✔ |
+| [**#173**](https://github.com/Tech4Aditya/pipOS/pull/173) | OS / UI | `feat(os): Window Manager 2.0 with Aero snap, maximize, & dynamic z-index` | `feature/window-manager-2.0` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 4/4 ✔ |
+| [**#172**](https://github.com/Tech4Aditya/pipOS/pull/172) | Security | `feat(security): deep JSON prototype pollution guard & recursive freezing` | `security/prototype-pollution-defense` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 5/5 ✔ |
+| [**#171**](https://github.com/Tech4Aditya/pipOS/pull/171) | Security | `feat(security): client-side tamper-proof cryptographic save vault` | `feature/cryptographic-save-vault` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 4/4 ✔ |
+| [**#170**](https://github.com/Tech4Aditya/pipOS/pull/170) | [Closes #161](https://github.com/Tech4Aditya/pipOS/issues/161) 🎯 | `fix(ui): resolve DOM tag nesting, duplicate IDs, & responsive grid` | `bugfix/inconsistent-ui-161` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 180/180 ✔ |
+| [**#144**](https://github.com/Tech4Aditya/pipOS/pull/144) | [Closes #110](https://github.com/Tech4Aditya/pipOS/issues/110) 🎯 | `feat(art): dress-up Pip nightcap & accessories customizer` | `feature/pip-dressup` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 7/7 ✔ |
+| [**#142**](https://github.com/Tech4Aditya/pipOS/pull/142) | [Closes #112](https://github.com/Tech4Aditya/pipOS/issues/112) 🎯 | `feat(ui): night flashlight for the whole page` | `feature/night-flashlight` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 8/8 ✔ |
+| [**#129**](https://github.com/Tech4Aditya/pipOS/pull/129) | [Closes #107](https://github.com/Tech4Aditya/pipOS/issues/107) 🎯 | `feat(ui): draggable desktop windows & keyboard alternative` | `feature/draggable-windows` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 7/7 ✔ |
+| [**#128**](https://github.com/Tech4Aditya/pipOS/pull/128) | [Closes #106](https://github.com/Tech4Aditya/pipOS/issues/106) 🎯 | `feat(ui): window management: minimize to taskbar & restore` | `feature/window-management-minimize` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 3/3 ✔ |
+| [**#127**](https://github.com/Tech4Aditya/pipOS/pull/127) | [Closes #119](https://github.com/Tech4Aditya/pipOS/issues/119) 🎯 | `feat(game): opt-in haptic feedback on toys (navigator.vibrate)` | `feature/haptic-feedback` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 6/6 ✔ |
+| [**#126**](https://github.com/Tech4Aditya/pipOS/pull/126) | [Closes #113](https://github.com/Tech4Aditya/pipOS/issues/113) 🎯 | `feat(audio): music box recorder and shareable lullaby link` | `feature/music-box-recorder` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ Passing | 7/7 ✔ |
 
 ---
 
