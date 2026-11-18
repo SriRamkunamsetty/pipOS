@@ -2,7 +2,7 @@
    Provides offline functionality, pre-caches essential local assets,
    serves cached offline fallbacks, and handles Google Fonts degradation. */
 
-var CACHE_NAME = 'pipos-v2';
+var CACHE_NAME = 'pipos-v3';
 
 var PRECACHE_ASSETS = [
   './',
@@ -17,10 +17,13 @@ var PRECACHE_ASSETS = [
   'js/stickers.js',
   'js/pip.js',
   'js/toys.js',
+  'js/rattle.js',
   'js/terminal.js',
+  'js/stars.js',
   'js/taskbar.js',
   'js/monitor.js',
   'js/notes.js',
+  'js/pwa.js',
   'js/main.js',
   'assets/favicon.svg',
   'assets/icon-192.png',
