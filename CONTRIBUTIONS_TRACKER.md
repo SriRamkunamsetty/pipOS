@@ -4,8 +4,8 @@
 **GitHub Profile**: [@SriRamkunamsetty](https://github.com/SriRamkunamsetty)  
 **Email / Notifications**: `mohansriramkunamsetty@gmail.com`  
 **Target Repository**: [Tech4Aditya/pipOS](https://github.com/Tech4Aditya/pipOS)  
-**Current Milestone**: **19 of 25 PRs MERGED (76.0%)** | 6 Open PRs Fully Rebased & 100% Mergeable (`MERGEABLE: true`)  
-**Last Updated**: 2026-11-18 05:30 IST  
+**Current Milestone**: **19 of 26 PRs MERGED (73.1%)** | 7 Open PRs Fully Rebased & 100% Mergeable (`MERGEABLE: true`)  
+**Last Updated**: 2026-11-18 13:25 IST  
 
 ---
 
@@ -14,16 +14,16 @@
 ```text
 ┌──────────────────────┬──────────────────────┬──────────────────────┬──────────────────────┐
 │   TOTAL PRS SUBMITTED│     PRS MERGED       │      PRS OPEN        │   MERGE CONFLICTS    │
-│         25           │    19 (76.0%) 🟣     │     6 (24.0%) 🟢     │       0 (100% Clean) │
+│         26           │    19 (73.1%) 🟣     │     7 (26.9%) 🟢     │       0 (100% Clean) │
 ├──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┤
 │   OFFICIALLY ASSIGNED│   CI CHECK STATUS    │  ACTIVE REBASE BASE  │  RUNTIME DEPS ADDED  │
-│      18 Issues 🎯    │  100% Green Passes 🛡️│  upstream/main       │       0 (Vanilla)    │
+│      19 Issues 🎯    │  100% Green Passes 🛡️│  upstream/main       │       0 (Vanilla)    │
 │                      │                      │  (commit 71493c9)    │                      │
 └──────────────────────┴──────────────────────┴──────────────────────┴──────────────────────┘
 ```
 
 ### 🎯 Milestone Progress Bar
-`[██████████████████████████████████████░░░░░░░░░░] 76.0% Complete (19/25 Merged)`
+`[███████████████████████████████████░░░░░░░░░░░░░] 73.1% Complete (19/26 Merged)`
 
 ---
 
@@ -68,9 +68,9 @@
 
 ---
 
-### Section B: 🟢 Open & Mergeable Pull Requests (6 PRs Ready for Merge — 24.0%)
+### Section B: 🟢 Open & Mergeable Pull Requests (7 PRs Ready for Merge — 26.9%)
 
-All 6 remaining open PRs are **100% conflict-free** (`MERGEABLE: true`), rebased directly onto latest `upstream/main` (`71493c9`), verified with passing unit test suites, and clean automated CI checks:
+All 7 remaining open PRs are **100% conflict-free** (`MERGEABLE: true`), rebased directly onto latest `upstream/main` (`71493c9`), verified with passing unit test suites, and clean automated CI checks:
 
 | PR # | Issue Closed | Feature Scope | Branch | Head SHA | Status | Mergeable | CI Checks | Unit Tests |
 | :---: | :---: | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
@@ -80,6 +80,7 @@ All 6 remaining open PRs are **100% conflict-free** (`MERGEABLE: true`), rebased
 | [**#129**](https://github.com/Tech4Aditya/pipOS/pull/129) | [Closes #107](https://github.com/Tech4Aditya/pipOS/issues/107) 🎯 | `feat(ui): draggable desktop windows & keyboard alternative` | `feature/draggable-windows` | `79787c2` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ 4/4 Passes | 7/7 ✔ |
 | [**#142**](https://github.com/Tech4Aditya/pipOS/pull/142) | [Closes #112](https://github.com/Tech4Aditya/pipOS/issues/112) 🎯 | `feat(ui): night flashlight for the whole page` | `feature/night-flashlight` | `24275f6` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ 4/4 Passes | 8/8 ✔ |
 | [**#144**](https://github.com/Tech4Aditya/pipOS/pull/144) | [Closes #110](https://github.com/Tech4Aditya/pipOS/issues/110) 🎯 | `feat(art): dress-up Pip nightcap & accessories customizer` | `feature/pip-dressup` | `949f64a` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ 4/4 Passes | 7/7 ✔ |
+| [**#170**](https://github.com/Tech4Aditya/pipOS/pull/170) | [Closes #161](https://github.com/Tech4Aditya/pipOS/issues/161) 🎯 | `fix(ui): resolve DOM tag nesting, duplicate IDs, & responsive grid` | `bugfix/inconsistent-ui-161` | `f8510f4` | 🟢 **OPEN / READY** | 🟢 `MERGEABLE: true` | 🛡️ 4/4 Passes | 180/180 ✔ |
 
 ---
 
@@ -96,6 +97,7 @@ All emails, notifications, issue comments, and PR reviews received from project 
 | **3** | Dev-only Tooling vs Build-free Rule | PR #90 & PR #148 | ⭐⭐⭐⭐ **High** | The mentor merged ESLint and Prettier dev-only tooling in `package.json`, which temporarily broke a strict visual regression test asserting no `package.json` existed. | Reconciled test assertion to check `pkg.dependencies === undefined` (zero runtime dependencies). Passed all unit tests. |
 | **4** | Automated CI Validation Enforcement | PR #89 (CI workflow) | ⭐⭐⭐⭐⭐ **Critical** | The mentor merged PR #89 which runs `npx --yes html-validate index.html`. Due to consecutive merges, 3 upstream HTML bugs surfaced (duplicate ID `blockLeaderboard`, trailing whitespace, and `aria-hidden` on elements with focusable children). | Proactively patched all 3 validation errors across all open branches. All automated GitHub Actions CI runs are now **100% Green (`success`)**. |
 | **5** | CodeQL Security Review Alert | PR #128 (`js/main.js`) | ⭐⭐⭐⭐⭐ **High Security Value** | CodeQL flagged dynamic `innerHTML` usage on minimized taskbar buttons as a potential DOM XSS vector. | Replaced `innerHTML` with safe `document.createElement()` and `textContent`. CodeQL check passed with **Zero Security Alerts**. |
+| **6** | *"Changes and fix highly appreciated"* / [BUG] Inconsistent UI | Issue #161 (`index.html` & `css/style.css`) | ⭐⭐⭐⭐⭐ **Critical Visual Fix** | Upstream commit merges left unclosed `<div>` elements and duplicate IDs, distorting CSS grid layout and crushing `terminal` and `monitor` into ~40px slivers. | Officially claimed via `/assign`, fixed all unclosed tags, eliminated duplicate IDs, hardened grid layout under `@media (max-width: 960px)`, verified 0 errors via `html-validate`, and submitted [PR #170](https://github.com/Tech4Aditya/pipOS/pull/170). |
 
 ---
 
