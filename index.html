@@ -1469,6 +1469,44 @@
           </div>
         </article>
 
+        <!-- Starlight Synthesizer -->
+        <article id="w-synth" class="win w-synth" data-foldable aria-labelledby="synthTitle">
+          <div class="win-bar">
+            <h3 class="win-title" id="synthTitle">pip-synth.exe</h3>
+          </div>
+          <div class="win-body">
+            <div class="proj-head">
+              <p>Starlight Synthesizer: 8-step pentatonic lullaby sequencer. Tap stars to sequence sleepy melodies or export a WAV file.</p>
+            </div>
+            <div class="synth-controls row row-between">
+              <div class="synth-actions">
+                <button type="button" id="synthPlayBtn" class="btn btn-primary" aria-pressed="false">▶ Play Sequence</button>
+                <button type="button" id="synthClearBtn" class="btn">Clear</button>
+                <button type="button" id="synthExportBtn" class="btn">💾 Export WAV</button>
+              </div>
+              <div class="synth-settings">
+                <label for="synthBpm" class="synth-label">Tempo: <span id="synthBpmLabel">90 BPM</span></label>
+                <input type="range" id="synthBpm" min="50" max="180" value="90" class="synth-slider" aria-label="Sequence tempo BPM">
+                <label for="synthWave" class="synth-label">Wave:</label>
+                <select id="synthWave" class="synth-select" aria-label="Synthesizer waveform">
+                  <option value="sine">Sine (Warm)</option>
+                  <option value="triangle">Triangle (Bright)</option>
+                </select>
+              </div>
+            </div>
+            <div class="synth-grid-container">
+              <div class="synth-labels" aria-hidden="true">
+                <span>A5</span>
+                <span>G5</span>
+                <span>E5</span>
+                <span>D5</span>
+                <span>C5</span>
+              </div>
+              <div id="synthGrid" class="synth-grid" role="grid" aria-label="Lullaby sequencer 8-step grid"></div>
+            </div>
+          </div>
+        </article>
+
         <!-- Starlight Scientific Calculator -->
         <article id="calc" class="win w-calc" data-foldable aria-labelledby="calcTitle">
           <div class="win-bar">
@@ -1843,6 +1881,7 @@
   <script src="js/task-switcher.js" defer></script>
   <script src="js/monitor.js" defer></script>
   <script src="js/notes.js" defer></script>
+  <script src="js/synth.js" defer></script>
   <script src="js/window-manager.js" defer></script>
   <script src="js/calc.js" defer></script>
   <script src="js/dressup.js" defer></script>

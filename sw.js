@@ -25,6 +25,7 @@ var PRECACHE_ASSETS = [
   'js/task-switcher.js',
   'js/monitor.js',
   'js/notes.js',
+  'js/synth.js',
   'js/window-manager.js',
   'js/calc.js',
   'js/dressup.js',
