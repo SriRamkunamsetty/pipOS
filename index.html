@@ -1048,7 +1048,7 @@
             <div class="stars-canvas-wrap">
               <canvas id="starsCanvas" width="300" height="380" aria-label="Catch the Falling Stars canvas game"
                 tabindex="0"></canvas>
-              <div id="starsGameOver" class="stars-overlay hidden" aria-hidden="true">
+              <div id="starsGameOver" class="stars-overlay hidden" aria-hidden="true" inert>
                 <div class="stars-modal">
                   <div class="stars-modal-icon" aria-hidden="true">🌙</div>
                   <h4 class="stars-modal-title">Dawn has arrived</h4>
@@ -1680,6 +1680,20 @@
             <div id="convFormula" class="conv-formula" role="status" aria-live="polite">100 C = 212 F</div>
           </div>
         </article>
+
+        <!-- Pip Interactive Soundboard (pip-soundboard.exe) -->
+        <article id="soundboardWin" class="win w-soundboard" data-foldable aria-labelledby="soundboardTitle">
+          <div class="win-bar">
+            <h3 class="win-title" id="soundboardTitle">pip-soundboard.exe</h3>
+            <span class="soundboard-badge" aria-hidden="true">Audio FX</span>
+          </div>
+          <div class="win-body">
+            <div class="proj-head">
+              <p>Pip's Voice Soundboard. Tap cards to synthesize Pip's bedtime yawns, chirps, giggles, and lullaby notes.</p>
+            </div>
+            <div id="soundboardGrid" class="soundboard-grid" role="region" aria-label="Pip procedural voice cards"></div>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -2069,6 +2083,7 @@
   <script src="js/constellations.js" defer></script>
   <script src="js/perf.js" defer></script>
   <script src="js/converter.js" defer></script>
+  <script src="js/soundboard.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 
