@@ -43,6 +43,8 @@ var PRECACHE_ASSETS = [
   'js/scope.js',
   'js/dimmer.js',
   'js/a11y-earcons.js',
+
+  'js/bubbles.js',
   'js/main.js',
   'assets/favicon.svg',
   'assets/icon-192.png',
