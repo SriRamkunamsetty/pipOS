@@ -21,6 +21,7 @@ var PRECACHE_ASSETS = [
   'js/toys.js',
   'js/rattle.js',
   'js/vfs.js',
+  'js/man.js',
   'js/terminal.js',
   'js/stars.js',
   'js/taskbar.js',

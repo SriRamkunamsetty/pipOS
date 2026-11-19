@@ -104,6 +104,7 @@
           "  fortune / dream    - Read a midnight prophecy",
           "  calc <expr>        - Quick arithmetic evaluator (e.g., calc 24 * 7)",
           "  blocks [stats|export] - View or export Rattle & Blocks tower records",
+          "  man <cmd>          - Format and display reference manual page",
           "  history            - Display recent command history",
           "  clear              - Wipe terminal screen"
         ].join('\n');
@@ -434,6 +435,15 @@
 
       case 'history':
         out = history.map(function (h, i) { return (i + 1) + '  ' + h; }).join('\n');
+        break;
+
+      case 'man':
+        if (!args[0]) {
+          out = "What manual page do you want?\nFor example, try 'man ls' or 'man cat'.";
+        } else {
+          var entry = (typeof PipMan !== 'undefined' ? PipMan.getManPage(args[0]) : null);
+          out = entry || ("No manual entry for " + args[0]);
+        }
         break;
 
       case 'clear':
