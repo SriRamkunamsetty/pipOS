@@ -1809,6 +1809,23 @@
             <div id="bubblesGrid" class="bubbles-grid" role="region" aria-label="Bubble wrap sheet"></div>
           </div>
         </article>
+        <!-- Sleepy Screen of Death (SSOD) Crash Supervisor -->
+  <dialog id="ssodModal" class="ssod-modal" hidden aria-labelledby="ssodTitle">
+    <div class="ssod-content">
+      <div class="ssod-badge" aria-hidden="true">:( zzz</div>
+      <h2 id="ssodTitle" class="ssod-title">Pip OS encountered a sleepy exception</h2>
+      <p class="ssod-desc">Pip was dreaming so deeply that an unexpected glitch occurred. Don't worry, your offline nursery data is safe.</p>
+      <div id="ssodErrorMsg" class="ssod-error-box" role="alert"></div>
+      <pre id="ssodDetails" class="ssod-details-box"></pre>
+      <div class="ssod-actions">
+        <button type="button" id="ssodReloadBtn" class="btn btn-primary">Wake Pip &amp; Reload</button>
+        <button type="button" id="ssodCopyBtn" class="btn">Copy Diagnostics</button>
+        <button type="button" id="ssodResetBtn" class="btn">Reset Nursery Cache</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="js/crash-reporter.js" defer></script>
       </div>
     </section>
 
