@@ -45,6 +45,7 @@ var PRECACHE_ASSETS = [
   'js/a11y-earcons.js',
 
   'js/bubbles.js',
+  'js/snake.js',
   'js/main.js',
   'assets/favicon.svg',
   'assets/icon-192.png',
