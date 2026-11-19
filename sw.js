@@ -42,6 +42,7 @@ var PRECACHE_ASSETS = [
   'js/contrast.js',
   'js/scope.js',
   'js/dimmer.js',
+  'js/ambience.js',
   'js/main.js',
   'assets/favicon.svg',
   'assets/icon-192.png',
