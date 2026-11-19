@@ -1714,6 +1714,38 @@
             <div class="contrast-hint">Shortcut: <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>D</kbd> toggles Dyslexia mode instantly.</div>
           </div>
         </article>
+
+        <!-- Kaleidoscope Radial Symmetry Drawing (pip-scope.exe) -->
+        <article id="scopeWin" class="win w-scope" data-foldable aria-labelledby="scopeTitle">
+          <div class="win-bar">
+            <h3 class="win-title" id="scopeTitle">pip-scope.exe</h3>
+            <span class="scope-badge" aria-hidden="true">Radial Art</span>
+          </div>
+          <div class="win-body">
+            <div class="proj-head">
+              <p>Pip's Radial Kaleidoscope Painter. Draw symmetric mandalas and rainbow starbursts with automated 8-fold radial symmetry.</p>
+            </div>
+            <div class="scope-toolbar">
+              <label for="scopeFolds" class="scope-lbl">Folds:</label>
+              <select id="scopeFolds" class="scope-select">
+                <option value="4">4-Fold</option>
+                <option value="6">6-Fold</option>
+                <option value="8" selected>8-Fold</option>
+                <option value="12">12-Fold</option>
+              </select>
+
+              <label for="scopeSize" class="scope-lbl">Brush:</label>
+              <input type="range" id="scopeSize" class="scope-slider" min="2" max="16" value="4">
+
+              <span class="scope-spacer"></span>
+              <button type="button" class="btn btn-tiny" id="scopeClearBtn">🗑️ Clear</button>
+              <button type="button" class="btn btn-tiny btn-primary" id="scopeSaveBtn">💾 Export</button>
+            </div>
+            <div class="scope-canvas-wrap">
+              <canvas id="scopeCanvas" width="300" height="300" class="scope-canvas" aria-label="Kaleidoscope canvas" role="img"></canvas>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -2106,6 +2138,7 @@
   <script src="js/converter.js" defer></script>
   <script src="js/soundboard.js" defer></script>
   <script src="js/contrast.js" defer></script>
+  <script src="js/scope.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 

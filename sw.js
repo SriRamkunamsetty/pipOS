@@ -40,6 +40,7 @@ var PRECACHE_ASSETS = [
   'js/converter.js',
   'js/soundboard.js',
   'js/contrast.js',
+  'js/scope.js',
   'js/main.js',
   'assets/favicon.svg',
   'assets/icon-192.png',
