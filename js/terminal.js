@@ -30,7 +30,7 @@
     'help', 'whoami', 'time', 'date', 'theme', 'sound', 'quiet', 'sleep',
     'play', 'wish', 'fortune', 'dream', 'calc', 'blocks', 'clear', 'history',
     'ls', 'cd', 'pwd', 'cat', 'mkdir', 'touch', 'rm',
-    'echo', 'grep', 'wc', 'sort', 'uniq', 'head', 'tail'
+    'echo', 'grep', 'wc', 'sort', 'uniq', 'head', 'tail', 'crt'
   ];
 
   var currentCwd = '/home/pip';
@@ -81,9 +81,9 @@
     return null;
   }
 
-    cmdHistory.push(raw);
-    historyIdx = -1;
-    pendingBuffer = '';
+  function executeSingle(rawInput, pipedInput) {
+    var raw = rawInput ? rawInput.trim() : '';
+    if (!raw) return { ok: true, output: '' };
 
     var parts = raw.split(/\s+/);
     var cmd = parts[0].toLowerCase();
@@ -451,6 +451,34 @@
       case 'clear':
         return { ok: true, clear: true, output: '' };
 
+      case 'crt':
+        var crtArg = args[0] ? args[0].toLowerCase() : '';
+        var curCrt = (typeof document !== 'undefined' && document.body && document.body.classList)
+          ? document.body.classList.contains('crt-active')
+          : false;
+        var nextCrt;
+        if (crtArg === 'on') {
+          nextCrt = true;
+        } else if (crtArg === 'off') {
+          nextCrt = false;
+        } else {
+          nextCrt = !curCrt;
+        }
+        var storeCrt = (typeof window !== 'undefined' && window.PIP && window.PIP.store)
+          ? window.PIP.store
+          : (typeof global !== 'undefined' && global.window && global.window.PIP && global.window.PIP.store ? global.window.PIP.store : null);
+        if (storeCrt && typeof storeCrt.set === 'function') {
+          storeCrt.set('crt_mode', String(nextCrt));
+        }
+        if (typeof document !== 'undefined' && document.body && document.body.classList) {
+          document.body.classList.toggle('crt-active', nextCrt);
+          if (typeof document.dispatchEvent === 'function' && typeof CustomEvent === 'function') {
+            document.dispatchEvent(new CustomEvent('pip-crt-toggle', { detail: { active: nextCrt } }));
+          }
+        }
+        out = "CRT Scanlines: " + (nextCrt ? "ON" : "OFF");
+        break;
+
       case 'echo':
         var echoText = args.join(' ');
         if (!echoText && pipedInput !== null) {
@@ -662,7 +690,8 @@
     if (!raw) return { ok: true, output: '' };
 
     history.push(raw);
-    historyIndex = history.length;
+    historyIdx = -1;
+    pendingBuffer = '';
 
     // Check for redirection: >> or >
     var isAppend = false;
@@ -742,6 +771,11 @@
       params: ['chime', 'lullaby'],
       hint: ' [chime|lullaby]',
       pills: ['play chime', 'play lullaby']
+    },
+    crt: {
+      params: ['on', 'off'],
+      hint: ' [on|off]',
+      pills: ['crt on', 'crt off']
     },
     calc: {
       params: ['24 * 7', '12 * 8', '100 / 4', '2 ^ 8'],

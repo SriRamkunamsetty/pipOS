@@ -433,17 +433,141 @@
     }
   }
 
-  function t(text, params) {
-    if (!text) return '';
-    var dict = TRANSLATIONS[curLang] || TRANSLATIONS.en;
-    var res = (dict && dict[text]) ? dict[text] : text;
-    if (params && typeof params === 'object') {
-      for (var k in params) {
-        if (Object.prototype.hasOwnProperty.call(params, k)) {
-          res = res.replace(new RegExp('\\{' + k + '\\}', 'g'), params[k]);
-        }
+  function t(key, params, extra) {
+    if (!key) return '';
+    var dict = TRANSLATIONS[curLang] || TRANSLATIONS.en || {};
+    var entry = (typeof key === 'string') ? dict[key] : key;
+
+    if (entry === undefined && typeof key === 'string') {
+      if (TRANSLATIONS.en && TRANSLATIONS.en[key] !== undefined) {
+        entry = TRANSLATIONS.en[key];
+      } else {
+        entry = key;
       }
     }
+
+    // Determine count and param object
+    var count = null;
+    var paramObj = null;
+
+    if (typeof params === 'number') {
+      count = params;
+      paramObj = { count: params };
+      if (typeof extra === 'function') {
+        paramObj.plural = extra;
+      }
+    } else if (typeof params === 'function') {
+      paramObj = { plural: params };
+    } else if (params && typeof params === 'object') {
+      paramObj = Object.assign({}, params);
+      if (typeof paramObj.count === 'number') count = paramObj.count;
+      else if (typeof paramObj.n === 'number') count = paramObj.n;
+      else if (typeof paramObj.num === 'number') count = paramObj.num;
+      else if (typeof paramObj.count === 'string' && !isNaN(Number(paramObj.count))) {
+        count = Number(paramObj.count);
+      }
+    } else if (typeof params === 'string') {
+      paramObj = { count: params, value: params };
+      if (!isNaN(Number(params))) count = Number(params);
+    }
+
+    if (typeof extra === 'function' && paramObj) {
+      paramObj.plural = extra;
+    }
+
+    // If entry is a function
+    if (typeof entry === 'function') {
+      entry = entry(paramObj || count, curLang);
+    }
+
+    // If paramObj has custom plural function
+    if (paramObj && typeof paramObj.plural === 'function' && count !== null) {
+      var customRes = paramObj.plural(count, curLang);
+      if (customRes !== undefined && customRes !== null) {
+        entry = customRes;
+      }
+    }
+
+    // If entry is an object of plural forms: { zero, one, other } or { singular, plural }
+    if (entry && typeof entry === 'object' && !Array.isArray(entry)) {
+      var num = count !== null ? count : 0;
+      var cat = getPluralCategory(num, curLang);
+      var chosen = null;
+      if (num === 0 && entry.zero !== undefined) {
+        chosen = entry.zero;
+      } else if (entry[cat] !== undefined) {
+        chosen = entry[cat];
+      } else if (cat === 'one' && entry.singular !== undefined) {
+        chosen = entry.singular;
+      } else if (cat === 'other' && entry.plural !== undefined) {
+        chosen = entry.plural;
+      } else {
+        chosen = entry.other !== undefined ? entry.other
+          : (entry.one !== undefined ? entry.one
+          : (entry.plural !== undefined ? entry.plural
+          : (entry.singular !== undefined ? entry.singular
+          : Object.values(entry)[0])));
+      }
+      entry = chosen !== undefined ? chosen : '';
+    }
+
+    if (typeof entry === 'string') {
+      // Pipe-delimited plural forms: "singular | plural" or "zero | singular | plural"
+      if (entry.indexOf('|') !== -1 && count !== null) {
+        var parts = entry.split('|').map(function (s) { return s.trim(); });
+        if (parts.length === 2) {
+          entry = (count === 1) ? parts[0] : parts[1];
+        } else if (parts.length >= 3) {
+          entry = (count === 0) ? parts[0] : ((count === 1) ? parts[1] : parts[2]);
+        }
+      }
+
+      // ICU plural format
+      if (entry.indexOf('plural') !== -1 && entry.indexOf('{') !== -1) {
+        entry = formatIcuPlural(entry, count, curLang);
+      }
+
+      // Parameter interpolation
+      if (paramObj) {
+        entry = interpolate(entry, paramObj);
+      }
+    }
+
+    return entry;
+  }
+
+  function plural(count, forms, lang) {
+    var num = typeof count === 'number' ? count : Number(count);
+    if (isNaN(num)) num = 0;
+
+    if (typeof forms === 'string' && arguments.length >= 3 && typeof arguments[2] === 'string') {
+      var singular = forms;
+      var pluralStr = arguments[2];
+      var chosenStr = (num === 1) ? singular : pluralStr;
+      if (chosenStr.indexOf('{count}') !== -1) {
+        return interpolate(chosenStr, { count: num });
+      }
+      return num + ' ' + chosenStr;
+    }
+
+    var targetLang = (typeof lang === 'string' && lang) ? lang : curLang;
+    var prevLang = curLang;
+    if (targetLang !== curLang && TRANSLATIONS[targetLang]) {
+      curLang = targetLang;
+    }
+
+    var res;
+    if (typeof forms === 'object' && forms !== null) {
+      res = t(forms, { count: num });
+    } else if (typeof forms === 'string') {
+      res = t(forms, { count: num });
+    } else if (typeof forms === 'function') {
+      res = forms(num, curLang);
+    } else {
+      res = String(num);
+    }
+
+    curLang = prevLang;
     return res;
   }
 
