@@ -1743,6 +1743,40 @@
             </div>
             <div class="scope-canvas-wrap">
               <canvas id="scopeCanvas" width="300" height="300" class="scope-canvas" aria-label="Kaleidoscope canvas" role="img"></canvas>
+          </div>
+        </div>
+      </article>
+        <!-- Screen Dimmer & Night Warmth Filter (pip-dimmer) -->
+        <article id="dimmerWin" class="win w-dimmer" data-foldable aria-labelledby="dimmerTitle">
+          <div class="win-bar">
+            <h3 class="win-title" id="dimmerTitle">pip-dimmer.exe</h3>
+            <span class="dimmer-badge" aria-hidden="true">Circadian Care</span>
+          </div>
+          <div class="win-body">
+            <div class="proj-head">
+              <p>Pip's Night Screen Dimmer &amp; Warmth Filter. Protect your eyes at bedtime by adjusting blue-light warmth and brightness.</p>
+            </div>
+            <div class="dimmer-controls">
+              <div class="dimmer-row">
+                <button type="button" class="btn btn-tiny btn-primary" id="dimmerToggleBtn" aria-pressed="false">☀️ Night Filter: OFF</button>
+                <button type="button" class="btn btn-tiny" id="dimmerAutoBtn">🌙 Bedtime Preset</button>
+              </div>
+
+              <div class="dimmer-slider-group">
+                <div class="dimmer-lbl-row">
+                  <label for="dimmerWarmth">Amber Warmth</label>
+                  <span>Blue-Light Cutoff</span>
+                </div>
+                <input type="range" id="dimmerWarmth" class="dimmer-slider" min="0" max="100" value="40">
+              </div>
+
+              <div class="dimmer-slider-group">
+                <div class="dimmer-lbl-row">
+                  <label for="dimmerBrightness">Gentle Dimming</label>
+                  <span>Screen Brightness</span>
+                </div>
+                <input type="range" id="dimmerBrightness" class="dimmer-slider" min="30" max="100" value="85">
+              </div>
             </div>
           </div>
         </article>
@@ -2139,6 +2173,7 @@
   <script src="js/soundboard.js" defer></script>
   <script src="js/contrast.js" defer></script>
   <script src="js/scope.js" defer></script>
+  <script src="js/dimmer.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 

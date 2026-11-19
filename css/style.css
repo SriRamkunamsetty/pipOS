@@ -4718,4 +4718,64 @@ html.mode-wide-spacing body {
     margin: 0 !important;
     z-index: 100;
   }
+/* Screen Dimmer & Night Warmth Filter */
+.w-dimmer {
+  min-width: 320px;
+}
+
+.dimmer-badge {
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.dimmer-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dimmer-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dimmer-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dimmer-lbl-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text, #f8fafc);
+}
+
+.dimmer-lbl-row span {
+  font-size: 0.72rem;
+  color: var(--text-muted, #94a3b8);
+}
+
+.dimmer-slider {
+  width: 100%;
+  accent-color: #f59e0b;
+  cursor: pointer;
+}
+
+.dimmer-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99990;
+  display: none;
+  transition: background 0.2s ease;
+}
 
