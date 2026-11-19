@@ -36,6 +36,7 @@ var PRECACHE_ASSETS = [
   'js/flashlight.js',
   'js/constellations.js',
   'js/perf.js',
+  'js/converter.js',
   'js/main.js',
   'assets/favicon.svg',
   'assets/icon-192.png',

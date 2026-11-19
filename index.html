@@ -1630,6 +1630,46 @@
             </div>
           </div>
         </article>
+
+        <!-- Unit & Measurement Converter (pip-converter) -->
+        <article id="converterWin" class="win w-converter" data-foldable aria-labelledby="converterTitle">
+          <div class="win-bar">
+            <h3 class="win-title" id="converterTitle">pip-converter.exe</h3>
+            <span class="converter-badge" aria-hidden="true">Calculations</span>
+          </div>
+          <div class="win-body">
+            <div class="proj-head">
+              <p>Pip's Unit &amp; Measurement Converter. Convert culinary cooking measures, temperatures, lengths, and weights.</p>
+            </div>
+            <div class="conv-category-wrap">
+              <label for="convCategory" class="conv-lbl">Category:</label>
+              <select id="convCategory" class="conv-select">
+                <option value="temp">🌡️ Temperature</option>
+                <option value="length">📏 Length &amp; Distance</option>
+                <option value="volume">🥣 Cooking &amp; Volume</option>
+                <option value="weight">⚖️ Weight &amp; Mass</option>
+              </select>
+            </div>
+
+            <div class="conv-grid">
+              <div class="conv-side">
+                <label for="convFromVal" class="conv-lbl">From:</label>
+                <input type="number" id="convFromVal" class="conv-input" value="100">
+                <select id="convFromUnit" class="conv-select" aria-label="From unit"></select>
+              </div>
+
+              <div class="conv-equal" aria-hidden="true">⇄</div>
+
+              <div class="conv-side">
+                <label for="convToVal" class="conv-lbl">To:</label>
+                <input type="number" id="convToVal" class="conv-input" readonly>
+                <select id="convToUnit" class="conv-select" aria-label="To unit"></select>
+              </div>
+            </div>
+
+            <div id="convFormula" class="conv-formula" role="status" aria-live="polite">100 C = 212 F</div>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -1974,6 +2014,7 @@
   <script src="js/haptics.js" defer></script>
   <script src="js/constellations.js" defer></script>
   <script src="js/perf.js" defer></script>
+  <script src="js/converter.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 
