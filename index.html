@@ -1743,6 +1743,32 @@
             </div>
             <div class="scope-canvas-wrap">
               <canvas id="scopeCanvas" width="300" height="300" class="scope-canvas" aria-label="Kaleidoscope canvas" role="img"></canvas>
+          </div>
+          </div>
+        </article>
+        <!-- Retro Text Editor (pip-pad.exe) -->
+        <article id="editorWin" class="win w-editor" data-foldable aria-labelledby="editorTitle">
+          <div class="win-bar">
+            <h3 class="win-title" id="editorTitle">pip-pad.exe</h3>
+            <span class="editor-badge" aria-hidden="true">Text Pad</span>
+          </div>
+          <div class="win-body">
+            <div class="proj-head">
+              <p>Pip's Retro Text Editor. Write bedtime notes, drafts, and stories with live word metrics and export.</p>
+            </div>
+            <div class="editor-toolbar">
+              <button type="button" class="btn btn-tiny" id="editorNewBtn">📄 New</button>
+              <button type="button" class="btn btn-tiny btn-primary" id="editorExportBtn">💾 Save (.txt)</button>
+              <button type="button" class="btn btn-tiny" id="editorClearBtn">🗑️ Clear</button>
+              <span class="editor-toolbar-spacer"></span>
+              <button type="button" class="btn btn-tiny" id="editorZoomOut" aria-label="Decrease font size">A-</button>
+              <button type="button" class="btn btn-tiny" id="editorZoomIn" aria-label="Increase font size">A+</button>
+            </div>
+            <textarea id="editorTextarea" class="editor-textarea" placeholder="Type your thoughts, bedtime stories, or notes here..." aria-label="Text editor content"></textarea>
+            <div class="editor-statusbar" role="status" aria-live="polite">
+              <span id="editorLineCount">Line 1</span>
+              <span id="editorWordCount">0 words</span>
+              <span id="editorCharCount">0 chars</span>
             </div>
           </div>
         </article>
@@ -2139,6 +2165,7 @@
   <script src="js/soundboard.js" defer></script>
   <script src="js/contrast.js" defer></script>
   <script src="js/scope.js" defer></script>
+  <script src="js/editor.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 
