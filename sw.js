@@ -44,6 +44,7 @@ var PRECACHE_ASSETS = [
   'js/dimmer.js',
 
   'js/bubbles.js',
+  'js/ambience.js',
   'js/main.js',
   'assets/favicon.svg',
   'assets/icon-192.png',
