@@ -166,32 +166,93 @@
     return matrix;
   }
 
-  function generateQrSvg(text, options) {
-    var opts = options || {};
-    var matrix = generateQrMatrix(text);
-    var size = matrix.length;
-    var cellSize = opts.cellSize || 8;
-    var padding = opts.padding || 16;
-    var totalSize = size * cellSize + padding * 2;
-    var dark = opts.darkColor || '#0f172a';
-    var light = opts.lightColor || '#fef08a';
+  function escapeXml(value) {
+    return String(value).replace(/[&<>"\']/g, function (character) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[character];
+    });
+  }
 
+  function getQrSvgConfig(options, matrixSize) {
+    var opts = options || {};
+    var cellSize = Number(opts.cellSize);
+    var padding = Number(opts.padding);
+    if (!Number.isFinite(cellSize) || cellSize < 1 || cellSize > 64) cellSize = 8;
+    if (!Number.isFinite(padding) || padding < 0 || padding > 100) padding = 16;
+    cellSize = Math.floor(cellSize);
+    padding = Math.floor(padding);
+
+    function safeColor(value, fallback) {
+      var color = typeof value === 'string' ? value.trim() : '';
+      return /^#(?:[0-9a-f]{3}|[0-9a-f]{4}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(color) ? color : fallback;
+    }
+
+    return {
+      cellSize: cellSize,
+      padding: padding,
+      totalSize: matrixSize * cellSize + padding * 2,
+      darkColor: safeColor(opts.darkColor, '#0f172a'),
+      lightColor: safeColor(opts.lightColor, '#fef08a')
+    };
+  }
+
+  function generateQrSvg(text, options) {
+    var value = String(text || '');
+    var matrix = generateQrMatrix(value);
+    var size = matrix.length;
+    var config = getQrSvgConfig(options, size);
     var svg = [];
-    svg.push('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + totalSize + ' ' + totalSize + '" width="100%" height="100%" aria-label="QR Code for ' + (text.slice(0, 30)) + '">');
-    svg.push('<rect width="' + totalSize + '" height="' + totalSize + '" fill="' + light + '" rx="8" />');
+    svg.push('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + config.totalSize + ' ' + config.totalSize + '" width="100%" height="100%" role="img" aria-label="QR Code for ' + escapeXml(value.slice(0, 30)) + '">');
+    svg.push('<rect width="' + config.totalSize + '" height="' + config.totalSize + '" fill="' + config.lightColor + '" rx="8" />');
 
     for (var r = 0; r < size; r++) {
       for (var c = 0; c < size; c++) {
         if (matrix[r][c] === 1) {
-          var x = padding + c * cellSize;
-          var y = padding + r * cellSize;
-          svg.push('<rect x="' + x + '" y="' + y + '" width="' + cellSize + '" height="' + cellSize + '" fill="' + dark + '" />');
+          var x = config.padding + c * config.cellSize;
+          var y = config.padding + r * config.cellSize;
+          svg.push('<rect x="' + x + '" y="' + y + '" width="' + config.cellSize + '" height="' + config.cellSize + '" fill="' + config.darkColor + '" />');
         }
       }
     }
 
     svg.push('</svg>');
     return svg.join('\n');
+  }
+
+  function createQrSvgElement(text, options) {
+    if (typeof document === 'undefined' || !document.createElementNS) return null;
+    var value = String(text || '');
+    var matrix = generateQrMatrix(value);
+    var size = matrix.length;
+    var config = getQrSvgConfig(options, size);
+    var namespace = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(namespace, 'svg');
+    svg.setAttribute('viewBox', '0 0 ' + config.totalSize + ' ' + config.totalSize);
+    svg.setAttribute('width', '100%');
+    svg.setAttribute('height', '100%');
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', 'QR Code for ' + value.slice(0, 30));
+
+    var background = document.createElementNS(namespace, 'rect');
+    background.setAttribute('width', String(config.totalSize));
+    background.setAttribute('height', String(config.totalSize));
+    background.setAttribute('fill', config.lightColor);
+    background.setAttribute('rx', '8');
+    svg.appendChild(background);
+
+    for (var r = 0; r < size; r++) {
+      for (var c = 0; c < size; c++) {
+        if (matrix[r][c] === 1) {
+          var cell = document.createElementNS(namespace, 'rect');
+          cell.setAttribute('x', String(config.padding + c * config.cellSize));
+          cell.setAttribute('y', String(config.padding + r * config.cellSize));
+          cell.setAttribute('width', String(config.cellSize));
+          cell.setAttribute('height', String(config.cellSize));
+          cell.setAttribute('fill', config.darkColor);
+          svg.appendChild(cell);
+        }
+      }
+    }
+    return svg;
   }
 
   function shareNative(data) {
@@ -219,14 +280,16 @@
       var b64 = encodeSharePayload(selectEl ? selectEl.value : 'text', 'PipOS Share', text);
       var shareUrl = (typeof window !== 'undefined' ? window.location.origin + window.location.pathname : 'https://pipos.org') + '#share=' + b64;
 
-      var svgHtml = generateQrSvg(shareUrl, {
+      var svgElement = createQrSvgElement(shareUrl, {
         cellSize: 8,
         padding: 14,
         darkColor: '#1e1b4b',
         lightColor: '#fef08a'
       });
 
-      qrContainer.innerHTML = svgHtml;
+      if (!svgElement) return;
+      while (qrContainer.firstChild) qrContainer.removeChild(qrContainer.firstChild);
+      qrContainer.appendChild(svgElement);
     }
 
     if (genBtn) {

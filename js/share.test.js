@@ -53,6 +53,16 @@ describe('Peer-to-Peer QR Code Share Sheet for Songs & Wishes (pip-share)', () =
     assert.ok(svg.includes('</svg>'));
   });
 
+  test('generateQrSvg escapes user text and rejects unsafe colors', () => {
+    const svg = share.generateQrSvg('<img src=x onerror=alert(1)>', {
+      darkColor: '" onload="alert(1)',
+      lightColor: '#fff'
+    });
+    assert.ok(svg.includes('&lt;img src=x onerror=alert(1)&gt;'));
+    assert.ok(!svg.includes('onload="alert(1)'));
+    assert.ok(svg.includes('fill="#0f172a"'));
+  });
+
   test('index.html contains #shareWin window, QR container, copy button, and script tag', () => {
     const htmlPath = path.resolve(__dirname, '../index.html');
     const html = fs.readFileSync(htmlPath, 'utf8');
