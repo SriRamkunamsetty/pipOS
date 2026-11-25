@@ -31,6 +31,7 @@ var PRECACHE_ASSETS = [
   'js/pwa.js',
   'js/desktop.js',
   'js/synth.js',
+  'js/flight.js',
   'js/window-manager.js',
   'js/calc.js',
   'js/dressup.js',
