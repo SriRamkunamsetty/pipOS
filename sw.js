@@ -35,6 +35,7 @@ var PRECACHE_ASSETS = [
   'js/calc.js',
   'js/dressup.js',
   'js/flashlight.js',
+  'js/users.js',
   'js/constellations.js',
   'js/perf.js',
   'js/converter.js',
