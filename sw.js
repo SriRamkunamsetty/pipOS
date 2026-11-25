@@ -23,6 +23,7 @@ var PRECACHE_ASSETS = [
   'js/vfs.js',
   'js/man.js',
   'js/terminal.js',
+  'js/about.js',
   'js/stars.js',
   'js/taskbar.js',
   'js/task-switcher.js',
