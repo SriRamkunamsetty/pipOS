@@ -11,6 +11,7 @@ var PRECACHE_ASSETS = [
   'css/style.css',
   'js/util.js',
   'js/security.js',
+  'js/spotlight.js',
   'js/vault.js',
   'js/audio.js',
   'js/wall.js',
