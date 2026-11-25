@@ -13,6 +13,7 @@ var PRECACHE_ASSETS = [
   'js/security.js',
   'js/vault.js',
   'js/audio.js',
+  'js/settings.js',
   'js/wall.js',
   'js/fx.js',
   'js/i18n.js',
