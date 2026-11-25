@@ -41,6 +41,7 @@ var PRECACHE_ASSETS = [
   'js/soundboard.js',
   'js/contrast.js',
   'js/scope.js',
+  'js/share.js',
   'js/dimmer.js',
   'js/a11y-earcons.js',
 
