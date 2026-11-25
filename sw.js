@@ -17,6 +17,7 @@ var PRECACHE_ASSETS = [
   'js/fx.js',
   'js/i18n.js',
   'js/stickers.js',
+  'js/visualizer.js',
   'js/pip.js',
   'js/toys.js',
   'js/rattle.js',
