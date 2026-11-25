@@ -43,6 +43,7 @@ var PRECACHE_ASSETS = [
   'js/scope.js',
   'js/dimmer.js',
   'js/a11y-earcons.js',
+  'js/editor.js',
 
   'js/bubbles.js',
   'js/crash-reporter.js',
