@@ -33,6 +33,7 @@ var PRECACHE_ASSETS = [
   'js/synth.js',
   'js/window-manager.js',
   'js/calc.js',
+  'js/garden.js',
   'js/dressup.js',
   'js/flashlight.js',
   'js/constellations.js',
