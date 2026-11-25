@@ -29,6 +29,7 @@ var PRECACHE_ASSETS = [
   'js/monitor.js',
   'js/notes.js',
   'js/pwa.js',
+  'js/memory.js',
   'js/desktop.js',
   'js/synth.js',
   'js/window-manager.js',
