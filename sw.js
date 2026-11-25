@@ -37,6 +37,7 @@ var PRECACHE_ASSETS = [
   'js/flashlight.js',
   'js/constellations.js',
   'js/perf.js',
+  'js/bridge.js',
   'js/converter.js',
   'js/soundboard.js',
   'js/contrast.js',

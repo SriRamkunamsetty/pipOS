@@ -1726,6 +1726,28 @@
           </div>
         </article>
 
+<article id="bridgeWin" class="win w-bridge" data-foldable aria-labelledby="bridgeTitle">
+          <div class="win-bar">
+            <h3 class="win-title" id="bridgeTitle">pip-bridge.exe</h3>
+            <span class="bridge-badge" aria-hidden="true">Host I/O Bridge</span>
+          </div>
+          <div class="win-body">
+            <div class="proj-head">
+              <p>Pip's Host File Bridge. Drag and drop external files from your desktop directly into PipOS (/home/pip/imports/), preview contents, or export archives.</p>
+            </div>
+
+            <!-- Bridge Toolbar -->
+            <div class="bridge-toolbar" role="toolbar" aria-label="Bridge controls">
+              <label for="bridgeFileInput" class="btn btn-tiny btn-primary">📁 Browse Files</label>
+              <input type="file" id="bridgeFileInput" class="sr-only" multiple aria-label="Browse host files to import">
+              <button type="button" class="btn btn-tiny" id="bridgeExportAllBtn">📦 Export Archive</button>
+            </div>
+
+            <!-- Imported Files List -->
+            <div id="bridgeList" class="bridge-list" role="region" aria-label="Imported host files list"></div>
+          </div>
+        </article>
+
         <!-- Kaleidoscope Radial Symmetry Drawing (pip-scope.exe) -->
         <article id="scopeWin" class="win w-scope" data-foldable aria-labelledby="scopeTitle">
           <div class="win-bar">
@@ -2167,6 +2189,15 @@
     </div>
     <div id="taskSwitcherList" class="switcher-list" role="listbox" aria-label="Running processes"></div>
   </div>
+<!-- Floating FPS Telemetry HUD Widget -->
+<!-- Starlight Host Dropzone Overlay -->
+  <div id="dropOverlay" class="drop-overlay is-hidden" aria-hidden="true" inert>
+    <div class="drop-modal">
+      <div class="drop-icon" aria-hidden="true">✨📥✨</div>
+      <h3 class="drop-title">Drop Files into PipOS</h3>
+      <p class="drop-subtitle">Files will be saved directly to /home/pip/imports/</p>
+    </div>
+  </div>
 
   <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
@@ -2195,6 +2226,7 @@
   <script src="js/stickers.js" defer></script>
   <script src="js/pip.js" defer></script>
   <script src="js/toys.js" defer></script>
+  <script src="js/bridge.js" defer></script>
   <script src="js/rattle.js" defer></script>
   <script src="js/vfs.js" defer></script>
   <script src="js/recorder.js" defer></script>
