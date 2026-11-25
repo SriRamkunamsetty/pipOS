@@ -9,6 +9,7 @@ var PRECACHE_ASSETS = [
   'index.html',
   'manifest.webmanifest',
   'css/style.css',
+  'js/trash.js',
   'js/util.js',
   'js/security.js',
   'js/vault.js',

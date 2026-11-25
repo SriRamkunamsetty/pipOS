@@ -1809,6 +1809,28 @@
             <div id="bubblesGrid" class="bubbles-grid" role="region" aria-label="Bubble wrap sheet"></div>
           </div>
         </article>
+
+<!-- TRASH CAN WINDOW -->
+        <article id="trash" class="win w-trash" data-foldable aria-labelledby="trashTitle" hidden>
+          <div class="win-bar">
+            <span class="win-title" id="trashTitle">trash.exe — Nursery Recycle Bin</span>
+            <div class="win-actions">
+              <button type="button" class="btn btn-sm btn-ghost win-min" aria-label="Minimize Trash Can">_</button>
+              <button type="button" class="btn btn-sm btn-ghost win-close" aria-label="Close Trash Can">✕</button>
+            </div>
+          </div>
+          <div class="win-body">
+            <div class="trash-controls">
+              <span class="trash-desc">Deleted bedtime stories and files stay here until permanently cleared.</span>
+              <button type="button" id="trashEmptyBtn" class="btn btn-sm btn-danger" disabled>Empty Trash</button>
+            </div>
+            <div id="trashList" class="trash-list"></div>
+            <div id="trashEmptyMsg" class="trash-empty-msg">
+              <span class="trash-empty-icon" aria-hidden="true">🧺</span>
+              <p>The trash basket is squeaky clean!</p>
+            </div>
+          </div>
+        </article>
         <!-- Sleepy Screen of Death (SSOD) Crash Supervisor -->
   <dialog id="ssodModal" class="ssod-modal" hidden aria-labelledby="ssodTitle">
     <div class="ssod-content">
@@ -2155,6 +2177,7 @@
   <menu id="desktopContextMenu" class="desktop-context-menu" hidden role="menu" aria-label="Desktop Context Menu" tabindex="-1">
     <li role="none"><button type="button" id="cmArrange" class="cm-item" role="menuitem">📐 Arrange Icons to Grid</button></li>
     <li role="none"><button type="button" id="cmAutoSnap" class="cm-item" role="menuitem">🧲 Auto-Snap: Off</button></li>
+    <li role="none"><button type="button" id="cmTrash" class="cm-item" role="menuitem">🗑️ Open Trash Can</button></li>
     <li role="none"><button type="button" id="cmTheme" class="cm-item" role="menuitem">🌓 Toggle Day/Night Theme</button></li>
     <li role="none"><button type="button" id="cmTerminal" class="cm-item" role="menuitem">💻 Open Terminal</button></li>
     <li role="none"><button type="button" id="cmSound" class="cm-item" role="menuitem">🎵 Mute/Unmute Sounds</button></li>
@@ -2207,6 +2230,7 @@
   <script src="js/notes.js" defer></script>
   <script src="js/pwa.js" defer></script>
   <script src="js/desktop.js" defer></script>
+  <script src="js/trash.js" defer></script>
   <script src="js/synth.js" defer></script>
   <script src="js/window-manager.js" defer></script>
   <script src="js/calc.js" defer></script>
