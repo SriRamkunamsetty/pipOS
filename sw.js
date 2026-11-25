@@ -49,6 +49,7 @@ var PRECACHE_ASSETS = [
   'js/main.js',
   'assets/favicon.svg',
   'assets/icon-192.png',
+  'js/ambience.js',
   'assets/icon-512.png',
   'assets/icon-maskable-512.png',
   'assets/apple-touch-icon.png',
