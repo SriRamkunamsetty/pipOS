@@ -47,6 +47,7 @@ var PRECACHE_ASSETS = [
   'js/bubbles.js',
   'js/crash-reporter.js',
   'js/main.js',
+  'js/simon.js',
   'assets/favicon.svg',
   'assets/icon-192.png',
   'assets/icon-512.png',
