@@ -124,6 +124,11 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="globe" cx="6" cy="12" r="2.5" /><circle class="globe" cx="18" cy="6" r="2.5" /><circle class="globe" cx="18" cy="18" r="2.5" /><path class="globe" d="M8.2 11l7.6-4M8.2 13l7.6 4" /></svg>
         <span id="shareLabel">Share</span>
       </button>
+      <button class="tb-btn notif-bell-btn" id="notifBell" type="button" aria-label="Notification Center" aria-controls="notifCenter">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" /></svg>
+        <span>Alerts</span>
+        <span id="notifBadge" class="notif-badge is-hidden" aria-hidden="true">0</span>
+      </button>
       <button class="tb-btn" id="themeBtn" type="button" aria-label="Day mode, switch to night mode">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <circle class="sun" cx="12" cy="12" r="4.5" />
@@ -2151,6 +2156,29 @@
       <button type="button" id="pwaDismissBtn" class="btn" aria-label="Dismiss install prompt">✕</button>
     </div>
   </div>
+<!-- Notification Center & Do-Not-Disturb Drawer -->
+  <aside id="notifCenter" class="notif-center is-hidden" aria-label="Notification Center" inert>
+    <div class="notif-center-head">
+      <h3 class="notif-center-title">Notifications</h3>
+      <div class="notif-center-actions">
+        <button type="button" class="btn btn-tiny" id="notifDndBtn" aria-pressed="false">🔔 DND: Off</button>
+        <button type="button" class="btn btn-tiny" id="notifClearBtn">Clear All</button>
+        <button type="button" class="btn-icon-tiny notif-close-btn" id="notifCloseBtn" aria-label="Close notification center">✕</button>
+      </div>
+    </div>
+    <div class="notif-filter-wrap">
+      <label for="notifFilterSelect" class="sr-only">Filter notifications</label>
+      <select id="notifFilterSelect" class="notif-select">
+        <option value="all">All Alerts</option>
+        <option value="system">⚙️ System</option>
+        <option value="starlight">🌟 Starlight</option>
+        <option value="audio">🎵 Audio</option>
+        <option value="security">🛡️ Security</option>
+      </select>
+    </div>
+    <div id="notifList" class="notif-list" role="region" aria-label="Notification alerts list"></div>
+  </aside>
+  <script src="js/notifications.js" defer></script>
   <!-- Desktop Right-Click Context Menu -->
   <menu id="desktopContextMenu" class="desktop-context-menu" hidden role="menu" aria-label="Desktop Context Menu" tabindex="-1">
     <li role="none"><button type="button" id="cmArrange" class="cm-item" role="menuitem">📐 Arrange Icons to Grid</button></li>

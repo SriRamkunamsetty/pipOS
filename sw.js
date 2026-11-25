@@ -39,6 +39,7 @@ var PRECACHE_ASSETS = [
   'js/perf.js',
   'js/converter.js',
   'js/soundboard.js',
+  'js/notifications.js',
   'js/contrast.js',
   'js/scope.js',
   'js/dimmer.js',
